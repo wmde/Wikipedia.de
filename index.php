@@ -1,0 +1,145 @@
+<?php
+define('SETUP_WIKI_BOXES', 1);
+include_once("inc/config.inc.php");
+include_once("inc/functions.inc.php");
+
+header("Content-Type: text/html; charset=UTF-8");
+
+// Cookie setzen (zum Test)
+if (!isset($_COOKIE) || !count($_COOKIE)) {
+	setcookie( "cookies" , true);
+}
+
+// Sprache ermitteln
+if (isset($_GET["l"]) && in_array($_GET["l"],$availableLangs)) {
+	$lang = $_GET["l"];
+} elseif (isset($_COOKIE["lang"]) && in_array($_COOKIE["lang"],$availableLangs)) {
+	$lang = $_COOKIE["lang"];
+} else {
+	$lang = chooseLang($availableLangs);
+}
+
+$onKeyUp = "triggerSuggestLater('$lang');"
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= $lang ?>" lang="<?= $lang ?>">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>wikipedia.de - Wikipedia, die freie Enzyklop&auml;die</title>
+	<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="suggest.js"></script>
+</head>
+
+<body onload="self.focus();document.getElementById('txtSearch').focus();">
+<center>
+
+<?php
+if ( $showBanner && @$bannerbox ) include("inc/bannerbox.inc.php");
+else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!");
+?>
+
+<table id="head" border="0" cellpadding="0" cellspacing="0" style="width:100%">
+  <tr>
+  <td style="text-align:left; padding:.5em 1em; vertical-align:top;">Die Hauptseite der deutschsprachigen Wikipedia finden Sie unter <a href="http://de.wikipedia.org">http://de.wikipedia.org</a>.</td>
+
+  <td style="padding:.5em 1em; width:8em; text-align:right; vertical-align:top;">
+    <a href="properties">Einstellungen</a>
+  </td>
+
+  </tr>
+</table>  <!-- head -->
+
+<div id="main">
+	<p id="langs">
+<?
+foreach ($availableLangs AS $langItem) {
+	if ($langItem == $lang) {
+		echo '<b>'.myText("lang_".$langItem).'</b> &nbsp; ';
+	} else {
+		echo '<a href="index?l='.$langItem.'">'.myText("lang_".$langItem).'</a> &nbsp; ';
+	}
+}
+echo '<a href="http://wikipedia.org">mehr</a>';
+?>
+	</p>
+
+	<div id="mainbox">
+		<div><a href="http://<?= $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?= $lang ?>)" alt="Logo Wikipedia" /></a></div>
+		<div id="maincontent">
+			<h3><?= myText("searchin") ?></h3>
+			<?
+			if (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "t-online" && $lang=="de") {
+				?>
+				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="t-online" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/t-online.ico"  width="16" height="16" title="Suchen mit T-Online" /></form></div>
+				<?
+			}elseif (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "exalead" && $lang=="de") {
+				?>
+				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="exalead" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/exalead.ico" width="16" height="16" title="Suchen mit exalead" /></form></div>
+				<?
+			}elseif (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "web.de" && $lang=="de") {
+				?>
+				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="web.de" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/web.de.ico" width="16" height="16" title="Suchen mit web.de" /></form></div>
+				<?
+			} else {
+				?>
+				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /></form></div>
+				<?
+			}
+			?>
+			<div id="search_suggest"></div>
+			<p>&nbsp;</p>  		
+			
+			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.<? /* myText("intro"); */ ?></p>-->
+		</div> <!-- maincontent -->
+	</div>  <!-- mainbox -->
+
+      <?php if ( $showFeature && @$featurebox ) include("inc/featurebox.inc.php"); ?>
+
+    <?php if ( isset($bottomBanners) && !empty($bottomBanners) ) banner($bottomBanners, "donationbox_bottom", "Jetzt spenden!"); ?>
+
+<div id="donationfooter">
+	<p>
+		<a href="http://www.wikimedia.de">Wikimedia Deutschland e.V.</a> 
+		&nbsp;&ndash;&nbsp; <a href="./imprint">Impressum&nbsp;und&nbsp;Datenschutz</a>
+	</p>
+	<? $donors = trim( getLatestDonorsString(3) ); ?>
+	<?php  if ( $donors ) { ?>
+	<p>Wir danken <a href="https://secure.wikimedia.de/spenden/list.php">unseren neusten Spendern</a>: <strong> <?= $donors ?></strong></p>
+	<?php } ?>
+	<p><a href="http://www.wikimedia.de"><img src="img/wikimedia_button-de.png" border="0" alt="Ein Wikimedia Projekt" title="Ein Wikimedia Projekt" /> </a></p>
+</div> <!-- footer -->
+
+</div> <!-- main -->
+
+</center>
+<?php if ($googleAnalyticsKey) { ?>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker(<?php echo $googleAnalyticsKey; ?>);
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+<?php } ?>
+<!-- Piwik -->
+<?php if (is_array($piwikConf) && $piwikConf["active"]) { ?>
+  <script type="text/javascript">
+    var pkBaseURL = (("https:" == document.location.protocol) ? "<?php echo $piwikConf["secureUrl"]; ?>" : "<?php echo $piwikConf["url"]; ?>");
+    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+    </script><script type="text/javascript">
+      try {
+        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", <?php echo $piwikConf["siteId"]; ?>);
+        piwikTracker.trackPageView();
+        piwikTracker.enableLinkTracking();
+      } catch( err ) {}
+    </script><noscript><p><img src="<?php echo $piwikConf["url"]; ?>piwik.php?idsite=<?php echo $piwikConf["siteId"]; ?>" style="border:0" alt="" /></p></noscript>
+<?php } ?>
+<!-- End Piwik Tracking Code -->
+</body>
+</html>

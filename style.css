@@ -1,0 +1,353 @@
+body {
+	margin:0;
+	padding:0;
+	background-color:white;
+	font: 9pt arial;
+}
+
+a:link, a:visited {
+  color: #575757;
+}
+
+a:hover, a:active {
+  color: #5757ff;
+}
+
+#main {
+	background-image:url(img/bg_gradient_2.gif);
+	background-repeat:repeat-x;
+}
+
+p {
+	margin:0;
+	padding:0;
+	margin-top:1em;
+	margin-bottom:1em;
+	font: 9pt arial;
+}
+
+h3 {
+	margin:0;
+	padding:0;
+	margin-top:0.7em;
+	margin-bottom:0.7em;	
+	font-size: 10pt;
+	font-family:arial;
+	font-weight:bold;
+}
+
+.suggest_link {
+	background-color: #FFFFFF;
+	color: #333;
+	padding: 2px 6px 2px 6px;
+}
+.suggest_link_over {
+	background-color: #d8e8ff;
+}
+#search_suggest {
+	width:23em;
+	margin:0px;
+	padding:0px;
+	position: absolute;
+	text-align:left;
+	background-color: #FFFFFF;
+	border: 1px solid #98ceff;
+	display: none;
+}
+
+#head p {
+	margin-top:0;
+	margin-bottom:0;
+}
+#head li {
+	display: inline;
+	margin:0;
+	padding:0;
+	margin-right:0.5em;
+}
+#head ul {
+	margin:0;
+	padding:1em;
+}
+
+#main {
+	clear:both;
+	padding-top:2em;
+	padding-left:5em;
+	padding-right:5em;
+}
+
+#langs {
+	margin-bottom:0.5em;
+	font-size:9pt;
+}
+
+#mainbox {
+	background-color:#ffffff; 
+	/* background-color:e8f1ff; */
+	/* background-image:url(img/bg.jpg); */
+	width:45em;
+	align:center;
+	border:1px solid #999;
+	padding:1.5em;
+	border-radius:8px;
+	-moz-border-radius:8px;
+}
+
+#featurebox {
+	align:center;
+	padding:0;
+	margin:2em auto 1em auto;
+}
+
+.feature-wrapper {
+	background-color:#ffffff;
+	min-width:45em;
+	align:center;
+	border:1px solid #999;
+	padding: 1.5em;
+	border-radius:8px;
+	-moz-border-radius:8px;
+}
+
+.feature {
+	background-color:#ffffff;
+		
+}
+
+ .featurebox-grid td {
+    text-align: left;
+ }
+
+ .featurebox-image-wrapper {
+    margin-left:1em;
+    margin-right:1.5em;
+ }
+
+ .featurebox-subtitle {
+    font-style: italic;
+    text-align: center;
+    font-size: 90%;
+  }
+
+ .featurebox-bildnachweis {
+    font-style: normal;
+    text-align: left;
+    font-size: 60%;
+    margin-bottom: .6em;
+  }
+
+ .featurebox-center-cell img {
+    padding: 0 1em 0 1em;
+ }
+
+ .featurebox-text-cell {
+    line-height: 180%;
+    text-align: left;
+ }
+
+ .featurebox-text-cell p {
+    margin: 0;
+    padding: 0 0 0.66em 0;
+    line-height: 180%;
+ }
+
+ .featurebox-text-cell ul {
+    line-height:1.5em;
+    margin:0.3em 0 0 1.5em;
+    padding:0;
+ }
+
+.shadow2{
+	box-shadow: 7px 7px 8px #818181; /* CSS 3 */
+	-webkit-box-shadow: 7px 7px 8px #818181; /* Safari */
+	-moz-box-shadow: 7px 7px 8px #818181;  /* Mozilla */
+	filter: progid:DXImageTransform.Microsoft.dropShadow(color=#818181, offX=7, offY=7, positive=true); /* MSIE */
+}
+
+#mainimage {
+	width:110px;
+	float:left;
+}
+
+#maincontent {
+	margin-left:120px;
+	text-align:left;
+}
+
+#donationbox {
+	margin-top:2em;
+
+	width:45em;
+	align:center;
+	padding:1.5em;
+
+
+	background-color:#ffffff;
+	border:1px solid #999;
+	-moz-border-radius:8px;
+}
+
+#donationbox_top {
+	margin:1em auto;
+
+	width:736px;
+	min-width:736px;
+	max-width:736px;
+	/* height: 90px; */
+	text-align: center;
+	align: center;
+
+	background-color:#ffffff;
+	border:1px solid #999;
+	-moz-border-radius:8px;
+}
+
+#bannerbox {
+}
+
+#bannerbox p {
+	margin: 0;
+}
+
+#donationbox_bottom {
+	margin-top:2em;
+	margin-bottom: 0.5em;
+
+	width:736px;
+	height: 90px;
+	text-align: center;
+
+
+	background-color:#ffffff;
+	border:1px solid #999;
+	-moz-border-radius:8px;
+}
+
+form {
+	margin:0px;
+	padding:0;
+}
+#form {
+	margin:0px;
+	padding:0;
+}
+#txtSearch {
+	background-color:#eee;
+	border:1px solid #ccc;
+	width:23em;
+	padding:1px;
+}
+
+#footer {
+	margin-top:5em;
+	font-size:9pt;
+	color:#333;
+}
+
+#donationfooter {
+	padding-top:2em;
+	font-size:9pt;
+	color:#333;
+	clear:both;
+}
+
+input {
+	margin:0px;
+	padding:0;
+
+}
+
+.fundraiser2009-banner {
+	margin:1em auto;
+
+	width:736px;
+	min-width:736px;
+	max-width:736px;
+	/* height: 90px; */
+	text-align: center;
+
+	background-color:#ffffff;
+	border:1px solid #999;
+	-moz-border-radius:8px;
+	padding:1.2ex;
+ }
+
+ .fundraiser2009-banner-pitch {
+ }
+
+ .fundraiser2009-banner-pitch-text {
+   font-size: 2.5em;
+   font-weight: bold;
+
+   color:#6E98C2;
+   cursor:pointer;
+
+   font-family:sans-serif;
+   line-height:1.3em;
+   overflow:visible;
+   padding:1ex;
+   text-align:center;
+ }
+
+
+ .fundraiser2009-banner-pitch a#link,
+ .fundraiser2009-banner-pitch a {
+   color:inherit !important;
+   cursor:inherit !important;
+   text-decoration:inherit !important;
+ }
+
+ .fundraiser2009-banner-pitch p {
+   padding: 0;
+   margin: 0;
+   font-size: inherit;
+   font-weight: inherit;
+   font-family: inherit;
+   color: inherit;
+ }
+
+.fundraiser2009-notice-button {
+  position: absolute;
+  bottom: 0em;
+  right: 0.5em;
+  height: 28px;
+  text-align: center;
+  background-color: transparent;
+}
+
+.fundraiser2009-notice-button-start {
+  float: left;
+  background-image: url(http://upload.wikimedia.org/centralnotice/images/2009/button-start.png);
+  width: 12px;
+  height: 28px;
+}
+
+.fundraiser2009-notice-button-end {
+  float: left;
+  background-image: url(http://upload.wikimedia.org/centralnotice/images/2009/button-end.png);
+  width: 12px;
+  height: 28px;
+}
+
+.fundraiser2009-notice-button a {
+  float: left;
+  background-image: url(http://upload.wikimedia.org/centralnotice/images/2009/button-base.png);
+  background-repeat: repeat-x;
+  font-family: sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  line-height: 28px;
+  height: 28px;
+  text-decoration: none;
+}
+
+.fundraiser2009-notice-button a#link {
+  text-decoration: none;
+}
+
+.fundraiser2009-notice-button a#active,
+.fundraiser2009-notice-button a#hover {
+  text-decoration: underline;
+}
