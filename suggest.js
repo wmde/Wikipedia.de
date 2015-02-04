@@ -64,6 +64,33 @@ function handleSearchSuggest( response ) {
 	} );
 	ss.append( '<hr noshade size=1 style="background-color:#ffffff;">' );
 	ss.append( '<div class="suggest_link"><img src="favicon.ico" width="16" height="16" title="Suchen mit Wikipedia" border="0" >&nbsp;&nbsp;<a href="go?l=' + searchLang + '&e=wikipedia&s=search&q=' + searchString + '">auf wikipedia.org suchen</a></div>' );
+
+	if (searchLang == "de") {
+		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+		suggest += 'onmouseout="javascript:suggestOut(this);" ';
+		suggest += 'class="suggest_link"><img src="img/t-online.ico" width="16" height="16" title="Suchen mit T-Online" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=t-online&s=search">t-online.de</a></div>';
+		ss.append( suggest );
+
+		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+		suggest += 'onmouseout="javascript:suggestOut(this);" ';
+		suggest += 'class="suggest_link"><img src="img/web.de.ico" width="16" height="16" title="Suchen mit web.de" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=web.de&s=search">web.de</a></div>';
+		ss.append( suggest );
+
+		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+		suggest += 'onmouseout="javascript:suggestOut(this);" ';
+		suggest += 'class="suggest_link"><img src="img/exalead.ico" width="16" height="16" title="Suchen mit exalead" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=exalead&s=search">exalead.de</a></div>';
+		ss.append( suggest );
+
+		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+		suggest += 'onmouseout="javascript:suggestOut(this);" ';
+		suggest += 'class="suggest_link"><img src="img/wikiwix.ico" width="16" height="16" title="Suchen mit Wikiwix" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=wikiwix&s=search">wikiwix.com</a></div>';
+		ss.append( suggest );
+
+		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+		suggest += 'onmouseout="javascript:suggestOut(this);" ';
+		suggest += 'class="suggest_link"><img src="img/eyeplorer.ico" width="16" height="16" title="Suchen mit EyePlorer" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=eyeplorer&s=search">eyeplorer.com</a></div>';
+		ss.append( suggest );
+	}
 }
 
 $( document ).ready( function() {
