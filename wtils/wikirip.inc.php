@@ -161,13 +161,13 @@ class WikiRip {
     $wiki_page = WikiRip::normalizeTitle($wiki_page);
     
     if ( $this->whitelist !== null && $this->whitelist !== false ) {
-    	if ( !in_array( $page, $this->whitelist ) ) {
+    	if ( !in_array( $wiki_page, $this->whitelist ) ) {
     		return false;
     	}
     }
 
     if ( $this->blacklist !== null && $this->blacklist !== false ) {
-    	if ( in_array( $page, $this->blacklist ) ) {
+    	if ( in_array( $wiki_page, $this->blacklist ) ) {
     		return false;
     	}
     }
