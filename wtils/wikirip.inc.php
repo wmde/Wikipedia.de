@@ -119,6 +119,8 @@ class WikiRip {
 	    $content = preg_replace_callback('/(<\w+\s+(?:[^<>]+\s)?src\s*=\s*["\'])([^\s\'"<>]+\.(?:png|gif|jpe?g|svg|tiff?|ico))(.*?\>)/si', $callback, $content);
 	    $content = preg_replace_callback('/(<\w+\s+(?:[^<>]+\s)?style\s*=\s*"(?:[^"<>]*?\s)?background-image\s*:\s*url\s*\(\s*\')([^\s\'<>]+)(\'.*?\>)/si', $callback, $content);
 	    $content = preg_replace_callback('/(<\w+\s+(?:[^<>]+\s)?style\s*=\s*\'(?:[^\'<>]*?\s)?background-image\s*:\s*url\s*\(\s*")([^\s"<>]+)(".*?\>)/si', $callback, $content);
+
+	  	$content = preg_replace( '/(srcset\s*=\s*["\'])([^\'"<>])+["\']/', '', $content ); #FIXME replace srcset
 	    return $content;
   }
   
