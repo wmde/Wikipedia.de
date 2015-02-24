@@ -105,4 +105,6 @@ $( document ).ready( function() {
 function triggerPiwikTrack( element, code ) {
 	var piwikImgUrl = 'https://spenden.wikimedia.de/piwik/piwik.php?idsite=1&url=https://www.wikipedia.de/link-clicked/' + code + '&rec=1';
 	$(element).prepend( '<img src="' + piwikImgUrl + '" width="0" height="0" border="0" />' );
+
+	console.error(piwikImgUrl);
 }
