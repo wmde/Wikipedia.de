@@ -1,1 +1,6 @@
+composer.lock
+!.*
+.idea/
+
 inc/config.inc.php
+cache/

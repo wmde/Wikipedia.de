@@ -73,6 +73,11 @@ function handleSearchSuggest( response ) {
 
 		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
 		suggest += 'onmouseout="javascript:suggestOut(this);" ';
+		suggest += 'class="suggest_link"><img src="img/web.de.ico" width="16" height="16" title="Suchen mit web.de" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=web.de&s=search">web.de</a></div>';
+		ss.append( suggest );
+
+		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
+		suggest += 'onmouseout="javascript:suggestOut(this);" ';
 		suggest += 'class="suggest_link"><img src="img/exalead.ico" width="16" height="16" title="Suchen mit exalead" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=exalead&s=search">exalead.de</a></div>';
 		ss.append( suggest );
 
