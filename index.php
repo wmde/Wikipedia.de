@@ -43,7 +43,7 @@ else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!"
 
 <table id="head" border="0" cellpadding="0" cellspacing="0" style="width:100%">
   <tr>
-  <td style="text-align:left; padding:.5em 1em; vertical-align:top;">Die Hauptseite der deutschsprachigen Wikipedia finden Sie unter <a href="http://de.wikipedia.org">http://de.wikipedia.org</a>.</td>
+  <td style="text-align:left; padding:.5em 1em; vertical-align:top;">Die Hauptseite der deutschsprachigen Wikipedia finden Sie unter <a href="https://de.wikipedia.org">https://de.wikipedia.org</a>.</td>
 
   <td style="padding:.5em 1em; width:8em; text-align:right; vertical-align:top;">
     <a href="properties">Einstellungen</a>
@@ -62,12 +62,12 @@ foreach ($availableLangs AS $langItem) {
 		echo '<a href="index?l='.$langItem.'">'.myText("lang_".$langItem).'</a> &nbsp; ';
 	}
 }
-echo '<a href="http://wikipedia.org">mehr</a>';
+echo '<a href="https://wikipedia.org">mehr</a>';
 ?>
 	</p>
 
 	<div id="mainbox">
-		<div><a href="http://<?= $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?= $lang ?>)" alt="Logo Wikipedia" /></a></div>
+		<div><a href="https://<?= $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?= $lang ?>)" alt="Logo Wikipedia" /></a></div>
 		<div id="maincontent">
 			<h3><?= myText("searchin") ?></h3>
 			<?
@@ -102,14 +102,14 @@ echo '<a href="http://wikipedia.org">mehr</a>';
 
 <div id="donationfooter">
 	<p>
-		<a href="http://www.wikimedia.de">Wikimedia Deutschland e.V.</a> 
+		<a href="https://www.wikimedia.de">Wikimedia Deutschland e. V.</a> 
 		&nbsp;&ndash;&nbsp; <a href="./imprint">Impressum&nbsp;und&nbsp;Datenschutz</a>
 	</p>
 	<? $donors = trim( getLatestDonorsString(3) ); ?>
 	<?php  if ( $donors ) { ?>
 	<p>Wir danken <a href="https://secure.wikimedia.de/spenden/list.php">unseren neusten Spendern</a>: <strong> <?= $donors ?></strong></p>
 	<?php } ?>
-	<p><a href="http://www.wikimedia.de"><img src="img/wikimedia_button-de.png" border="0" alt="Ein Wikimedia Projekt" title="Ein Wikimedia Projekt" /> </a></p>
+	<p><a href="https://www.wikimedia.de"><img src="img/wikimedia_button-de.png" border="0" alt="Ein Wikimedia Projekt" title="Ein Wikimedia Projekt" /> </a></p>
 </div> <!-- footer -->
 
 </div> <!-- main -->
