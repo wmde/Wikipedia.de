@@ -80,7 +80,7 @@ function banner($banners, $id, $text = NULL) {
 			$banner_tracking_params = "b=" . urlencode($bannerNo + 1);
 			$banner_tracking_params .= "&piwik_campaign=wikipediade_" . urlencode($id);
 			$banner_tracking_params .= "&piwik_kwd=" . urlencode($banner);
-			$banner_target_url = "https://secure.wikimedia.de/spenden/?$banner_tracking_params";
+			$banner_target_url = "https://spenden.wikimedia.de/spenden/?$banner_tracking_params";
 
 			if ( preg_match('/\.php$/', $banner) ) {
 				include( $banner );

@@ -107,7 +107,7 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 	</p>
 	<? $donors = trim( getLatestDonorsString(3) ); ?>
 	<?php  if ( $donors ) { ?>
-	<p>Wir danken <a href="https://secure.wikimedia.de/spenden/list.php">unseren neusten Spendern</a>: <strong> <?= $donors ?></strong></p>
+	<p>Wir danken <a href="https://spenden.wikimedia.de/spenden/list.php">unseren neusten Spendern</a>: <strong> <?= $donors ?></strong></p>
 	<?php } ?>
 	<p><a href="https://www.wikimedia.de"><img src="img/wikimedia_button-de.png" border="0" alt="Ein Wikimedia Projekt" title="Ein Wikimedia Projekt" /> </a></p>
 </div> <!-- footer -->
