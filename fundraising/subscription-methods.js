@@ -1,8 +1,9 @@
 var mailCheckPending = false;
+var ajaxURL = '//test.wikimedia.de/ajax.php';
 
 $( function () {
 	$( document ).bind( 'change', function ( e ) {
-		if ( $( e.target ).hasClass( "required" ) || $( e.target ).hasClass( "optional" ) ) {
+		if ( $( e.target ).hasClass( 'required' ) || $( e.target ).hasClass( 'optional' ) ) {
 
 			var vIcon = $( e.target ).next();
 			if ( e.target.validity.valid ) {
@@ -28,44 +29,122 @@ $( function () {
 		}
 	} );
 
-	$( "#email" ).on( 'change', function ( evt ) {
+	$( '#email' ).on( 'change', function ( evt ) {
 		mailCheckPending = true;
 		checkMailAddress( false );
 	} );
 
+	$( '#subscriptionForm' ).on( 'submit', function ( e ) {
+		e.preventDefault();
+		sendInitialServerRequest();
+	} );
+
+	function sendInitialServerRequest() {
+		var data = $( '#subscriptionForm' ).serialize();
+
+		startSpinner();
+		resetErrorBox();
+
+		$.ajax( {
+			url: 'fundraising/proxy.php',
+			type: 'POST',
+			dataType: 'json',
+			data: data,
+			timeout: 8000,
+			success: checkServerResponse,
+			error: handleAjaxError
+		} );
+	}
+
+	function checkServerResponse( response ) {
+		stopSpinner();
+
+		if ( response.status === 'OK' ) {
+			showConfirmation();
+		} else {
+			handleErrorResponse( response );
+		}
+	}
+
+	function handleAjaxError() {
+		stopSpinner();
+
+		showErrorBox( 'Server nicht erreichbar.' );
+	}
+
+	function showConfirmation() {
+		$( '#form-section' ).hide();
+		$( '#thanks-section' ).show()
+	}
+
+	function handleErrorResponse( response ) {
+		if ( response.errors ) {
+			var errorMessage = '';
+			Object.keys( response.errors ).forEach( function ( key ) {
+				errorMessage += response.errors[key] + '</br>';
+			} );
+			showErrorBox( errorMessage );
+		} else {
+			showErrorBox( JSON.stringify( response ) );
+		}
+	}
+
+	function showErrorBox( html ) {
+		$( '#error-reason' ).html( html );
+		$( '#errorbox' ).show();
+	}
+
+	function resetErrorBox() {
+		$( '#errorbox' ).hide();
+		$( '#error-reason' ).text( '' )
+	}
+
+	function startSpinner() {
+		$( '#ajax-overlay' ).show();
+		$( '#subscriptionFormSubmit' ).attr( 'disabled', 'disabled' );
+	}
+
+	function stopSpinner() {
+		$( '#ajax-overlay' ).hide();
+		$( '#subscriptionFormSubmit' ).removeAttr( 'disabled' );
+	}
+
 	function setFieldsValid( $fields ) {
-		$fields.removeClass( "invalid" ).addClass( "valid" );
-		$fields.next().removeClass( "icon-bug icon-placeholder" ).addClass( "icon-ok" );
+		$fields.removeClass( 'invalid' ).addClass( 'valid' );
+		$fields.next().removeClass( 'icon-bug icon-placeholder' ).addClass( 'icon-ok' );
 		$fields.each( function ( index, elmId ) {
-			$( elmId )[0].setCustomValidity( "" );
+			$( elmId )[0].setCustomValidity( '' );
 		} );
 	}
 
 	function checkMailAddress( submit ) {
-		var url = "//test.wikimedia.de/ajax.php";
 		$.ajax( {
-			url: url,
-			type: "GET",
-			dataType: "jsonp",
-			data: { action: "checkEmail", eaddr: $( "#email" ).val() },
-			success: checkMailResponse
+			url: ajaxURL,
+			type: 'GET',
+			dataType: 'jsonp',
+			data: { action: 'checkEmail', eaddr: $( '#email' ).val() },
+			timeout: 8000,
+			success: function ( response ) {
+				checkMailResponse( response, submit );
+			},
+			error: handleAjaxError
 		} );
 	}
 
-	function checkMailResponse( response ) {
-		var $email = $( "#email" );
-		if ( response.status === "OK" ) {
-			$email.removeClass( "invalid" ).addClass( "valid" );
-			$email.next().removeClass( "icon-bug" ).addClass( "icon-ok" );
-			$email.get( 0 ).setCustomValidity( "" );
+	function checkMailResponse( response, submit ) {
+		var $email = $( '#email' );
+		if ( response.status === 'OK' ) {
+			$email.removeClass( 'invalid' ).addClass( 'valid' );
+			$email.next().removeClass( 'icon-bug' ).addClass( 'icon-ok' );
+			$email.get( 0 ).setCustomValidity( '' );
 		} else {
-			$email.removeClass( "valid" ).addClass( "invalid" );
-			$email.next().removeClass( "icon-ok" ).addClass( "icon-bug" );
-			$email.get( 0 ).setCustomValidity( "E-Mail-Adresse nicht korrekt" );
+			$email.removeClass( 'valid' ).addClass( 'invalid' );
+			$email.next().removeClass( 'icon-ok' ).addClass( 'icon-bug' );
+			$email.get( 0 ).setCustomValidity( 'E-Mail-Adresse nicht korrekt' );
 		}
 		mailCheckPending = false;
 		if ( submit ) {
-			$( "#donFormSubmit" ).trigger( "click" );
+			$( '#donFormSubmit' ).trigger( 'click' );
 		}
 	}
 
