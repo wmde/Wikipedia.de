@@ -1,4 +1,4 @@
-div#subscriptionForm {
+div#subscriptionFormFeature {
     background: #FFF;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 1em;
@@ -6,7 +6,7 @@ div#subscriptionForm {
     text-align: left;
 }
 
-div#subscriptionForm hr {
+div#subscriptionFormFeature hr {
     color: #DDD;
     background: #DDD;
     border: none;
@@ -15,54 +15,54 @@ div#subscriptionForm hr {
 }
 
 /* Form & Interaction elements =========================================================== */
-div#subscriptionForm form {
+div#subscriptionFormFeature form {
     position: relative;
 }
 
-div#subscriptionForm textarea {
+div#subscriptionFormFeature textarea {
     -webkit-appearance: none;
     resize: none;
 }
 
-div#subscriptionForm input {
+div#subscriptionFormFeature input {
     -webkit-appearance: none;
     border-radius: 0;
 }
 
-div#subscriptionForm .input-container {
+div#subscriptionFormFeature .input-container {
     position: relative;
     margin-bottom: 10px;
 }
 
-div#subscriptionForm label {
+div#subscriptionFormFeature label {
     cursor: default;
     color: #666666;
     display: inline-block;
 }
 
 /* Radio button & Checkbox*/
-div#subscriptionForm input[type=radio],
-div#subscriptionForm input[type=checkbox] {
+div#subscriptionFormFeature input[type=radio],
+div#subscriptionFormFeature input[type=checkbox] {
     opacity: 0;
     position: absolute;
 }
 
-div#subscriptionForm input[type=checkbox] + label,
-div#subscriptionForm input[type=radio] + label {
+div#subscriptionFormFeature input[type=checkbox] + label,
+div#subscriptionFormFeature input[type=radio] + label {
     position: relative;
     padding-left: 30px;
 }
 
-div#subscriptionForm input[type=checkbox] + label:after,
-div#subscriptionForm input[type=radio] + label:after {
+div#subscriptionFormFeature input[type=checkbox] + label:after,
+div#subscriptionFormFeature input[type=radio] + label:after {
     clear: both;
     float: none;
     display: block;
     content: '';
 }
 
-div#subscriptionForm input[type=radio] + label:before,
-div#subscriptionForm input[type=checkbox] + label:before {
+div#subscriptionFormFeature input[type=radio] + label:before,
+div#subscriptionFormFeature input[type=checkbox] + label:before {
     content: '';
     position: absolute;
     width: 20px;
@@ -73,40 +73,40 @@ div#subscriptionForm input[type=checkbox] + label:before {
     cursor: default;
 }
 
-div#subscriptionForm input[type=radio] + label:before {
+div#subscriptionFormFeature input[type=radio] + label:before {
     background: url(radio_button.png) no-repeat 0 0;
 }
 
-div#subscriptionForm input[type=checkbox] + label:before {
+div#subscriptionFormFeature input[type=checkbox] + label:before {
     background: url(checkbox.png) no-repeat 0 0;
     margin-top: -2px;
 }
 
-div#subscriptionForm input[type=radio]:checked + label:before,
-div#subscriptionForm input[type=checkbox]:checked + label:before {
+div#subscriptionFormFeature input[type=radio]:checked + label:before,
+div#subscriptionFormFeature input[type=checkbox]:checked + label:before {
     background-position: left center;
 }
 
-div#subscriptionForm input[type=radio]:disabled + label:before,
-div#subscriptionForm input[type=checkbox]:disabled + label:before {
+div#subscriptionFormFeature input[type=radio]:disabled + label:before,
+div#subscriptionFormFeature input[type=checkbox]:disabled + label:before {
     background-position: left top;
 }
 
-div#subscriptionForm input[type=radio]:disabled + label,
-div#subscriptionForm input[type=checkbox]:disabled + label {
+div#subscriptionFormFeature input[type=radio]:disabled + label,
+div#subscriptionFormFeature input[type=checkbox]:disabled + label {
     color: #b2b2b2;
 }
 
-div#subscriptionForm input[type=radio]:disabled:checked + label:before,
-div#subscriptionForm input[type=checkbox]:disabled:checked + label:before {
+div#subscriptionFormFeature input[type=radio]:disabled:checked + label:before,
+div#subscriptionFormFeature input[type=checkbox]:disabled:checked + label:before {
     background-position: left bottom;
 }
 
 /* Textbox / Textarea*/
-div#subscriptionForm textarea,
-div#subscriptionForm input[type=number],
-div#subscriptionForm input[type=tel],
-div#subscriptionForm input[type=text] {
+div#subscriptionFormFeature textarea,
+div#subscriptionFormFeature input[type=number],
+div#subscriptionFormFeature input[type=tel],
+div#subscriptionFormFeature input[type=text] {
     font-size: 1em;
     font-family: sans-serif;
     font-weight: normal;
@@ -123,66 +123,66 @@ div#subscriptionForm input[type=text] {
     box-sizing: border-box;
 }
 
-div#subscriptionForm input[type=number],
-div#subscriptionForm input[type=tel],
-div#subscriptionForm input[type=text] {
+div#subscriptionFormFeature input[type=number],
+div#subscriptionFormFeature input[type=tel],
+div#subscriptionFormFeature input[type=text] {
     padding-right: 30px;
 }
 
 textarea:focus,
-div#subscriptionForm input[type=number]:focus,
-div#subscriptionForm input[type=tel]:focus,
-div#subscriptionForm input[type=text]:focus {
+div#subscriptionFormFeature input[type=number]:focus,
+div#subscriptionFormFeature input[type=tel]:focus,
+div#subscriptionFormFeature input[type=text]:focus {
     border: 1px solid #77bfef;
 }
 
-div#subscriptionForm input[type=tel] + .validation,
-div#subscriptionForm input[type=text] + .validation {
+div#subscriptionFormFeature input[type=tel] + .validation,
+div#subscriptionFormFeature input[type=text] + .validation {
     margin-left: -30px;
     margin-right: 14px;
     font-size: 1.2em;
     vertical-align: middle;
 }
 
-div#subscriptionForm input[type=tel] ~ .validation-explanation,
-div#subscriptionForm input[type=text] ~ .validation-explanation {
+div#subscriptionFormFeature input[type=tel] ~ .validation-explanation,
+div#subscriptionFormFeature input[type=text] ~ .validation-explanation {
     font-size: 0.8em;
     vertical-align: middle;
     display: inline-block;
 }
 
-div#subscriptionForm input[type=tel].invalid + .validation,
-div#subscriptionForm input[type=text].invalid + .validation,
-div#subscriptionForm input[type=tel].invalid ~ .validation-explanation,
-div#subscriptionForm input[type=text].invalid ~ .validation-explanation {
+div#subscriptionFormFeature input[type=tel].invalid + .validation,
+div#subscriptionFormFeature input[type=text].invalid + .validation,
+div#subscriptionFormFeature input[type=tel].invalid ~ .validation-explanation,
+div#subscriptionFormFeature input[type=text].invalid ~ .validation-explanation {
     color: #f3a5a5;
 }
 
-div#subscriptionForm input[type=tel].valid + .validation,
-div#subscriptionForm input[type=text].valid + .validation,
-div#subscriptionForm input[type=tel].valid ~ .validation-explanation,
-div#subscriptionForm input[type=text].valid ~ .validation-explanation {
+div#subscriptionFormFeature input[type=tel].valid + .validation,
+div#subscriptionFormFeature input[type=text].valid + .validation,
+div#subscriptionFormFeature input[type=tel].valid ~ .validation-explanation,
+div#subscriptionFormFeature input[type=text].valid ~ .validation-explanation {
     color: #a5da9b;
 }
 
 /* main */
-div#subscriptionForm .box-header {
+div#subscriptionFormFeature .box-header {
     background: #64aadb;
 }
 
-div#subscriptionForm label {
+div#subscriptionFormFeature label {
     width: 100px;
 }
 
-div#subscriptionForm input[type=radio] + label {
+div#subscriptionFormFeature input[type=radio] + label {
     width: auto;
 }
 
-div#subscriptionForm input[type="text"] {
+div#subscriptionFormFeature input[type="text"] {
     width: 342px;
 }
 
-div#subscriptionForm ul.salutation {
+div#subscriptionFormFeature ul.salutation {
     display: inline-block;
     width: 160px;
     margin-right: 7px;
@@ -190,61 +190,61 @@ div#subscriptionForm ul.salutation {
     vertical-align: middle;
 }
 
-div#subscriptionForm #personal-title {
+div#subscriptionFormFeature #personal-title {
     width: 168px;
 }
 
-div#subscriptionForm #first-name {
+div#subscriptionFormFeature #first-name {
     width: 169px;
 }
 
-div#subscriptionForm #last-name {
+div#subscriptionFormFeature #last-name {
     width: 169px;
 }
 
-div#subscriptionForm #post-code {
+div#subscriptionFormFeature #post-code {
     width: 169px;
 }
 
-div#subscriptionForm #city {
+div#subscriptionFormFeature #city {
     width: 169px;
 }
 
-div#subscriptionForm .approval {
+div#subscriptionFormFeature .approval {
     font-weight: bold;
     color: #000;
 }
 
-div#subscriptionForm .approval .icon-ok:before {
+div#subscriptionFormFeature .approval .icon-ok:before {
     color: #69c159;
 }
 
-div#subscriptionForm #country {
+div#subscriptionFormFeature #country {
     width: 350px;
 }
 
-div#subscriptionForm ul, ol {
+div#subscriptionFormFeature ul, ol {
     list-style: none;
 }
 
-div#subscriptionForm ul li {
+div#subscriptionFormFeature ul li {
     margin-bottom: 15px;
 }
 
-div#subscriptionForm ul.horizontal li {
+div#subscriptionFormFeature ul.horizontal li {
     display: inline-block;
     margin-right: 20px;
     margin-bottom: 0;
 }
 
-div#subscriptionForm ul.horizontal li label {
+div#subscriptionFormFeature ul.horizontal li label {
     width: auto !important;
 }
 
 /* button */
-div#subscriptionForm button[type=submit],
-div#subscriptionForm input[type=button],
-div#subscriptionForm a.button {
+div#subscriptionFormFeature button[type=submit],
+div#subscriptionFormFeature input[type=button],
+div#subscriptionFormFeature a.button {
     margin-left: 103px;
     padding: 10px 40px !important;
     color: #000;
@@ -268,12 +268,12 @@ div#subscriptionForm a.button {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#feef00', endColorstr='#fcdf00', GradientType=0);
 }
 
-div#subscriptionForm button[type=submit]:hover,
-div#subscriptionForm button[type=submit]:active,
-div#subscriptionForm input[type=button]:hover,
-div#subscriptionForm input[type=button]:active,
-div#subscriptionForm a.button:hover,
-div#subscriptionForm a.button:active {
+div#subscriptionFormFeature button[type=submit]:hover,
+div#subscriptionFormFeature button[type=submit]:active,
+div#subscriptionFormFeature input[type=button]:hover,
+div#subscriptionFormFeature input[type=button]:active,
+div#subscriptionFormFeature a.button:hover,
+div#subscriptionFormFeature a.button:active {
     text-decoration: none;
     background: rgb(253, 216, 0);
     background: -moz-linear-gradient(top, rgb(253, 216, 0) 0%, rgb(251, 201, 0) 100%);
@@ -285,9 +285,9 @@ div#subscriptionForm a.button:active {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdd800', endColorstr='#fbc900', GradientType=0);
 }
 
-div#subscriptionForm button[type="submit"] [class^="icon-"],
-div#subscriptionForm input[type=button] [class^="icon-"],
-div#subscriptionForm a.button [class^="icon-"] {
+div#subscriptionFormFeature button[type="submit"] [class^="icon-"],
+div#subscriptionFormFeature input[type=button] [class^="icon-"],
+div#subscriptionFormFeature a.button [class^="icon-"] {
     font-size: 1.2em;
     position: relative;
     top: 2px;
@@ -308,4 +308,19 @@ a.ui-selectmenu:hover {
 
 .ui-corner-all {
     border-radius: 2px;
+}
+
+#ajax-overlay {
+    background-color: #666;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-image: url('//upload.wikimedia.org/wikipedia/commons/2/2a/Loading_Key.gif');
+    background-position: center;
+    background-repeat: no-repeat;
 }
