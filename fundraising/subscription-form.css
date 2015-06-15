@@ -198,6 +198,11 @@ div#subscriptionFormFeature #personal-title {
     width: 168px;
 }
 
+/* Safari 7 fix*/
+#personal-title-button, #personal-title-menu {
+    width: 168px !important;
+}
+
 div#subscriptionFormFeature #first-name {
     width: 169px;
 }
