@@ -50,14 +50,14 @@ if (isset($_COOKIE["engine"])) $engine = $_COOKIE["engine"];
 
 <h3>Einstellungen</h3>
 <div style="width:600px;align:center;">
-<?
+<?php
 
 if ($okay) {
 	echo '<p><b>Ihre Einstellungen wurden gespeichert, zur&uuml;ck <a href="/">zur Suche</a></b></p>';
 }
 ?>
 <div id="form">
-<?
+<?php
 if (!isset($_COOKIE) || !count($_COOKIE)) {
 	echo "<p><b>Um diese Funktion nutzen zu k&ouml;nnen, muss Ihr Browser Cookies erlauben.</b></p>";
 	//print_r($_COOKIE);
@@ -68,7 +68,7 @@ if (!isset($_COOKIE) || !count($_COOKIE)) {
 	<form id="frmSearch" action="properties" method="post">
 	<p>Bitte w&auml;hlen Sie Ihre bevorzugte Sprache</p>
 	<p>
-<?
+<?php
 echo '<input type="radio" name="lang" value="auto" '.(!$lang?'checked="checked"':"").' />&nbsp;&nbsp;automatisch<br />';
 foreach ($availableLangs AS $langItem) {
 	echo '<input type="radio" name="lang" value="'.$langItem.'" '.($langItem==$lang?'checked="checked"':"").' />&nbsp;&nbsp;'.myText("lang_".$langItem).'<br />';
@@ -77,7 +77,7 @@ foreach ($availableLangs AS $langItem) {
 	</p>
 	<p>Bitte w&auml;hlen Sie Ihre bevorzugte Suchmaschine zum Durchsuchen der Wikipedia (Nicht alle Suchmaschinen sind in allen Sprachen verf&uuml;gbar. Im Zweifel wird immer wikipedia.org verwendet):</p>
 	<p>
-<?
+<?php
 foreach ($searchEngines["de"] AS $engineItem=>$engineURL) {
 	echo '<input type="radio" name="engine" value="'.$engineItem.'" '.($engineItem==$engine?"CHECKED":"").' />&nbsp;&nbsp;'.$engineItem.'<br />';
 }
@@ -86,7 +86,7 @@ foreach ($searchEngines["de"] AS $engineItem=>$engineURL) {
 	<input type="submit" value="Einstellungen speichern" />
 	</form>
 </div>
-<?
+<?php
 
 ?>
 </div>
