@@ -86,9 +86,7 @@ foreach ($searchEngines["de"] AS $engineItem=>$engineURL) {
 	<input type="submit" value="Einstellungen speichern" />
 	</form>
 </div>
-<?php
 
-?>
 </div>
 </div>
 </body>
