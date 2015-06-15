@@ -59,7 +59,9 @@ $( function () {
 	function checkServerResponse( response ) {
 		stopSpinner();
 
-		if ( response.status === 'OK' || ( response.status === 'ERR' && response.errors.duplicate ) ) {
+		if ( response.status === 'OK'
+			|| ( response.status === 'ERR' && response.errors.moderation )
+			|| ( response.status === 'ERR' && response.errors.duplicate ) ) {
 			showConfirmation();
 		} else {
 			handleErrorResponse( response );
