@@ -92,7 +92,7 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 			<div id="search_suggest"></div>
 			<p>&nbsp;</p>  		
 			
-			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.<?= /* myText("intro") */ ?></p>-->
+			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.</p>-->
 		</div> <!-- maincontent -->
 	</div>  <!-- mainbox -->
 
