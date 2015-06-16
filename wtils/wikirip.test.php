@@ -1,4 +1,4 @@
-<?
+<?php
 if ( !preg_match( '/^cli/i', php_sapi_name() ) ) {
 	die("for command line use only");
 }

@@ -1,4 +1,4 @@
-<?
+<?php
 function myText($key) {
 	global $lang,$txt;
 	return isset($txt[$lang][$key])?$txt[$lang][$key]:$txt["de"][$key];
@@ -74,7 +74,7 @@ function banner($banners, $id, $text = NULL) {
 	if ( !$banners ) return;
 	?>
 	<div id="<?= htmlspecialchars($id) ?>">
-		<? 
+		<?php
 			$bannerNo = mt_rand(0, count($banners)-1);
 			$banner = $banners[$bannerNo];
 			$banner_tracking_params = "b=" . urlencode($bannerNo + 1);
@@ -87,7 +87,7 @@ function banner($banners, $id, $text = NULL) {
 			} else {
 				?>
 				<a href="<?php echo htmlspecialchars($banner_target_url); ?>"><img src="img/<?php echo urlencode($banner); ?>" border="0" alt="<?php echo htmlspecialchars($text); ?>" title="<?php echo htmlspecialchars($text); ?>" /></a>
-				<?
+				<?php
 			}
 		?>
 		<br style="clear:right"/>

@@ -54,7 +54,7 @@ else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!"
 
 <div id="main">
 	<p id="langs">
-<?
+<?php
 foreach ($availableLangs AS $langItem) {
 	if ($langItem == $lang) {
 		echo '<b>'.myText("lang_".$langItem).'</b> &nbsp; ';
@@ -70,29 +70,29 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 		<div><a href="https://<?= $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?= $lang ?>)" alt="Logo Wikipedia" /></a></div>
 		<div id="maincontent">
 			<h3><?= myText("searchin") ?></h3>
-			<?
+			<?php
 			if (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "t-online" && $lang=="de") {
 				?>
 				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="t-online" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/t-online.ico"  width="16" height="16" title="Suchen mit T-Online" /></form></div>
-				<?
+				<?php
 			}elseif (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "exalead" && $lang=="de") {
 				?>
 				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="exalead" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/exalead.ico" width="16" height="16" title="Suchen mit exalead" /></form></div>
-				<?
+				<?php
 			}elseif (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "web.de" && $lang=="de") {
 				?>
 				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="web.de" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/web.de.ico" width="16" height="16" title="Suchen mit web.de" /></form></div>
-				<?
+				<?php
 			} else {
 				?>
 				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /></form></div>
-				<?
+				<?php
 			}
 			?>
 			<div id="search_suggest"></div>
 			<p>&nbsp;</p>  		
 			
-			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.<? /* myText("intro"); */ ?></p>-->
+			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.</p>-->
 		</div> <!-- maincontent -->
 	</div>  <!-- mainbox -->
 
@@ -105,7 +105,7 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 		<a onclick="triggerPiwikTrack(this, 'wikimedia.de');" href="http://www.wikimedia.de">Wikimedia Deutschland e.V.</a>
 		&nbsp;&ndash;&nbsp; <a href="./imprint" onclick="triggerPiwikTrack(this, 'impressum');">Impressum&nbsp;und&nbsp;Datenschutz</a>
 	</p>
-	<? $donors = trim( getLatestDonorsString(3) ); ?>
+	<?php $donors = trim( getLatestDonorsString(3) ); ?>
 	<?php  if ( $donors ) { ?>
 	<p>Wir danken <a onclick="triggerPiwikTrack(this, 'donation-list');" href="https://spenden.wikimedia.de/spenden/list.php">unseren neusten Spendern</a>: <strong> <?= $donors ?></strong></p>
 	<?php } ?>
