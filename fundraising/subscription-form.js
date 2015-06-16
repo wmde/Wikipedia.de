@@ -42,15 +42,17 @@ $( function () {
 			data: { action: 'checkEmail', eaddr: $( '#email' ).val() },
 			timeout: 8000,
 			success: function ( response ) {
-				checkMailResponse( response, submit );
+				checkMailResponse( response, submit, false );
 			},
-			error: handleAjaxError
+			error: function () {
+				checkMailResponse( response, submit, true );
+			}
 		} );
 	}
 
-	function checkMailResponse( response, submit ) {
+	function checkMailResponse( response, submit, error ) {
 		var $email = $( '#email' );
-		if ( response.status === 'OK' ) {
+		if ( response.status === 'OK' || error ) {
 			$email.removeClass( 'invalid' ).addClass( 'valid' );
 			$email.next().removeClass( 'icon-bug' ).addClass( 'icon-ok' );
 			$email.get( 0 ).setCustomValidity( '' );
