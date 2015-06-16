@@ -107,3 +107,25 @@ $( function () {
 
 	initStyledSelect();
 } );
+
+if ( !Object.keys ) {
+	Object.keys = function ( obj ) {
+		var keys = [];
+
+		for ( var i in obj ) {
+			if ( obj.hasOwnProperty( i ) ) {
+				keys.push( i );
+			}
+		}
+
+		return keys;
+	};
+}
+
+if ( !Array.prototype.forEach ) {
+	Array.prototype.forEach = function ( fn, scope ) {
+		for ( var i = 0, len = this.length; i < len; ++i ) {
+			fn.call( scope, this[i], i, this );
+		}
+	}
+}
