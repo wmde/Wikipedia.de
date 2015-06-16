@@ -146,7 +146,7 @@ $( function () {
 		}
 		mailCheckPending = false;
 		if ( submit ) {
-			$( '#donFormSubmit' ).trigger( 'click' );
+			$( '#subscriptionFormSubmit' ).trigger( 'click' );
 		}
 	}
 
