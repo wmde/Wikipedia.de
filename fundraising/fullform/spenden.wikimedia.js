@@ -413,7 +413,7 @@ $(function() {
 
   $( document.commentForm ).on( "submit", function( event ) {
     event.preventDefault();
-    var url = "../ajax.php?action=addComment";
+    var url = "../ajax.php?module=action&action=addComment";
     $.ajax( url, {
         data: $( this ).serialize(),
         dataType: "json",

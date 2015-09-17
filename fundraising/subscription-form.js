@@ -39,7 +39,7 @@ $( function () {
 			url: ajaxURL,
 			type: 'GET',
 			dataType: 'jsonp',
-			data: { action: 'checkEmail', eaddr: $( '#email' ).val() },
+			data: { module: 'action', action: 'checkEmail', eaddr: $( '#email' ).val() },
 			timeout: 8000,
 			success: function ( response ) {
 				checkMailResponse( response, submit, false );
