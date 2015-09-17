@@ -6,7 +6,7 @@ if ( isset( $_POST[ 'debug' ] ) && $_POST[ 'debug' ] === 'true' ) {
 	$baseUrl = 'https://test.wikimedia.de/ajax.php';
 }
 
-$handle = curl_init( $baseUrl . '?action=subscribe' );
+$handle = curl_init( $baseUrl . '?module=action&action=subscribe' );
 
 curl_setopt( $handle, CURLOPT_POST, true );
 curl_setopt( $handle, CURLOPT_POSTFIELDS, $_POST );

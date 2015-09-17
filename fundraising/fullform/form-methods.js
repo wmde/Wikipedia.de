@@ -107,11 +107,11 @@ $( document ).ready( function() {
 			if( $( '#account-number' ).val() === '' || $( '#bank-code' ).val() === '' ) {
 				return;
 			}
-			url = "https://spenden.wikimedia.de/ajax.php?action=generateIban&bankCode=" + $( "#bank-code" ).val() + "&accNum=" + $( "#account-number" ).val() + "&callback=?";
+			url = "https://spenden.wikimedia.de/ajax.php?module=action&action=generateIban&bankCode=" + $( "#bank-code" ).val() + "&accNum=" + $( "#account-number" ).val() + "&callback=?";
 			$( '#iban, #bic' ).val( '' );
 			$( '#bank-name' ).text( '' );
 		} else if ( evt.target.id === 'iban' ) {
-			url = "https://spenden.wikimedia.de/ajax.php?action=checkIban&iban=" + $( "#iban" ).val() + "&callback=?";
+			url = "https://spenden.wikimedia.de/ajax.php?module=action&action=checkIban&iban=" + $( "#iban" ).val() + "&callback=?";
 			$( '#account-number, #bank-code' ).val( '' );
 			$( '#bank-name' ).text( '' );
 		}
@@ -164,7 +164,7 @@ $( document ).ready( function() {
 	}
 
 	function checkMailAddress( submit ) {
-		var url = "https://spenden.wikimedia.de/ajax.php?action=checkEmail&eaddr=" + $( "#email" ).val() + "&callback=?";
+		var url = "https://spenden.wikimedia.de/ajax.php?module=action&action=checkEmail&eaddr=" + $( "#email" ).val() + "&callback=?";
 		$.getJSON( url, function( response ) {
 			var $email = $( "#email" );
 			if ( response.status === "OK" ) {
