@@ -23,6 +23,10 @@
 				that.setTracker( Piwik.getTracker( trackingConfig.baseUrl, trackingConfig.siteId ) );
 			}
 		} );
+
+		$( document ).ready( function() {
+			that.initClickHandlers();
+		} );
 	}
 
 	TP = Tracking.prototype;
@@ -33,7 +37,7 @@
 
 	TP.trackVirtualPageView = function ( eventName ) {
 		if ( this.shouldTrack( eventName, this.getRandomNumber() ) ) {
-			this._tracker.trackPageView(
+			console.log( //this._tracker.trackPageView(
 				Banner.config.tracking.baseUrl +
 				Banner.config.tracking.events[eventName].pathName +
 				'/' +
@@ -43,6 +47,7 @@
 	};
 
 	TP.shouldTrack = function ( eventName, randomNumber ) {
+		console.log( 'checking whether click should be tracked' );
 		return this._tracker &&
 			Banner.config.tracking.events[eventName] &&
 			Banner.config.tracking.events[eventName].sample > randomNumber;
@@ -50,6 +55,14 @@
 	
 	TP.getRandomNumber = function () {
 		return Math.random() * ( 1 - 0.01 ) + 0.01;
+	};
+
+	TP.initClickHandlers = function() {
+		$.each( Banner.config.tracking.events, function ( key, settings ) {
+			$( settings.clickElement ).click( function () {
+				Banner.tracking.trackVirtualPageView( key );
+			} );
+		} );
 	};
 
 	Banner.tracking = new Tracking();

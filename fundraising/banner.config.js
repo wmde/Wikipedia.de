@@ -19,22 +19,27 @@
 			events: {
 				BANNER_CLOSED: {
 					pathName: 'banner-closed',
+					clickElement: '',
 					sample: 0
 				},
 				BANNER_EXPANDED: {
 					pathName: 'banner-expanded',
+					clickElement: '',
 					sample: 0
 				},
 				BANNER_SHOWN: {
 					pathName: 'banner-shown',
+					clickElement: '',
 					sample: 0
 				},
 				LIGHTBOX_CLICKED: {
 					pathName: 'lightbox-clicked',
+					clickElement: '',
 					sample: 0
 				},
 				LINK_CLICKED: {
 					pathName: 'link-clicked',
+					clickElement: '',
 					sample: 0
 				}
 			}
