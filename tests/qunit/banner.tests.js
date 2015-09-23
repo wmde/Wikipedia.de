@@ -1,3 +1,9 @@
+/**
+ * JavaScript library for tracking functionalities
+ *
+ * @licence GNU GPL v2+
+ * @author Kai Nissen <kai.nissen@wikimedia.de>
+ */
 Banner.config.setConfig(
 	{
 		tracking: {

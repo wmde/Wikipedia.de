@@ -20,11 +20,21 @@
 	}
 
 	TP = Tracking.prototype;
-	
+
+	/**
+	 * Set the tracker lib
+	 *
+	 * @param Tracker an instance of Piwik's Tracker class   
+	 */
 	TP.setTracker = function ( tracker ) {
 		this._tracker = tracker;
 	};
 
+	/**
+	 * Track a virtual page view
+	 *
+	 * @param eventName
+	 */
 	TP.trackVirtualPageView = function ( eventName ) {
 		if ( this.shouldTrack( eventName, this.getRandomNumber() ) ) {
 			this._tracker.trackPageView(
@@ -36,12 +46,22 @@
 		}
 	};
 
+	/**
+	 * Determines whether an event should be tracked
+	 *
+	 * @param eventName event name based on the property keys of Banner.tracking.events 
+	 * @param randomNumber randomly generated number to compare against the configured sample size
+	 * @return {boolean}
+	 */
 	TP.shouldTrack = function ( eventName, randomNumber ) {
 		return this._tracker &&
 			Banner.config.tracking.events[eventName] &&
 			Banner.config.tracking.events[eventName].sample > randomNumber;
 	};
-	
+
+	/**
+	 * @returns {number}
+	 */
 	TP.getRandomNumber = function () {
 		return Math.random() * ( 1 - 0.01 ) + 0.01;
 	};
