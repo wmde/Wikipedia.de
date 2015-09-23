@@ -10,22 +10,12 @@
 	var TP;
 
 	function Tracking() {
-		var that = this;
+		var self = this;
 		this._tracker = null;
 
-		// fetch the piwik library and get the specified tracker from it
-		$.ajax( {
-			url: Banner.config.tracking.libUrl,
-			dataType: 'script',
-			cache: true,
-			success: function() {
-				var trackingConfig = Banner.config.tracking;
-				that.setTracker( Piwik.getTracker( trackingConfig.baseUrl, trackingConfig.siteId ) );
-			}
-		} );
-
 		$( document ).ready( function() {
-			that.initClickHandlers();
+			self.initTrackingLib();
+			self.initClickHandlers();
 		} );
 	}
 
@@ -56,6 +46,25 @@
 		return Math.random() * ( 1 - 0.01 ) + 0.01;
 	};
 
+	/**
+	 * fetch the piwik library and get the specified tracker from it
+	 */
+	TP.initTrackingLib = function() {
+		var self = this;
+		$.ajax( {
+			url: Banner.config.tracking.libUrl,
+			dataType: 'script',
+			cache: true,
+			success: function() {
+				var trackingConfig = Banner.config.tracking;
+				self.setTracker( Piwik.getTracker( trackingConfig.trackerUrl, trackingConfig.siteId ) );
+			}
+		} );
+	};
+
+	/**
+	 * bind click events to elements as configured
+	 */
 	TP.initClickHandlers = function() {
 		$.each( Banner.config.tracking.events, function ( key, settings ) {
 			$( settings.clickElement ).click( function () {
