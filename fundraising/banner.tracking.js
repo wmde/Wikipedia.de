@@ -37,7 +37,7 @@
 
 	TP.trackVirtualPageView = function ( eventName ) {
 		if ( this.shouldTrack( eventName, this.getRandomNumber() ) ) {
-			console.log( //this._tracker.trackPageView(
+			this._tracker.trackPageView(
 				Banner.config.tracking.baseUrl +
 				Banner.config.tracking.events[eventName].pathName +
 				'/' +
@@ -47,7 +47,6 @@
 	};
 
 	TP.shouldTrack = function ( eventName, randomNumber ) {
-		console.log( 'checking whether click should be tracked' );
 		return this._tracker &&
 			Banner.config.tracking.events[eventName] &&
 			Banner.config.tracking.events[eventName].sample > randomNumber;
