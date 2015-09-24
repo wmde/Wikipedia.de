@@ -30,7 +30,7 @@ $onKeyUp = "triggerSuggestLater('$lang');"
 	<title>wikipedia.de - Wikipedia, die freie Enzyklop&auml;die</title>
 	<link rel="apple-touch-icon" href="/img/wikipedia.png" />
 	<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
-	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 	<script language="JavaScript" type="text/javascript" src="suggest.js"></script>
 	<script language="JavaScript" type="text/javascript" src="fundraising/banner.js"></script>
 	<script language="JavaScript" type="text/javascript" src="fundraising/banner.config.js"></script>
