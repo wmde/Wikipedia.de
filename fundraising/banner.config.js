@@ -8,6 +8,10 @@
 	'use strict';
 	
 	Banner.config = {
+		encryption: {
+			libUrl: '../fundraising/openpgp.min.js',
+			publicKey: ''
+		},
 		tracking: {
 			campaign: 'default',
 			keyword: 'default',
