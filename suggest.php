@@ -7,7 +7,7 @@ require_once("./inc/config.inc.php");
 require_once("./inc/json.php");
 
 function load_url($url) {
-	global $useCURL;
+	global $useCURL, $max_seconds;
 	if (!$useCURL) return file_get_contents($url);
 
 	$ch = curl_init($url);
@@ -16,7 +16,7 @@ function load_url($url) {
 	curl_setopt($ch, CURLOPT_USERAGENT, ini_get('user_agent'));
 	curl_setopt($ch, CURLOPT_TIMEOUT, $max_seconds); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_HEADER, 0); 
+	curl_setopt($ch, CURLOPT_HEADER, 0);
 
 	$text = curl_exec($ch);
 
