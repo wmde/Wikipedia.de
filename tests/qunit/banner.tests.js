@@ -80,7 +80,7 @@ QUnit.test( 'Click handlers are set', function( assert ) {
 	assert.notOk( $._data( $( '#qunit' ).get( 0 ), 'events' ) );
 } );
 
-QUnit.test( 'Encryption', function( assert ) {
+QUnit.test( 'Message can be encrypted', function( assert ) {
 	var $inputField = $( '<input id="enc" />' );
 	var done = assert.async();
 
@@ -88,7 +88,7 @@ QUnit.test( 'Encryption', function( assert ) {
 	Banner.encryption.encrypt( 'Hello, Dexter Morgan!', $( '#enc' ) );
 
 	setTimeout( function() {
-		assert.ok( $inputField.val() !== '' );
+		assert.ok( $inputField.val().indexOf( 'BEGIN PGP MESSAGE' ) !== -1 );
 		done();
 	}, 0 );
 } );
