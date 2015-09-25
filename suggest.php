@@ -7,7 +7,7 @@ require_once("./inc/config.inc.php");
 require_once("./inc/json.php");
 
 function load_url($url) {
-	global $useCURL;
+	global $useCURL, $max_seconds;
 	if (!$useCURL) return file_get_contents($url);
 
 	$ch = curl_init($url);
