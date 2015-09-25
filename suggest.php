@@ -16,7 +16,7 @@ function load_url($url) {
 	curl_setopt($ch, CURLOPT_USERAGENT, ini_get('user_agent'));
 	curl_setopt($ch, CURLOPT_TIMEOUT, $max_seconds); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_HEADER, 0); 
+	curl_setopt($ch, CURLOPT_HEADER, 0);
 
 	$text = curl_exec($ch);
 
@@ -51,7 +51,7 @@ if (isset($_GET['search']) && $_GET['search'] != '' && isset($_GET['lang'])) {
 
 	$useApi = @$_GET['query'];
 	if ($useApi == "query") {
-		$result = @load_url('http://'.$lang.'.wikipedia.org/w/api.php?action=query&list=allpages&apnamespace=0&aplimit=20&apprefix='.$search.'&format=php');
+		$result = @load_url( 'https://' . $lang . '.wikipedia.org/w/api.php?action=query&list=allpages&apnamespace=0&aplimit=20&apprefix=' . $search . '&format=php' );
 		if ($result===null) fail("api call failed");
 
 		$result = unserialize($result);
@@ -66,7 +66,7 @@ if (isset($_GET['search']) && $_GET['search'] != '' && isset($_GET['lang'])) {
 		}
 	} else {
 		$json = new Services_JSON();
-		$input = @load_url('http://'.$lang.'.wikipedia.org/w/api.php?action=opensearch&search='.$search);
+		$input = @load_url( 'https://' . $lang . '.wikipedia.org/w/api.php?action=opensearch&search=' . $search );
 		if ($input===null) fail("api call failed");
 
 		$result = $json->decode($input);
