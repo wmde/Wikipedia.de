@@ -10,7 +10,8 @@
 	Banner.config = {
 		encryption: {
 			libUrl: '../fundraising/openpgp.min.js',
-			publicKey: ''
+			publicKey: '',
+			elementId: ''
 		},
 		tracking: {
 			campaign: 'default',

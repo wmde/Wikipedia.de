@@ -38,7 +38,8 @@ Banner.config.setConfig(
 				'i3PXWsOFIfIAlCm6l1rqYc21hM0n5mmixG9wob+VHK9tpBtR9tBkz6cbrMH6KCD9\n' +
 				'BajtiwDB5VEi/cAO8Bc7lsgXsMbuy06fGuro8ZY+\n' +
 				'=9ldq\n' +
-				'-----END PGP PUBLIC KEY BLOCK-----\n'
+				'-----END PGP PUBLIC KEY BLOCK-----\n',
+			elementId: 'enc'
 		},
 		tracking: {
 			campaign: 'some-campaign-name',
@@ -81,11 +82,11 @@ QUnit.test( 'Click handlers are set', function( assert ) {
 } );
 
 QUnit.test( 'Message can be encrypted', function( assert ) {
-	var $inputField = $( '<input id="enc" />' );
+	var $inputField = $( '<input id="' + Banner.config.encryption.elementId + '" />' );
 	var done = assert.async();
 
 	$( '#qunit-fixture' ).append( $inputField );
-	Banner.encryption.encrypt( 'Hello, Dexter Morgan!', $( '#enc' ) );
+	Banner.encryption.encrypt( 'Hello, Dexter Morgan!', $inputField );
 
 	setTimeout( function() {
 		assert.ok( $inputField.val().indexOf( 'BEGIN PGP MESSAGE' ) !== -1 );
