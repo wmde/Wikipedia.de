@@ -39,7 +39,6 @@
 	/**
 	 * Encrypts a message and puts the encrypted data into the given field
 	 * @param data The message to encrypt
-	 * @param $targetField Field to hold the encrypted message.
 	 * @return {Promise}
 	 */
 	EP.encrypt = function ( data ) {
