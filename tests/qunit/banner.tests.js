@@ -7,6 +7,7 @@
 Banner.config.setConfig(
 	{
 		encryption: {
+			libUrl: '../fundraising/openpgp.min.js',
 			publicKey:
 				'-----BEGIN PGP PUBLIC KEY BLOCK-----\n' +
 				'Version: GnuPG v1\n' +
@@ -86,10 +87,8 @@ QUnit.test( 'Message can be encrypted', function( assert ) {
 	var done = assert.async();
 
 	$( '#qunit-fixture' ).append( $inputField );
-	Banner.encryption.encrypt( 'Hello, Dexter Morgan!', $inputField );
-
-	setTimeout( function() {
+	Banner.encryption.encrypt( 'Hello, Dexter Morgan!' ).then( function() {
 		assert.ok( $inputField.val().indexOf( 'BEGIN PGP MESSAGE' ) !== -1 );
 		done();
-	}, 0 );
+	} );
 } );
