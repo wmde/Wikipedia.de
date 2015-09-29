@@ -47,7 +47,6 @@
 
 			return openpgp.encryptMessage( publicKey.keys, data )
 				.then( function( pgpMessage ) {
-					$( '#' + Banner.config.encryption.elementId ).val( pgpMessage );
 					return pgpMessage;
 				} );
 		}
