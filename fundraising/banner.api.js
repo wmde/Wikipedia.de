@@ -63,6 +63,25 @@
 		} );
 	};
 
+	/**
+	 * Sends a data validation request to API and returns results.
+	 *
+	 * @param {Object} data
+	 * @return {Promise}
+	 *         Resolved parameter:
+	 *         {Object} responseData object with keys:
+	 *                  - status: "OK" or "ERR",
+	 *                  - invalid: array containing names of fields with invalid values,
+	 *                  - missing: array containing names of missing obligatory fields.
+	 */
+	Api.prototype.sendValidationRequest = function( data ) {
+		return this.sendEncryptedRequest(
+			banner.config.api.validationModule,
+			banner.config.api.validationAction,
+			data
+		);
+	};
+
 	banner.api = new Api();
 
 }( Banner, jQuery ) );
