@@ -28,11 +28,11 @@
 	Api.prototype.sendEncryptedRequest = function( module, action, data ) {
 		var self = this;
 		return banner.encryption.encrypt( $.param( data ) )
-		.then( function( encryptedData ) {
-			return self.sendRequest( module, action, {
-				enc: self.encodeBase64( encryptedData )
+			.then( function( encryptedData ) {
+				return self.sendRequest( module, action, {
+					enc: self.encodeBase64( encryptedData )
+				} );
 			} );
-		} );
 	};
 
 	/**

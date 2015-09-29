@@ -25,10 +25,10 @@
 		done = assert.async();
 
 		banner.api.sendValidationRequest( data )
-		.then( function( responseData ) {
-			assert.equal( responseData.status, 'OK' );
-			done();
-		} );
+			.then( function( responseData ) {
+				assert.equal( responseData.status, 'OK' );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'When given data missing obligatory fields Form.validateData returns status error and list missing fields', function( assert ) {
@@ -48,11 +48,11 @@
 		done = assert.async();
 
 		banner.api.sendValidationRequest( data )
-		.then( function( responseData ) {
-			assert.equal( responseData.status, 'ERR' );
-			assert.deepEqual( responseData.missing, [ 'betrag', 'nachname' ] );
-			done();
-		} );
+			.then( function( responseData ) {
+				assert.equal( responseData.status, 'ERR' );
+				assert.deepEqual( responseData.missing, [ 'betrag', 'nachname' ] );
+				done();
+			} );
 	} );
 
 	QUnit.test( 'When given data containing invalid values Form.validateData returns status error and list fields with invalid values', function( assert ) {
@@ -74,11 +74,11 @@
 			done = assert.async();
 
 		banner.api.sendValidationRequest( data )
-		.then( function( responseData ) {
-			assert.equal( responseData.status, 'ERR' );
-			assert.deepEqual( responseData.invalid, [ 'email', 'plz' ] );
-			done();
-		} );
+			.then( function( responseData ) {
+				assert.equal( responseData.status, 'ERR' );
+				assert.deepEqual( responseData.invalid, [ 'email', 'plz' ] );
+				done();
+			} );
 	} );
 
 }( Banner, QUnit ) );
