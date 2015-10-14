@@ -1,0 +1,136 @@
+.banner-lightbox {
+    font-size: 10pt;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #A9A9A9;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.banner-lightbox-small {
+    width: 186px;
+}
+
+.banner-lightbox-funds {
+    width: 650px;
+}
+
+.banner-lightbox-tax {
+    width: 390px;
+}
+
+.banner-lightbox-title {
+    color: #545454;
+    font-size: 10pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.banner-lightbox-title .icon-bar-chart, .banner-lightbox-title .icon-hand-right, .banner-lightbox-title .icon-parcel {
+    position: relative;
+    top: 4px;
+    margin-right: 8px;
+}
+
+.banner-lightbox ul {
+    margin: 0;
+    padding: 0;
+}
+
+.banner-lightbox ul li {
+    font-weight: bold;
+    list-style-type: none;
+    list-style-image: none;
+    text-indent: 0;
+}
+
+.banner-lightbox ul li p {
+    font-weight: normal;
+    line-height: 1.1em;
+    padding-left: 20px;
+    margin-top: 0;
+    display: none;
+}
+
+.banner-lightbox hr {
+    border: 0;
+    border-top: 1px solid #cfd2d9;
+    margin: 20px 0;
+}
+
+.banner-lightbox a {
+    color: #545454;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.lightbox-list-item {
+    margin-bottom: 8px;
+}
+
+.lightbox-list-item.last {
+    margin-bottom: 0;
+}
+
+.lightbox-list-item span {
+    vertical-align: bottom;
+    margin-right: 5px;
+}
+
+.list-item-title {
+    color: #545454;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.list-item-title.opened {
+    text-decoration: none;
+}
+
+.logo-itz-white {
+    background: transparent url("../img/itz_logo_white.png") no-repeat scroll center center;
+    float: right;
+    display: block;
+    height: 30px;
+    width: 100px;
+    margin-top: -10px;
+}
+
+.banner-lightbox-more {
+    display: block;
+    text-align: center;
+}
+
+.banner-lightbox-close {
+    color: #545454;
+    float: right;
+    margin-right: -15px;
+    margin-top: -16px;
+    cursor: pointer;
+}
+
+#bitpay-donate {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+#bitpay-price {
+    padding: 0;
+    width: 90px;
+    margin-left: 20px;
+    margin-right: 1px;
+}
+
+#bitpay-amount {
+    margin-bottom: 20px;
+}
+
+#bitpay-info-text {
+    margin-top: 20px;
+    margin-bottom: 0;
+    color: #545454;
+}
+
+#bitpay-donate-button-wrapper {
+    text-align: right;
+}
