@@ -206,7 +206,7 @@ h3 {
 #bannerbox {
 }
 
-#bannerbox p {
+#bannerbox > p {
 	margin: 0;
 }
 
