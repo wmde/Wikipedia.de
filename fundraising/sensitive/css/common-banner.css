@@ -5,6 +5,7 @@
 /*for mobile page*/
 #WMDE_Banner div {
     box-sizing: content-box;
+    text-align: left;
 }
 
 #WMDE_Banner td {
