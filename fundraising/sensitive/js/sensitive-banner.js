@@ -9,11 +9,11 @@ $( function() {
 
 	$( '#interval_onetime' ).on( 'click', function() {
 		$( '#WMDE_BannerForm-wrapper' ).css( 'height', '158px' );
-		$( '.interval-options input[name=interval]').prop( 'checked', false );
+		$( '.interval-options input[name=interval]' ).prop( 'checked', false );
 	} );
 	$( '#interval_multiple' ).on( 'click', function() {
 		$( '#WMDE_BannerForm-wrapper' ).css( 'height', '204px' );
-		$( '#interval1').prop( 'checked', 'checked' );
+		$( '#interval1' ).prop( 'checked', 'checked' );
 	} );
 
 	paymentButtons.on( 'click', function( e ) {
@@ -118,10 +118,11 @@ function showFullForm() {
 }
 
 function hideFullForm() {
+	$( '#zahlweise' ).val( '' );
+	isOpen = false;
 	$( '#WMDE_BannerFullForm-details' ).slideUp( 400, function() {
 		$( '#WMDE_Banner' ).css( 'position', 'fixed' );
 		resetButtons();
-		isOpen = false;
 	} );
 	$( '#WMDE_BannerFullForm-info' ).hide();
 	$( '#WMDE_BannerFullForm-shadow' ).fadeOut();
@@ -139,15 +140,19 @@ function debitNextStep() {
 /* Payment methods show and hide */
 
 function showDebitDonation( button ) {
-	resetButtons();
-	$( button ).addClass( 'active' );
-	$( '#zahlweise' ).val( 'BEZ' );
-	$( '#WMDE_Banner-debit-type' ).slideDown();
-	$( '#WMDE_Banner-anonymous' ).slideUp();
-	$( '#WMDE_BannerFullForm-finish' ).hide();
-	$( '#WMDE_BannerFullForm-next' ).show();
-	resetAddressType();
-	showFullForm();
+	if ( $( '#zahlweise' ).val() === 'BEZ' ) {
+		hideFullForm();
+	} else {
+		$( '#zahlweise' ).val( 'BEZ' );
+		$( '#WMDE_Banner-debit-type' ).slideDown();
+		$( '#WMDE_Banner-anonymous' ).slideUp();
+		$( '#WMDE_BannerFullForm-finish' ).hide();
+		$( '#WMDE_BannerFullForm-next' ).show();
+		resetAddressType();
+		resetButtons();
+		$( button ).addClass( 'active' );
+		showFullForm();
+	}
 }
 
 function resetAddressType() {
@@ -155,18 +160,30 @@ function resetAddressType() {
 }
 
 function showDepositDonation( button ) {
-	$( '#zahlweise' ).val( 'UEB' );
-	showNonDebitParts( button );
+	if ( $( '#zahlweise' ).val() === 'UEB' ) {
+		hideFullForm();
+	} else {
+		$( '#zahlweise' ).val( 'UEB' );
+		showNonDebitParts( button );
+	}
 }
 
 function showCreditDonation( button ) {
-	$( '#zahlweise' ).val( 'MCP' );
-	showNonDebitParts( button );
+	if ( $( '#zahlweise' ).val() === 'MCP' ) {
+		hideFullForm();
+	} else {
+		$( '#zahlweise' ).val( 'MCP' );
+		showNonDebitParts( button );
+	}
 }
 
 function showPayPalDonation( button ) {
-	$( '#zahlweise' ).val( 'PPL' );
-	showNonDebitParts( button );
+	if ( $( '#zahlweise' ).val() === 'PPL' ) {
+		hideFullForm();
+	} else {
+		$( '#zahlweise' ).val( 'PPL' );
+		showNonDebitParts( button );
+	}
 }
 
 function showNonDebitParts( button ) {
