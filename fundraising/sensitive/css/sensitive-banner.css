@@ -34,10 +34,14 @@
     display: none;
 }
 
+#WMDE_BannerFullForm-dataprotection {
+    display: none;
+}
+
 #WMDE_BannerFullForm-arrow {
     display: none;
     height: 27px;
-    background: transparent url('//wikipedia.de/fundraising/sensitive/img/form-arrow-down.png') no-repeat scroll right top;
+    background: transparent url('../img/form-arrow-down.png') no-repeat scroll right top;
     margin-right: 19px;
 }
 
@@ -144,14 +148,14 @@ td#WMDE_BannerFullForm-wrapper {
     right: -227px;
     margin-top: 7px;
     margin-left: 6px;
-    background: transparent url('//wikipedia.de/fundraising/sensitive/img/form-info-icon.png') no-repeat scroll center center;
+    background: transparent url('../img/form-info-icon.png') no-repeat scroll center center;
     width: 14px;
     height: 14px;
     display: block;
 }
 
 #WMDE_BannerFullForm button.submit {
-    background: #ffff00 url('//wikipedia.de/fundraising/sensitive/img/form-submit-ok.png') scroll 2px center;; /* Old browsers */
+    background: #ffff00 url('../img/form-submit-ok.png') scroll 2px center;; /* Old browsers */
     background: -moz-linear-gradient(top, #ffff00 0%, #e5e500 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffff00), color-stop(100%, #e5e500)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #ffff00 0%, #e5e500 100%); /* Chrome10+,Safari5.1+ */
@@ -175,7 +179,7 @@ td#WMDE_BannerFullForm-wrapper {
 }
 
 button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sepa.waiting {
-    background: #e5e500 url('//wikipedia.de/fundraising/sensitive/img/form-submit-ok.png') scroll 2px center;; /* Old browsers */
+    background: #e5e500 url('../img/form-submit-ok.png') scroll 2px center;; /* Old browsers */
     background: -moz-linear-gradient(top, #e5e500 0%, #ffff00 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e5e500), color-stop(100%, #ffff00)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #e5e500 0%, #ffff00 100%); /* Chrome10+,Safari5.1+ */
@@ -191,7 +195,7 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
     height: 13px;
     position: absolute;
     margin-left: 2px;
-    background: transparent url('//wikipedia.de/fundraising/sensitive/img/form-submit-ok.png') scroll center center;
+    background: transparent url('../img/form-submit-ok.png') scroll center center;
 }
 
 #WMDE_BannerFullForm-finish.waiting .mark-ok, #WMDE_BannerFullForm-finish-sepa.waiting .mark-ok {
@@ -201,7 +205,7 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 }
 
 #WMDE_BannerFullForm div.form-field-error-box {
-    margin-left: -30%;
+    margin-left: -34%;
     position: absolute;
     z-index: 1;
 }
@@ -209,7 +213,7 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 #WMDE_BannerFullForm span.form-field-error-text {
     border: 1px solid #C25959;
     border-radius: 4px;
-    background: #FFFFFF url('//wikipedia.de/fundraising/sensitive/img/form-error-excl.png') no-repeat scroll 2px center;
+    background: #FFFFFF url('../img/form-error-excl.png') no-repeat scroll 2px center;
     color: #C25959;
     padding: 2px 2px 2px 18px;
     font-size: 13px;
@@ -218,7 +222,7 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 #WMDE_BannerFullForm div.form-field-error-arrow {
     position: relative;
     top: -2px;
-    background: transparent url('//wikipedia.de/fundraising/sensitive/img/form-arrow-error.png') no-repeat scroll center center;
+    background: transparent url('../img/form-arrow-error.png') no-repeat scroll center center;
     width: 14px;
     height: 8px;
     margin: auto;
@@ -233,11 +237,11 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 }
 
 #WMDE_BannerFullForm .icon-bug {
-    background: transparent url('//wikipedia.de/fundraising/sensitive/img/form-input-error.png') no-repeat scroll center center;
+    background: transparent url('../img/form-input-error.png') no-repeat scroll center center;
 }
 
 #WMDE_BannerFullForm .icon-ok {
-    background: transparent url('//wikipedia.de/fundraising/sensitive/img/form-input-valid.png') no-repeat scroll center center;
+    background: transparent url('../img/form-input-valid.png') no-repeat scroll center center;
 }
 
 #WMDE_BannerFullForm-close-step1, #WMDE_BannerFullForm-close-step2 {
@@ -291,19 +295,26 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
     width: 430px;
 }
 
+#WMDE_BannerFullForm-info.dataprotection {
+    width: 430px;
+}
+
 @media screen and (min-width: 1000px) {
-    #WMDE_BannerFullForm-info.taxes {
+    #WMDE_BannerFullForm-info.taxes,
+    #WMDE_BannerFullForm-info.dataprotection {
         width: 680px;
     }
 }
 
 @media screen and (min-width: 1250px) {
-    #WMDE_BannerFullForm-info.funds {
+    #WMDE_BannerFullForm-info.funds,
+    #WMDE_BannerFullForm-info.dataprotection {
         width: 940px;
     }
 }
 
-#WMDE_BannerFullForm-infolinks, #WMDE_BannerFullForm-security, #WMDE_BannerFullForm-taxes, #WMDE_BannerFullForm-bitcoin, #WMDE_BannerFullForm-funds {
+#WMDE_BannerFullForm-infolinks, #WMDE_BannerFullForm-security, #WMDE_BannerFullForm-taxes,
+#WMDE_BannerFullForm-bitcoin, #WMDE_BannerFullForm-funds, #WMDE_BannerFullForm-dataprotection {
     margin-top: 20px;
 }
 
@@ -311,6 +322,20 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
     float: right;
 }
 
-#WMDE_BannerFullForm-taxes, #WMDE_BannerFullForm-bitcoin, #WMDE_BannerFullForm-funds {
+#WMDE_BannerFullForm-taxes, #WMDE_BannerFullForm-bitcoin, #WMDE_BannerFullForm-funds, #WMDE_BannerFullForm-dataprotection  {
     float: left;
+}
+
+.banner-lightbox-funds {
+    width: 650px;
+}
+
+.banner-lightbox-tax, .banner-lightbox-dataprotection {
+    width: 390px;
+}
+
+@media screen and (min-width: 1250px) {
+    .banner-lightbox-dataprotection {
+        width: 640px;
+    }
 }
