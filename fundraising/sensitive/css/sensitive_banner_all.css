@@ -112,15 +112,15 @@ td#WMDE_BannerFullForm-wrapper {
 }
 
 #WMDE_BannerFullForm input[type=text], #WMDE_BannerFullForm input[type=tel] {
-    width: 244px;
+    width: 240px;
 }
 
 #WMDE_BannerFullForm select {
-    width: 248px;
+    width: 247px;
 }
 
 #WMDE_BannerFullForm input.small-input {
-    width: 117px;
+    width: 114px;
 }
 
 #WMDE_BannerFullForm select.small-input {
@@ -273,6 +273,11 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
     float: left;
 }
 
+#WMDE_Banner #globalsign-siteseal {
+    width: 125px;
+    float: left;
+}
+
 #confirm_sepa {
     margin-bottom: 240px;
 }
@@ -421,7 +426,7 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 }
 
 .logo-itz-white {
-    background: transparent url("../img/itz_logo_white.png") no-repeat scroll center center;
+    /*background: transparent url("../img/itz_logo_white.png") no-repeat scroll center center;*/
     float: right;
     display: block;
     height: 30px;
