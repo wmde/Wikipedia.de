@@ -183,26 +183,8 @@ function validateForm() {
 		$( '#periode' ).val( "0" );
 	}
 
-	// Get amount selection
-	var amount = null;
-	for ( var i = 0; i < form.betrag_auswahl.length; i++ ) {
-		if ( form.betrag_auswahl[i].checked ) {
-			amount = form.betrag_auswahl[i].value;
-			break;
-		}
-	}
-	if ( form.amountGiven.value !== "" ) {
-		var otherAmount = form.amountGiven.value;
-		otherAmount = otherAmount.replace( /[,.](\d)$/, '\:$10' );
-		otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, '\:$1$2' );
-		otherAmount = otherAmount.replace( /[\$,.]/g, '' );
-		otherAmount = otherAmount.replace( /:/, '.' );
-		form.amountGiven.value = otherAmount;
-		amount = otherAmount;
-		$( '#input_amount_other' ).val( otherAmount );
-	}
-	// Check amount is a real number
-	error = ( amount === null || isNaN( amount ) || amount.value <= 0 );
+	var amount = getAmount();
+
 	// Check amount is at least the minimum
 	if ( amount < 1 || error ) {
 		alert( 'Der Mindestbetrag beträgt 1 Euro.' );
@@ -211,7 +193,30 @@ function validateForm() {
 		alert( 'Der Spendenbetrag ist zu hoch.' );
 		return false;
 	}
-	return !error;
+	return amount;
+}
+
+function getAmount() {
+	var amount = null;
+	var otherAmount = $( '#amount-other-input' ).val();
+	var form = document.donationForm;
+
+	amount = $( 'input[name=betrag_auswahl]:checked' ).val();
+
+	if ( otherAmount !== '' ) {
+		otherAmount = otherAmount.replace( /[,.](\d)$/, '\:$10' );
+		otherAmount = otherAmount.replace( /[,.](\d)(\d)$/, '\:$1$2' );
+		otherAmount = otherAmount.replace( /[\$,.]/g, '' );
+		otherAmount = otherAmount.replace( /:/, '.' );
+		$( '#amount-other-input' ).val( otherAmount );
+		amount = otherAmount;
+	}
+
+	if ( amount === null || isNaN( amount ) || amount.value <= 0 ) {
+		return false;
+	}
+
+	return amount;
 }
 
 function addBannerSpace() {
