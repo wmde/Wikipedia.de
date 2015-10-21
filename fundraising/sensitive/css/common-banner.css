@@ -125,7 +125,6 @@
     background: -ms-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* IE10+ */
     background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5e5e5', GradientType=0); /* IE6-9 */
-    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.5);
     margin: 0 1px;
 }
 
@@ -139,7 +138,6 @@
     background: -ms-linear-gradient(top, #e5e5e5 0%, #ffffff 100%); /* IE10+ */
     background: linear-gradient(to bottom, #e5e5e5 0%, #ffffff 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5e5e5', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
-    box-shadow: none;
 }
 
 #WMDE_BannerForm-payment button:hover {
