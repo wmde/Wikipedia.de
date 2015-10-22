@@ -92,6 +92,7 @@ $( function() {
 		$( '#WMDE_BannerFullForm-company' ).slideUp();
 		$( '#WMDE_Banner-person' ).slideUp();
 		$( '#WMDE_Banner-address' ).slideUp();
+		$( '#send-information' ).prop( 'checked', false );
 		addressType = 'anonymous';
 	} );
 
@@ -148,6 +149,7 @@ function showFullForm() {
 function hideFullForm() {
 	$( '#zahlweise' ).val( '' );
 	$( '#form_action' ).prop( 'name', '' );
+	$( '#donationIframe' ).val( '' );
 	isOpen = false;
 	$( '#WMDE_BannerFullForm-details' ).slideUp( 400, function() {
 		$( '#WMDE_Banner' ).css( 'position', 'fixed' );
@@ -233,6 +235,7 @@ function showDebitDonation( button ) {
 	} else {
 		$( '#zahlweise' ).val( 'BEZ' );
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:einzug' );
+		$( '#donationIframe' ).val( '' );
 		$( '#WMDE_Banner-debit-type' ).slideDown();
 		$( '#WMDE_Banner-anonymous' ).slideUp();
 		$( '#WMDE_BannerFullForm-finish' ).hide();
@@ -254,6 +257,7 @@ function showDepositDonation( button ) {
 	} else {
 		$( '#zahlweise' ).val( 'UEB' );
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:ueberweisung' );
+		$( '#donationIframe' ).val( '' );
 		showNonDebitParts( button );
 	}
 }
@@ -264,6 +268,7 @@ function showCreditDonation( button ) {
 	} else {
 		$( '#zahlweise' ).val( 'MCP' );
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:micropayment-i' );
+		$( '#donationIframe' ).val( 'micropayment-iframe' );
 		showNonDebitParts( button );
 	}
 }
@@ -274,6 +279,7 @@ function showPayPalDonation( button ) {
 	} else {
 		$( '#zahlweise' ).val( 'PPL' );
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:paypal' );
+		$( '#donationIframe' ).val( '' );
 		showNonDebitParts( button );
 	}
 }

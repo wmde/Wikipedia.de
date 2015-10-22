@@ -52,16 +52,12 @@
 }
 
 #WMDE_BannerFullForm hr {
-    width: 248px;
+    width: 240px;
 }
 
 #WMDE_BannerFullForm td {
     background: #eef0fc;
     padding: 8px 8px 0 8px;
-}
-
-#WMDE_BannerForm-wrapper {
-    padding: 0 8px 4px;
 }
 
 #WMDE_BannerForm-payment td {
@@ -104,27 +100,23 @@ td#WMDE_BannerFullForm-wrapper {
 }
 
 #WMDE_BannerFullForm label.salutation-label {
-    margin-right: 21px;
-}
-
-#WMDE_BannerFullForm label.address-label {
-    margin-right: 3px;
+    margin-right: 18px;
 }
 
 #WMDE_BannerFullForm input[type=text], #WMDE_BannerFullForm input[type=tel] {
-    width: 240px;
+    width: 232px;
 }
 
 #WMDE_BannerFullForm select {
-    width: 247px;
+    width: 239px;
 }
 
 #WMDE_BannerFullForm input.small-input {
-    width: 114px;
+    width: 110px;
 }
 
 #WMDE_BannerFullForm select.small-input {
-    width: 96px;
+    width: 92px;
 }
 
 #WMDE_BannerFullForm #send-information {
@@ -167,7 +159,7 @@ td#WMDE_BannerFullForm-wrapper {
     border-radius: 5px;
     color: #000;
     font-weight: bold;
-    width: 248px;
+    width: 240px;
     height: 25px;
     text-decoration: none;
     text-align: center;
@@ -288,7 +280,7 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 
 #WMDE_BannerFullForm-info {
     position: absolute;
-    right: 304px;
+    right: 296px;
     width: 480px;
 }
 
@@ -454,8 +446,8 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 
 #bitpay-price {
     padding: 0;
-    width: 90px;
-    margin-left: 20px;
+    width: 86px;
+    margin-left: 16px;
     margin-right: 1px;
 }
 
@@ -472,7 +464,10 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
 #bitpay-donate-button-wrapper {
     text-align: right;
 }
-[class^="icon-"], [class*=" icon-"] {
+
+#bitpay-donate-button-wrapper input {
+    border: 0;
+}[class^="icon-"], [class*=" icon-"] {
 	display: inline-block;
 	background-repeat: no-repeat;
 	background-image: url(../img/sprite.svg);
