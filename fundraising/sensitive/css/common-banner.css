@@ -19,6 +19,11 @@
     padding: 0 2px;
 }
 
+#WMDE_Banner input[type=radio] {
+    padding: 0;
+    border: none;
+}
+
 #WMDE_Banner button {
     font-size: 14px;
 }
@@ -107,7 +112,7 @@
 }
 
 #WMDE_BannerForm-payment #amount-other-input {
-    width: 30px;
+    width: 27px;
 }
 
 #WMDE_BannerForm-payment button {
