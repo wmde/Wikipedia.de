@@ -1,5 +1,4 @@
 var isOpen = false;
-var paySEPA = true;
 var addressType = 'private';
 
 $( function() {
@@ -10,6 +9,7 @@ $( function() {
 		dataProtectionBox = new BannerModalInfobox( 'dataprotection' );
 
 	unlockForm();
+	toggleDebitType();
 
 	$( '#interval_onetime' ).on( 'click', function() {
 		$( '#WMDE_BannerForm-wrapper' ).css( 'height', '158px' );
@@ -30,25 +30,7 @@ $( function() {
 		lockForm();
 	} );
 
-	$( '#WMDE_BannerFullForm-finish-sepa' ).on( 'click', function( e ) {
-		e.preventDefault();
-		if ( $( '#confirm_sepa').prop( 'checked' ) && $( '#confirm_shortterm' ).prop( 'checked' ) ) {
-			$( '#donationForm' ).submit();
-		}
-		else {
-			$( '#confirm_sepa, #confirm_shortterm' ).each( function (index, element ) {
-				var $element = $( element ), p;
-				if ( $element.prop( 'checked' ) ) {
-					return;
-				}
-				p = $element.parent();
-				p.css( { border: 'red 1px solid' } );
-				$element.on( 'click', function () {
-					p.css( { border: 'none' } );
-				});
-			} );
-		}
-	} );
+	$( '#WMDE_BannerFullForm-finish-sepa' ).on( 'click', handleSepaValidation );
 
 	$( '#WMDE_BannerFullForm-close-step1' ).on( 'click', function() {
 		hideFullForm();
@@ -62,6 +44,9 @@ $( function() {
 		unlockForm();
 	} );
 
+	$( '.WMDE_BannerFullForm-confirm-edit' ).on( 'click', function () {
+		debitBackToFirstStep();
+	} );
 
 	paymentButtons.hover( function() {
 			if ( !isOpen ) $( '#WMDE_BannerFullForm-arrow' ).show();
@@ -115,6 +100,33 @@ $( function() {
 
 } );
 
+/**
+ * Handle clicks on the button on the SEPA confirmation page.
+ *
+ * When checkboxes are ok, submit the form, if not, highlight missing checkboxes.
+ *
+ * @param evt {Event} Button click event
+ */
+function handleSepaValidation ( evt ) {
+	evt.preventDefault();
+	if ( $( '#confirm_sepa').prop( 'checked' ) && $( '#confirm_shortterm' ).prop( 'checked' ) ) {
+		$( '#donationForm' ).submit();
+	}
+	else {
+		$( '#confirm_sepa, #confirm_shortterm' ).each( function (index, element ) {
+			var $element = $( element ), $parent;
+			if ( $element.prop( 'checked' ) ) {
+				return;
+			}
+			$parent = $element.parent();
+			$parent.css( { border: 'red 1px solid' } );
+			$element.one( 'click', function () {
+				$parent.css( { border: 'none' } );
+			} );
+		} );
+	}
+}
+
 function lockForm() {
 	$( 'button' ).prop( 'disabled', true );
 	$( 'input' ).prop( 'disabled', true );
@@ -128,9 +140,13 @@ function unlockForm() {
 }
 
 function toggleDebitType() {
-	$( '#WMDE_Banner-sepa' ).slideToggle();
-	$( '#WMDE_BannerFullForm-nosepa' ).slideToggle();
-	paySEPA = !paySEPA;
+	if ( $( 'input:radio[name=debit-type]:checked' ).val() === 'sepa' ) {
+		$( '#WMDE_BannerFullForm-nosepa' ).slideUp();
+		$( '#WMDE_Banner-sepa' ).slideDown();
+	} else {
+		$( '#WMDE_Banner-sepa' ).slideUp();
+		$( '#WMDE_BannerFullForm-nosepa' ).slideDown();
+	}
 }
 
 function showFullForm() {
@@ -181,6 +197,7 @@ function fillConfirmationValues() {
 	$( '#WMDE_BannerFullForm-confirm-IBAN' ).text( $( '#iban' ).val() );
 	$( '#WMDE_BannerFullForm-confirm-BIC' ).text( $( '#bic' ).val() );
 	$( '#WMDE_BannerFullForm-confirm-bankname' ).text( $( '#bank-name' ).val() );
+	$( '#WMDE_BannerFullForm-confirm-date' ).text( getCurrentDateString() );
 }
 
 function getSalutation() {
@@ -225,6 +242,30 @@ function getCountryByCode( code ) {
 		default:
 			return '';
 	}
+}
+
+function getCurrentDateString() {
+	var now = new Date(),
+		day = now.getDate(),
+		month = now.getMonth() + 1;
+	return ( day < 10 ? '0' : '' )
+		+ day
+		+ '.'
+		+ ( month < 10  ? '0' : '' )
+		+ month
+		+ '.'
+		+ now.getFullYear();
+}
+
+function debitBackToFirstStep() {
+	$( '#donationForm' ).trigger( 'banner:validationReset' );
+	$( '#WMDE_BannerFullForm-step2' ).slideToggle( 400, function () {
+		$( '#WMDE_BannerFullForm-step1' ).slideToggle();
+	} );
+
+	$( 'html, body' ).animate( {
+		scrollTop: 0
+	}, 'slow' );
 }
 
 /* Payment methods show and hide */
@@ -640,9 +681,7 @@ var Banner;
 			self._initSubmitHandler();
 			self._initBankDataHandler();
 			self._initFieldClearHandlers();
-			$( '#' + banner.config.form.formId + ' .amount-radio' ).on( 'click', function () {
-				self._clearElementValidity( self.amountValidationAnchor );
-			} );
+			self._initValidationResetHandler();
 		} );
 	}
 
@@ -711,6 +750,14 @@ var Banner;
 		$( '#account-number, #bank-code, #iban' ).on( 'change', this.checkBankData.bind( this ) );
 	};
 
+	Form.prototype._initValidationResetHandler = function () {
+		var self = this,
+			form = $( '#' + banner.config.form.formId );
+		form.on( 'banner:validationReset', function () {
+			self.validated = false;
+		} );
+	};
+
 	Form.prototype.checkBankData = function ( evt ) {
 		var cleanBankData = function ( data, isIBAN ) {
 				data = data.toString();
@@ -759,7 +806,7 @@ var Banner;
 			$( '#bank-name' ).val( data.bankName ? data.bankName : '' );
 		} else {
 			$iban.val( '' );
-			errorMessage = data.message || 'Die eingegebenen Bankdaten sind nicht korrekt.';
+			errorMessage = 'Die eingegebenen Bankdaten sind nicht korrekt.';
 			this._showError( $iban, errorMessage );
 			this._showError( $( '#account-number' ), errorMessage );
 		}
@@ -860,22 +907,8 @@ var Banner;
 	 * @param {string[]} fieldsWithInvalidValue
 	 */
 	Form.prototype._applyValidationErrors = function ( fieldsMissingValue, fieldsWithInvalidValue ) {
-		var self = this,
-			valueMissingIndex = $.inArray( 'betrag', fieldsMissingValue ),
-			valueInvalidIndex = $.inArray( 'betrag', fieldsWithInvalidValue );
-		if ( valueInvalidIndex > -1 ) {
-			this._showError( this.amountValidationAnchor, 'Bitte geben Sie einen gültigen Betrag ein.' );
-			fieldsWithInvalidValue.splice( valueInvalidIndex, 1 );
-			// Invalid values cause this
-			if ( valueMissingIndex > -1 ) {
-				fieldsMissingValue.splice( valueMissingIndex, 1 );
-			}
-		}
-		if ( valueMissingIndex > -1 ) {
-			this._showError( this.amountValidationAnchor, 'Bitte geben Sie einen Betrag ein.' );
-			fieldsMissingValue.splice( valueMissingIndex, 1 );
-		}
-
+		var self = this;
+		this._applyAmountValidationErrors( fieldsMissingValue, fieldsWithInvalidValue );
 		$( '#' + banner.config.form.formId + ' :input:not([type=hidden])' ).each( function ( index, element ) {
 			if ( $.inArray( $( element ).attr( 'name' ), fieldsMissingValue ) > -1 ) {
 				self._markMissing( $( element ) );
@@ -889,6 +922,29 @@ var Banner;
 		} );
 	};
 
+	Form.prototype._applyAmountValidationErrors = function ( fieldsMissingValue, fieldsWithInvalidValue ) {
+		var valueMissingIndex = $.inArray( 'betrag', fieldsMissingValue ),
+			valueInvalidIndex = $.inArray( 'betrag', fieldsWithInvalidValue ),
+			errorBox, errorText = '';
+		if ( valueInvalidIndex > -1 ) {
+			errorText = 'Bitte geben Sie einen gültigen Betrag ein.' ;
+			fieldsWithInvalidValue.splice( valueInvalidIndex, 1 );
+			// Invalid values cause this
+			if ( valueMissingIndex > -1 ) {
+				fieldsMissingValue.splice( valueMissingIndex, 1 );
+			}
+		}
+		if ( valueMissingIndex > -1 ) {
+			errorText = 'Bitte geben Sie einen Betrag ein.';
+			fieldsMissingValue.splice( valueMissingIndex, 1 );
+		}
+		if ( errorText ) {
+			errorBox = this._showError( this.amountValidationAnchor, errorText );
+			this._addErrorRemovalHandler( $( '#' + banner.config.form.formId + ' .amount-radio' ), errorBox, 'click' );
+			this._addErrorRemovalHandler( $( '#amount-other-input' ), errorBox );
+		}
+	};
+
 	Form.prototype._markInvalid = function ( $element ) {
 		this._showError( $element );
 	};
@@ -899,9 +955,15 @@ var Banner;
 		this._showError( $element );
 	};
 
+	/**
+	 * Set the element parent class to "invalid", show invalid icon and add error text
+	 *
+	 * @param {jQuery} $element
+	 * @return {jQuery} The error box
+	 */
 	Form.prototype._showError = function ( $element ) {
 		var $parent = $element.parent(),
-			errorText;
+			errorText, $errorBox;
 		if ( arguments.length > 1 ) {
 			errorText = arguments[ 1 ];
 		} else {
@@ -910,12 +972,22 @@ var Banner;
 		$element.addClass( 'invalid' );
 		$( '.validation', $parent ).addClass( 'icon-bug' );
 		if ( !$( '.form-field-error-box', $parent ).length ) {
-			$parent.append(
+			$errorBox = $(
 				'<div class="form-field-error-box"><div class="form-field-error-arrow"></div><span class="form-field-error-text">' +
 				errorText +
 				'</span></div></div>'
 			);
+			$parent.append( $errorBox );
+			this._addErrorRemovalHandler( $element, $errorBox );
 		}
+		return $errorBox;
+	};
+
+	Form.prototype._addErrorRemovalHandler = function ( $element, $errorBox, eventName ) {
+		eventName = eventName || 'focus';
+		$element.one( eventName, function () {
+			$errorBox.remove();
+		} );
 	};
 
 	Form.prototype._markValid = function ( $element ) {
