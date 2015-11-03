@@ -1,7 +1,10 @@
-var isOpen = false;
-var addressType = 'private';
+/*jshint latedef: nofunc */
+/*jshint unused: false */
+/* globals getAmount */
+var isOpen = false,
+	addressType = 'private';
 
-$( function() {
+$( function () {
 	var paymentButtons = $( '#WMDE_BannerForm-payment button' ),
 		fundsBox = new BannerModalInfobox( 'funds' ),
 		taxesBox = new BannerModalInfobox( 'taxes' ),
@@ -10,34 +13,35 @@ $( function() {
 
 	unlockForm();
 	toggleDebitType();
+	initWatchingInitialValues();
 
-	$( '#interval_onetime' ).on( 'click', function() {
+	$( '#interval_onetime' ).on( 'click', function () {
 		$( '#WMDE_BannerForm-wrapper' ).css( 'height', '158px' );
 		$( '.interval-options input[name=interval]' ).prop( 'checked', false );
 	} );
-	$( '#interval_multiple' ).on( 'click', function() {
+	$( '#interval_multiple' ).on( 'click', function () {
 		$( '#WMDE_BannerForm-wrapper' ).css( 'height', '204px' );
 		$( '#interval1' ).prop( 'checked', 'checked' );
 	} );
 
-	paymentButtons.on( 'click', function( e ) {
+	paymentButtons.on( 'click', function ( e ) {
 		e.preventDefault();
 	} );
 
-	$( '#WMDE_BannerFullForm-finish' ).on( 'click', function( e ) {
-		$( this ).trigger( "blur" );
+	$( '#WMDE_BannerFullForm-finish' ).on( 'click', function ( e ) {
+		$( this ).trigger( 'blur' );
 		$( this ).addClass( 'waiting' );
 		lockForm();
 	} );
 
 	$( '#WMDE_BannerFullForm-finish-sepa' ).on( 'click', handleSepaValidation );
 
-	$( '#WMDE_BannerFullForm-close-step1' ).on( 'click', function() {
+	$( '#WMDE_BannerFullForm-close-step1' ).on( 'click', function () {
 		hideFullForm();
 		unlockForm();
 	} );
-	$( '#WMDE_BannerFullForm-close-step2' ).on( 'click', function() {
-		$( '#WMDE_BannerFullForm-step2' ).slideToggle( 400, function() {
+	$( '#WMDE_BannerFullForm-close-step2' ).on( 'click', function () {
+		$( '#WMDE_BannerFullForm-step2' ).slideToggle( 400, function () {
 			$( '#WMDE_BannerFullForm-step1' ).slideToggle();
 		} );
 		hideFullForm();
@@ -48,32 +52,34 @@ $( function() {
 		debitBackToFirstStep();
 	} );
 
-	paymentButtons.hover( function() {
-			if ( !isOpen ) $( '#WMDE_BannerFullForm-arrow' ).show();
+	paymentButtons.hover( function () {
+			if ( !isOpen ) {
+				$( '#WMDE_BannerFullForm-arrow' ).show();
+			}
 		},
-		function() {
+		function () {
 			$( '#WMDE_BannerFullForm-arrow' ).hide();
 		} );
 
-	$( 'input[name=\'debit-type\']' ).on( 'click', function() {
+	$( 'input[name=\'debit-type\']' ).on( 'click', function () {
 		toggleDebitType();
 	} );
 
-	$( '#address-type-1' ).on( 'click', function() {
+	$( '#address-type-1' ).on( 'click', function () {
 		$( '#WMDE_BannerFullForm-company' ).slideUp();
 		$( '#WMDE_Banner-person' ).slideDown();
 		$( '#WMDE_Banner-address' ).slideDown();
 		addressType = 'private';
 	} );
 
-	$( '#address-type-2' ).on( 'click', function() {
+	$( '#address-type-2' ).on( 'click', function () {
 		$( '#WMDE_Banner-person' ).slideUp();
 		$( '#WMDE_BannerFullForm-company' ).slideDown();
 		$( '#WMDE_Banner-address' ).slideDown();
 		addressType = 'company';
 	} );
 
-	$( '#address-type-3' ).on( 'click', function() {
+	$( '#address-type-3' ).on( 'click', function () {
 		$( '#WMDE_BannerFullForm-company' ).slideUp();
 		$( '#WMDE_Banner-person' ).slideUp();
 		$( '#WMDE_Banner-address' ).slideUp();
@@ -81,40 +87,116 @@ $( function() {
 		addressType = 'anonymous';
 	} );
 
+	// Enter key in input fields should trigger the correct submit button
+	$( '#donationForm input[type=text]' ).keypress( function ( evt ) {
+		if ( evt.key === 'Enter' || evt.which === 13 ) {
+			evt.preventDefault();
+			$( '#donationForm .submit:visible' ).first().trigger( 'click' );
+		}
+	} );
+
 	// set validation event handlers
-	$( '#donationForm' ).on( 'banner:validationFailed', function() {
+	$( '#donationForm' ).on( 'banner:validationFailed', function () {
 		unlockForm();
 		$( '#WMDE_BannerFullForm-finish' ).removeClass( 'waiting' );
 	} );
 
-	$( '#donationForm' ).on( 'banner:validationSucceeded', function( evt ) {
+	$( '#donationForm' ).on( 'banner:validationSucceeded', function ( evt ) {
 		unlockForm();
 		if ( $( '#zahlweise' ).val() === 'BEZ' ) {
 			debitNextStep();
 			evt.preventDefault();
-		}
-		else {
+		} else {
 			this.submit();
 		}
 	} );
 
 } );
 
+function initWatchingInitialValues() {
+	initWatchingInitialPeriodValues();
+	initWatchingInitialAmountValues();
+	// Payment type initial value is handled by the payment button event handlers
+}
+
+/**
+ * If a payment period is selected, store its value, otherwise add event
+ * handlers to store the first period that is selected.
+ */
+function initWatchingInitialPeriodValues() {
+	var intervalOnetime = $( '#interval_onetime' ),
+		intervalMultipleIsSelected = $( '#interval_multiple:checked' ),
+		intervals = $( 'input[name=interval]' ),
+		selectedInterval = intervals.filter( ':checked' );
+
+	if ( intervalOnetime.prop( 'checked' ) ) {
+		storeIntervalSelection( intervalOnetime );
+	} else if ( intervalMultipleIsSelected.length && selectedInterval.length ) {
+		storeIntervalSelection( selectedInterval );
+	} else {
+		intervalOnetime.one( 'click', function () {
+			storeIntervalSelection( $( this ) );
+		} );
+		intervals.one( 'click', function () {
+			storeIntervalSelection( $( this ) );
+		} );
+	}
+}
+
+function storeIntervalSelection( selectedInput ) {
+	if ( selectedInput.prop( 'id' ) === 'interval_onetime' ) {
+		setInitialValue( 'periode', 0 );
+	} else {
+		setInitialValue( 'periode', selectedInput.val() );
+	}
+}
+
+function initWatchingInitialAmountValues() {
+	var amounts = $( '.amount-options .amount-radio' ),
+		selectedAmount = amounts.filter( ':checked' );
+	if ( selectedAmount.length ) {
+		setInitialValue( 'betrag', getAmountSelectionOrInput( selectedAmount ) );
+	} else {
+		amounts.one( 'click', function () {
+			getAmountSelectionOrInput( $( this ) );
+		} );
+	}
+}
+
+function getAmountSelectionOrInput( selected ) {
+	if ( selected.prop( 'id' ) === 'amount-other' ) {
+		return $( 'amount-other-input' ).val();
+	} else {
+		return selected.val();
+	}
+}
+
+/**
+ * Store the first value a user selected for for payment type, amount and period
+ */
+function setInitialValue( name, value ) {
+	var elem = $( '#' + name + '_orig' );
+	if ( !elem.data( 'has-value' ) ) {
+		elem.data( 'has-value', true );
+		elem.val( value );
+	}
+}
+
 /**
  * Handle clicks on the button on the SEPA confirmation page.
  *
  * When checkboxes are ok, submit the form, if not, highlight missing checkboxes.
  *
- * @param evt {Event} Button click event
+ * @param {Event} evt Button click event
  */
-function handleSepaValidation ( evt ) {
+function handleSepaValidation( evt ) {
 	evt.preventDefault();
-	if ( $( '#confirm_sepa').prop( 'checked' ) && $( '#confirm_shortterm' ).prop( 'checked' ) ) {
+	if ( $( '#confirm_sepa' ).prop( 'checked' ) && $( '#confirm_shortterm' ).prop( 'checked' ) ) {
 		$( '#donationForm' ).submit();
-	}
-	else {
-		$( '#confirm_sepa, #confirm_shortterm' ).each( function (index, element ) {
-			var $element = $( element ), $parent;
+	} else {
+		$( '#confirm_sepa, #confirm_shortterm' ).each( function ( index, element ) {
+			var $element = $( element ),
+				$parent;
 			if ( $element.prop( 'checked' ) ) {
 				return;
 			}
@@ -128,13 +210,13 @@ function handleSepaValidation ( evt ) {
 }
 
 function lockForm() {
-	$( 'button' ).prop( 'disabled', true );
+	$( '#WMDE_BannerForm-payment button' ).prop( 'disabled', true );
 	$( 'input' ).prop( 'disabled', true );
 	$( 'select' ).prop( 'disabled', true );
 }
 
 function unlockForm() {
-	$( 'button' ).prop( 'disabled', false );
+	$( '#WMDE_BannerForm-payment button' ).prop( 'disabled', false );
 	$( 'input' ).prop( 'disabled', false );
 	$( 'select' ).prop( 'disabled', false );
 }
@@ -167,7 +249,7 @@ function hideFullForm() {
 	$( '#form_action' ).prop( 'name', '' );
 	$( '#donationIframe' ).val( '' );
 	isOpen = false;
-	$( '#WMDE_BannerFullForm-details' ).slideUp( 400, function() {
+	$( '#WMDE_BannerFullForm-details' ).slideUp( 400, function () {
 		$( '#WMDE_Banner' ).css( 'position', 'fixed' );
 		resetButtons();
 	} );
@@ -176,15 +258,15 @@ function hideFullForm() {
 }
 
 function debitNextStep() {
-	$( '#WMDE_BannerFullForm-step1' ).slideToggle( 400, function() {
+	$( '#WMDE_BannerFullForm-step1' ).slideToggle( 400, function () {
 		$( '#WMDE_BannerFullForm-step2' ).slideToggle();
 	} );
 
 	fillConfirmationValues();
 
-	$( "html, body" ).animate( {
+	$( 'html, body' ).animate( {
 		scrollTop: 0
-	}, "slow" );
+	}, 'slow' );
 }
 
 function fillConfirmationValues() {
@@ -192,7 +274,7 @@ function fillConfirmationValues() {
 	$( '#WMDE_BannerFullForm-confirm-salutation' ).text( getSalutation() );
 	$( '#WMDE_BannerFullForm-confirm-street' ).text( $( '#street' ).val() );
 	$( '#WMDE_BannerFullForm-confirm-city' ).text( $( '#post-code' ).val() + ' ' + $( '#city' ).val() );
-	$( '#WMDE_BannerFullForm-confirm-country' ).text( getCountryByCode ( $( '#country' ).val() ) );
+	$( '#WMDE_BannerFullForm-confirm-country' ).text( getCountryByCode( $( '#country' ).val() ) );
 	$( '#WMDE_BannerFullForm-confirm-mail' ).text( $( '#email' ).val() );
 	$( '#WMDE_BannerFullForm-confirm-IBAN' ).text( $( '#iban' ).val() );
 	$( '#WMDE_BannerFullForm-confirm-BIC' ).text( $( '#bic' ).val() );
@@ -201,15 +283,15 @@ function fillConfirmationValues() {
 }
 
 function getSalutation() {
-	var companyName = $( '#company-name' ).val();
+	var companyName = $( '#company-name' ).val(),
+		firstName = $( '#first-name' ).val(),
+		lastName = $( '#last-name' ).val(),
+		title = $( '#personal-title' ).val(),
+		salutation = '';
+
 	if ( companyName !== '' ) {
 		return companyName;
 	}
-
-	var firstName = $( '#first-name' ).val();
-	var lastName = $( '#last-name' ).val();
-	var title = $( '#personal-title' ).val();
-	var salutation = '';
 
 	if ( firstName !== '' && lastName !== '' ) {
 		salutation += $( 'input[name=anrede]:checked' ).val();
@@ -285,6 +367,7 @@ function showDebitDonation( button ) {
 		resetButtons();
 		$( button ).addClass( 'active' );
 		showFullForm();
+		setInitialValue( 'zahlweise', 'BEZ' );
 	}
 }
 
@@ -300,6 +383,7 @@ function showDepositDonation( button ) {
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:ueberweisung' );
 		$( '#donationIframe' ).val( '' );
 		showNonDebitParts( button );
+		setInitialValue( 'zahlweise', 'UEB' );
 	}
 }
 
@@ -311,6 +395,7 @@ function showCreditDonation( button ) {
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:micropayment-i' );
 		$( '#donationIframe' ).val( 'micropayment-iframe' );
 		showNonDebitParts( button );
+		setInitialValue( 'zahlweise', 'MCP' );
 	}
 }
 
@@ -322,6 +407,7 @@ function showPayPalDonation( button ) {
 		$( '#form_action' ).prop( 'name', 'go_prepare--pay:paypal' );
 		$( '#donationIframe' ).val( '' );
 		showNonDebitParts( button );
+		setInitialValue( 'zahlweise', 'PPL' );
 	}
 }
 
@@ -336,7 +422,7 @@ function showNonDebitParts( button ) {
 }
 
 function resetButtons() {
-	$( '#WMDE_BannerForm-payment button' ).trigger( "blur" );
+	$( '#WMDE_BannerForm-payment button' ).trigger( 'blur' );
 	$( '#WMDE_BannerForm-payment button' ).removeClass( 'active' );
 }
 
@@ -356,44 +442,45 @@ function BannerModalInfobox( boxName ) {
 	$( '.banner-lightbox-close', this.$box ).on( 'click', this.close.bind( this ) );
 }
 
-BannerModalInfobox.prototype.toggle = function( e ) {
+BannerModalInfobox.prototype.toggle = function ( e ) {
 	if ( this.$box.hasClass( 'opened' ) ) {
 		this.$box.trigger( 'banner:closeInfobox' );
-	}
-	else {
+	} else {
 		this.$box.trigger( 'banner:openInfobox' );
 	}
-}
+};
 
-BannerModalInfobox.prototype.open = function( e ) {
+BannerModalInfobox.prototype.open = function ( e ) {
 	// close other banners
 	$( '.banner-unique' ).trigger( 'banner:closeInfobox' );
 
 	// wait for the slide-out to be done before showing banner
-	$( '.banner-unique' ).promise().done( function() {
+	$( '.banner-unique' ).promise().done( function () {
 		$( '#WMDE_BannerFullForm-info' ).addClass( this.boxName );
 		this.$box.addClass( 'opened' );
 		this.$box.slideDown();
 	}.bind( this ) );
-}
+};
 
-BannerModalInfobox.prototype.close = function( e ) {
+BannerModalInfobox.prototype.close = function ( e ) {
 	if ( !this.$box.hasClass( 'opened' ) ) {
 		return;
 	}
-	this.$box.slideUp( 400, function() {
+	this.$box.slideUp( 400, function () {
 		this.$box.removeClass( 'opened' );
 		this.$link.removeClass( 'opened' );
 		$( '#WMDE_BannerFullForm-info' ).removeClass( this.boxName );
 	}.bind( this ) );
-}
+};
 $( document ).ready( function () {
-	$( '.list-item-title' ).on( 'click', function() {
+	$( '.list-item-title' ).on( 'click', function () {
 		$( this ).toggleClass( 'opened' );
 		$( this ).next().toggle();
 	} );
-});
-/**
+} );
+/* Function.prototype.bind polyfill from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Polyfill */
+Function.prototype.bind||(Function.prototype.bind=function(t){if("function"!=typeof this)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");var o=Array.prototype.slice.call(arguments,1),n=this,r=function(){},i=function(){return n.apply(this instanceof r?this:t,o.concat(Array.prototype.slice.call(arguments)))};return this.prototype&&(r.prototype=this.prototype),i.prototype=new r,i});/*  Polyfill for browsers which don't provide window.btoa and window.atob https://github.com/davidchambers/Base64.js */
+!function(){function t(t){this.message=t}var r="undefined"!=typeof exports?exports:this,e="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";t.prototype=new Error,t.prototype.name="InvalidCharacterError",r.btoa||(r.btoa=function(r){for(var o,n,a=String(r),i=0,c=e,d="";a.charAt(0|i)||(c="=",i%1);d+=c.charAt(63&o>>8-i%1*8)){if(n=a.charCodeAt(i+=.75),n>255)throw new t("'btoa' failed: The string to be encoded contains characters outside of the Latin1 range.");o=o<<8|n}return d}),r.atob||(r.atob=function(r){var o=String(r).replace(/=+$/,"");if(o.length%4==1)throw new t("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,a,i=0,c=0,d="";a=o.charAt(c++);~a&&(n=i%4?64*n+a:a,i++%4)?d+=String.fromCharCode(255&n>>(-2*i&6)):0)a=e.indexOf(a);return d})}();/**
  * JavaScript library for general banner functionalities
  *
  * @licence GNU GPL v2+
@@ -419,6 +506,7 @@ var Banner;
 	Banner.config = {
 		encryption: {
 			libUrl: '../js/lib/openpgp.min.js',
+			legacyLibUrl: '../js/lib/pgp-legacy-libs.js',
 			publicKey: ''
 		},
 		form: {
@@ -468,6 +556,109 @@ var Banner;
 
 } )( Banner );
 /**
+ * JavaScript library for tracking functionalities
+ *
+ * @licence GNU GPL v2+
+ * @author Kai Nissen <kai.nissen@wikimedia.de>
+ */
+( function ( Banner, $ ) {
+	'use strict';
+
+	var TP;
+
+	function Tracking() {
+		var self = this;
+		this._tracker = null;
+		this._eventsTracked = [];
+
+		$( document ).ready( function () {
+			self.initTrackingLib();
+			self.initClickHandlers();
+		} );
+	}
+
+	TP = Tracking.prototype;
+
+	/**
+	 * Set the tracker lib
+	 *
+	 * @param {Tracker} tracker an instance of Piwik's Tracker class
+	 */
+	TP.setTracker = function ( tracker ) {
+		this._tracker = tracker;
+	};
+
+	/**
+	 * Track a virtual page view
+	 *
+	 * @param {string} eventName
+	 */
+	TP.trackVirtualPageView = function ( eventName ) {
+		if ( this.shouldTrack( eventName, this.getRandomNumber() ) ) {
+			this._tracker.trackPageView(
+				Banner.config.tracking.baseUrl +
+				Banner.config.tracking.events[ eventName ].pathName +
+				'/' +
+				Banner.config.tracking.keyword
+			);
+		}
+	};
+
+	/**
+	 * Determines whether an event should be tracked
+	 *
+	 * @param {string} eventName event name based on the property keys of Banner.tracking.events
+	 * @param {number} randomNumber randomly generated number to compare against the configured sample size
+	 * @return {boolean}
+	 */
+	TP.shouldTrack = function ( eventName, randomNumber ) {
+		return this._tracker &&
+			Banner.config.tracking.events[ eventName ] &&
+			Banner.config.tracking.events[ eventName ].sample > randomNumber;
+	};
+
+	/**
+	 * @return {number}
+	 */
+	TP.getRandomNumber = function () {
+		return Math.random() * ( 1 - 0.01 ) + 0.01;
+	};
+
+	/**
+	 * fetch the piwik library and get the specified tracker from it
+	 */
+	TP.initTrackingLib = function () {
+		var self = this;
+		$.ajax( {
+			url: Banner.config.tracking.libUrl,
+			dataType: 'script',
+			cache: true,
+			success: function () {
+				var trackingConfig = Banner.config.tracking;
+				self.setTracker( Piwik.getTracker( trackingConfig.trackerUrl, trackingConfig.siteId ) );
+			}
+		} );
+	};
+
+	/**
+	 * bind click events to elements as configured
+	 */
+	TP.initClickHandlers = function () {
+		var self = this;
+		$.each( Banner.config.tracking.events, function ( key, settings ) {
+			$( settings.clickElement ).click( function () {
+				if ( $.inArray( key, self._eventsTracked ) === -1 ) {
+					Banner.tracking.trackVirtualPageView( key );
+					self._eventsTracked.push( key );
+				}
+			} );
+		} );
+	};
+
+	Banner.tracking = new Tracking();
+
+} )( Banner, jQuery );
+/**
  * JavaScript library for encryption functionalities
  *
  * @licence GNU GPL v2+
@@ -481,6 +672,7 @@ var Banner;
 	function Encryption() {
 		var self = this;
 		this.initialized = false;
+		this.useLegacyEncryption = !this._browserSupportsCryptoAPI();
 
 		$( document ).ready( function () {
 			self.initCryptLib();
@@ -490,16 +682,41 @@ var Banner;
 	EP = Encryption.prototype;
 
 	/**
+	 * Check if the browser supports the window.crypto API
+	 */
+	EP._browserSupportsCryptoAPI = function () {
+		if ( typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues ) {
+			return true;
+		} else if ( typeof window !== 'undefined' && typeof window.msCrypto === 'object'
+			&& typeof window.msCrypto.getRandomValues === 'function' ) {
+			return true;
+		}
+		return false;
+	};
+
+	/**
 	 * Load the encryption library
 	 */
 	EP.initCryptLib = function () {
-		var self = this;
+		var self = this,
+			libUrl = Banner.config.encryption.libUrl;
+
+		if ( this.useLegacyEncryption ) {
+			libUrl = Banner.config.encryption.legacyLibUrl;
+		}
 
 		$.ajax( {
-			url: Banner.config.encryption.libUrl,
+			url: libUrl,
 			dataType: 'script',
 			cache: true,
 			success: function () {
+				var legacyEncryption;
+				if ( self.useLegacyEncryption ) {
+					/*jshint -W117 *//* Ignore undefined LegacyPGP (it's loaded dynamically) */
+					legacyEncryption = new LegacyPGP();
+					/*jshint +W117 */
+					self.encrypt = legacyEncryption.encrypt.bind( legacyEncryption );
+				}
 				self.initialized = true;
 			}
 		} );
@@ -797,18 +1014,22 @@ var Banner;
 
 	Form.prototype._setBankdataAfterCheck = function ( data ) {
 		var $iban = $( '#iban' ),
+			$accNumber = $( '#account-number' ),
 			errorMessage;
-		if ( data.status === 'OK' ) {
-			$iban.val( data.iban ? data.iban : '' );
-			$( '#bic' ).val( data.bic ? data.bic : '' );
-			$( '#account-number' ).val( data.account ? data.account : '' );
-			$( '#bank-code' ).val( data.bankCode ? data.bankCode : '' );
-			$( '#bank-name' ).val( data.bankName ? data.bankName : '' );
-		} else {
-			$iban.val( '' );
-			errorMessage = 'Die eingegebenen Bankdaten sind nicht korrekt.';
-			this._showError( $iban, errorMessage );
-			this._showError( $( '#account-number' ), errorMessage );
+
+		// payment method might have been switched already, check whether the related fields are visible
+		if ( $iban.is( ':visible' ) || $accNumber.is( ':visible' ) ) {
+			if ( data.status === 'OK' ) {
+				$iban.val( data.iban ? data.iban : '' );
+				$( '#bic' ).val( data.bic ? data.bic : '' );
+				$accNumber.val( data.account ? data.account : '' );
+				$( '#bank-code' ).val( data.bankCode ? data.bankCode : '' );
+				$( '#bank-name' ).val( data.bankName ? data.bankName : '' );
+			} else {
+				errorMessage = 'Die eingegebenen Bankdaten sind nicht korrekt.';
+				this._showError( $iban, errorMessage );
+				this._showError( $accNumber, errorMessage );
+			}
 		}
 		this.bankCheckPending = false;
 	};
@@ -979,6 +1200,7 @@ var Banner;
 			);
 			$parent.append( $errorBox );
 			this._addErrorRemovalHandler( $element, $errorBox );
+			this._addErrorRemovalHandler( $( '#WMDE_BannerForm-payment button' ), $errorBox, 'click' );
 		}
 		return $errorBox;
 	};

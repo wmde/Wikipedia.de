@@ -1,8 +1,11 @@
-var finalDateTime = new Date( 2015, 0, 1, 5, 0, 0 );
-var goalSum = 8200000;
+/*jshint latedef: nofunc */
+/*jshint unused: false */
+/* globals mw, alert */
+var finalDateTime = new Date( 2015, 0, 1, 5, 0, 0 ),
+	goalSum = 8200000;
 
-$( function() {
-	$( '#WMDE_Banner-close' ).click( function() {
+$( function () {
+	$( '#WMDE_Banner-close' ).click( function () {
 		if ( Math.random() < 0.01 ) {
 			$( '#WMDE_Banner-close-ct' ).attr( 'src', 'https://spenden.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{{BannerName}}}&rec=1' );
 		}
@@ -11,21 +14,21 @@ $( function() {
 		return false;
 	} );
 
-	$( '#amount-other-input' ).on( 'click', function() {
+	$( '#amount-other-input' ).on( 'click', function () {
 		$( 'input:radio[name=betrag_auswahl]' ).prop( 'checked', false );
 		$( '#amount_other' ).prop( 'checked', true );
 	} );
-	$( '#amount_other' ).on( 'click', function() {
+	$( '#amount_other' ).on( 'click', function () {
 		$( '#amount-other-input' ).trigger( 'click' );
 	} );
-	$( 'input:radio[name=betrag_auswahl]' ).on( 'click', function() {
+	$( 'input:radio[name=betrag_auswahl]' ).on( 'click', function () {
 		$( '#amount_other' ).prop( 'checked', false );
 	} );
-	$( '#interval_onetime' ).on( 'click', function() {
+	$( '#interval_onetime' ).on( 'click', function () {
 		$( '.interval-options' ).addClass( 'interval-hidden' );
 		$( '#interval_multiple' ).prop( 'checked', false );
 	} );
-	$( '#interval_multiple' ).on( 'click', function() {
+	$( '#interval_multiple' ).on( 'click', function () {
 		$( '.interval-options' ).removeClass( 'interval-hidden' );
 		$( '#interval_onetime' ).prop( 'checked', false );
 	} );
@@ -43,86 +46,90 @@ function getDaysRemaining() {
 		$( '#donationRemaining' ).width( 0 );
 		$( '#donationRemaining' ).html( '' );
 	}
-	return ( daysRemaining != 1 ) ? daysRemaining + " Tage" : "1 Tag";
+	return ( daysRemaining !== 1 ) ? daysRemaining + ' Tage' : '1 Tag';
 }
 
 function getSecsPassed() {
-	var startDate = "{{{donations-date-base}}}".split( '-' );
-	var startDateObj = new Date( startDate[0], startDate[1] - 1, startDate[2] );
+	var startDate = '{{{donations-date-base}}}'.split( '-' ),
+		startDateObj = new Date( startDate[ 0 ], startDate[ 1 ] - 1, startDate[ 2 ] ),
+		maxSecs = Math.floor( new Date( finalDateTime - startDateObj ) / 1000 ),
+		secsPassed = Math.floor( ( new Date() - startDateObj ) / 1000 );
 
-	var maxSecs = Math.floor( new Date( finalDateTime - startDateObj ) / 1000 );
-
-	var secsPassed = Math.floor( (new Date() - startDateObj) / 1000 );
-	if ( secsPassed < 0 ) secsPassed = 0;
-	if ( secsPassed > maxSecs ) secsPassed = maxSecs;
+	if ( secsPassed < 0 ) {
+		secsPassed = 0;
+	}
+	if ( secsPassed > maxSecs ) {
+		secsPassed = maxSecs;
+	}
 
 	return secsPassed;
 }
 
 function getApprDonationsRaw( rand ) {
-	var startDonations = parseInt( "{{{donations-collected-base}}}" );
-	var secsPast = getSecsPassed();
+	var startDonations = parseInt( '{{{donations-collected-base}}}', 10 ),
+		secsPast = getSecsPassed();
 
-	//TODO manually hack to fix older banners from 2014
-	//return startDonations + getApprDonationsFor( secsPast, rand );
+	// TODO manually hack to fix older banners from 2014
+	// return startDonations + getApprDonationsFor( secsPast, rand );
 	return 8300000;
 }
 
 function getApprDonatorsRaw( rand ) {
-	var startDonators = parseInt( "{{{donators-base}}}" );
-
-	var secsPast = getSecsPassed();
+	var startDonators = parseInt( '{{{donators-base}}}', 10 ),
+		secsPast = getSecsPassed();
 
 	return startDonators + getApprDonatorsFor( secsPast, rand );
 }
 
 function getApprDonationsFor( secsPast, rand ) {
-	var apprDontionsMinute = parseFloat( "{{{appr-donations-per-minute}}}" );
-	var randFactor = 0;
+	var apprDontionsMinute = parseFloat( '{{{appr-donations-per-minute}}}' ),
+		randFactor = 0;
 
 	if ( rand === true ) {
-		randFactor = Math.floor( (Math.random()) + 0.5 - 0.2 );
+		randFactor = Math.floor( ( Math.random() ) + 0.5 - 0.2 );
 	}
 
-	return (secsPast / 60 * (apprDontionsMinute * (100 + randFactor)) / 100);
+	return ( secsPast / 60 * ( apprDontionsMinute * ( 100 + randFactor ) ) / 100 );
 }
 
 function getApprDonatorsFor( secsPast, rand ) {
-	var apprDonatorsMinute = parseFloat( "{{{appr-donators-per-minute}}}" );
-	var randFactor = 0;
+	var apprDonatorsMinute = parseFloat( '{{{appr-donators-per-minute}}}' ),
+		randFactor = 0;
 
 	if ( rand === true ) {
-		randFactor = Math.floor( (Math.random()) + 0.5 - 0.2 );
+		randFactor = Math.floor( ( Math.random() ) + 0.5 - 0.2 );
 	}
 
-	return (secsPast / 60 * (apprDonatorsMinute * (100 + randFactor)) / 100);
+	return ( secsPast / 60 * ( apprDonatorsMinute * ( 100 + randFactor ) ) / 100 );
 }
 
 function getCurrentGermanDay() {
 	switch ( new Date().getDay() ) {
 		case 0:
-			return "Sonntag";
+			return 'Sonntag';
 		case 1:
-			return "Montag";
+			return 'Montag';
 		case 2:
-			return "Dienstag";
+			return 'Dienstag';
 		case 3:
-			return "Mittwoch";
+			return 'Mittwoch';
 		case 4:
-			return "Donnerstag";
+			return 'Donnerstag';
 		case 5:
-			return "Freitag";
+			return 'Freitag';
 		case 6:
-			return "Samstag";
+			return 'Samstag';
 		default:
-			return "";
+			return '';
 	}
 }
 
 function addPointsToNum( num ) {
-	num = parseInt( num ) + "";
+	// jscs:disable disallowImplicitTypeConversion
+	num = parseInt( num, 10 ) + '';
+	// jscs:enable disallowImplicitTypeConversion
 	num = num.replace( /\./g, ',' );
-	return num.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, "$1." );
+	return num.replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1.' );
 }
 
 function floorF( num ) {
@@ -130,60 +137,63 @@ function floorF( num ) {
 }
 
 function increaseImpCount() {
-	impCount = parseInt( $.cookie( 'centralnotice_banner_impression_count' ) ) | 0;
+	var impCount = parseInt( $.cookie( 'centralnotice_banner_impression_count' ), 10 ) || 0;
 	$.cookie( 'centralnotice_banner_impression_count', impCount + 1, { expires: 7, path: '/' } );
 	return impCount + 1;
 }
 
 function increaseBannerImpCount( bannerId ) {
-	var impCount = 0;
+	var impCount = 0,
+		impCountCookie, bannerImpCount;
 
 	if ( $.cookie( 'centralnotice_single_banner_impression_count' ) ) {
-		var impCountCookie = $.cookie( 'centralnotice_single_banner_impression_count' );
-		var bannerImpCount = impCountCookie.split( "|" );
-		if ( bannerImpCount[0] === bannerId ) {
-			impCount = parseInt( bannerImpCount[1] );
+		impCountCookie = $.cookie( 'centralnotice_single_banner_impression_count' );
+		bannerImpCount = impCountCookie.split( '|' );
+		if ( bannerImpCount[ 0 ] === bannerId ) {
+			impCount = parseInt( bannerImpCount[ 1 ], 10 );
 		}
 	}
-	$.cookie( 'centralnotice_single_banner_impression_count', bannerId + '|' + (impCount + 1), {
+	$.cookie( 'centralnotice_single_banner_impression_count', bannerId + '|' + ( impCount + 1 ), {
 		expires: 7,
 		path: '/'
 	} );
-	return (impCount + 1);
+	return ( impCount + 1 );
 }
 
 function validateForm() {
-	var chkdPayment = $( 'input[name=pay]:checked', '#WMDE_BannerForm' ).val();
+	var chkdPayment = $( 'input[name=pay]:checked', '#WMDE_BannerForm' ).val(),
+		form = document.donationForm,
+		error = false,
+		amount;
+
 	switch ( chkdPayment ) {
-		case "BEZ":
+		case 'BEZ':
 			$( '#form-page' ).val( 'Formularseite2-Lastschrift' );
 			break;
-		case "UEB":
+		case 'UEB':
 			$( '#form-page' ).val( 'Formularseite2-Überweisung' );
 			break;
-		case "PPL":
+		case 'PPL':
 			$( '#form-page' ).val( 'Formularseite2-PayPal' );
 			break;
-		case "MCP":
+		case 'MCP':
 			$( '#form-page' ).val( 'Formularseite2-Micropayment' );
 			break;
 	}
-	var form = document.donationForm;
-	var error = false;
 
 	if ( $( '#interval_multiple' ).attr( 'checked' ) === 'checked' ) {
 		if ( $( 'input[name=interval]:checked', form ).length !== 1 ) {
-			alert( "Es wurde kein Zahlungsintervall ausgewählt." );
+			alert( 'Es wurde kein Zahlungsintervall ausgewählt.' );
 			return false;
 		} else {
-			$( '#intervalType' ).val( "1" );
+			$( '#intervalType' ).val( '1' );
 			$( '#periode' ).val( $( 'input[name=interval]:checked', form ).val() );
 		}
 	} else {
-		$( '#periode' ).val( "0" );
+		$( '#periode' ).val( '0' );
 	}
 
-	var amount = getAmount();
+	amount = getAmount();
 
 	// Check amount is at least the minimum
 	if ( amount < 1 || error ) {
@@ -197,9 +207,9 @@ function validateForm() {
 }
 
 function getAmount() {
-	var amount = null;
-	var otherAmount = $( '#amount-other-input' ).val();
-	var form = document.donationForm;
+	var amount = null,
+		otherAmount = $( '#amount-other-input' ).val(),
+		form = document.donationForm;
 
 	amount = $( 'input[name=betrag_auswahl]:checked' ).val();
 
@@ -220,11 +230,11 @@ function getAmount() {
 }
 
 function addBannerSpace() {
-	var expandableBannerHeight = $( 'div#WMDE_Banner' ).height() + 44;
-	var bannerDivElement = $( '#WMDE_Banner' );
+	var expandableBannerHeight = $( 'div#WMDE_Banner' ).height() + 44,
+		bannerDivElement = $( '#WMDE_Banner' );
 
 	switch ( 'vector' ) {
-		//switch ( skin ) { TODO fix when non-static
+		// switch ( skin ) { TODO fix when non-static
 		case 'vector':
 			bannerDivElement.css( 'top', 0 - expandableBannerHeight );
 			$( '#mw-panel' ).animate( { top: expandableBannerHeight + 160 }, 1000 );
@@ -245,7 +255,7 @@ function addBannerSpace() {
 
 function removeBannerSpace() {
 	switch ( 'vector' ) {
-		//switch ( skin ) { TODO fix when non-static
+		// switch ( skin ) { TODO fix when non-static
 		case 'vector':
 			$( '#mw-panel' ).css( 'top', 160 );
 			$( '#mw-head' ).css( 'top', 0 );
@@ -259,43 +269,44 @@ function removeBannerSpace() {
 }
 
 function animateProgressBar() {
-	var donationFillElement = $( "#donationFill" );
-	var preFillValue = 0;
+	var donationFillElement = $( '#donationFill' ),
+		preFillValue = 0,
+		barWidth, dTarget, dCollected, dRemaining, fWidth, maxFillWidth, widthToFill;
 
 	donationFillElement.clearQueue();
 	donationFillElement.stop();
-	donationFillElement.width( preFillValue + "px" );
+	donationFillElement.width( preFillValue + 'px' );
 
 	$( '#daysLeft' ).hide();
 
-	var barWidth = $( '#donationMeter' ).width();
-	var dTarget = parseInt( "8300000" );
-	var dCollected = getApprDonationsRaw();
-	var dRemaining = dTarget - dCollected;
+	barWidth = $( '#donationMeter' ).width();
+	dTarget = parseInt( '8300000', 10 );
+	dCollected = getApprDonationsRaw();
+	dRemaining = dTarget - dCollected;
 
-	var fWidth = dCollected / dTarget * barWidth;
-	var maxFillWidth = barWidth - $( '#donationRemaining' ).width() - 16;
-	widthToFill = (fWidth > maxFillWidth) ? maxFillWidth : fWidth;
+	fWidth = dCollected / dTarget * barWidth;
+	maxFillWidth = barWidth - $( '#donationRemaining' ).width() - 16;
+	widthToFill = ( fWidth > maxFillWidth ) ? maxFillWidth : fWidth;
 
 	donationFillElement.animate( { width: widthToFill + 'px' }, {
 		duration: 2500,
-		progress: function() {
-			var dFill = donationFillElement.width() / widthToFill * fWidth;
-			var pFill = dFill / barWidth;
+		progress: function () {
+			var dFill = donationFillElement.width() / widthToFill * fWidth,
+				pFill = dFill / barWidth,
 
-			var dColl = dTarget * pFill / 1000000;
-			var vRem = ( dTarget - ( dTarget * pFill ) ) / 1000000;
+				dColl = dTarget * pFill / 1000000,
+				vRem = ( dTarget - ( dTarget * pFill ) ) / 1000000;
 
 			dColl = dColl.toFixed( 1 );
-			dColl = dColl.replace( ".", "," );
+			dColl = dColl.replace( '.', ',' );
 
 			vRem = vRem.toFixed( 1 );
-			vRem = vRem.replace( ".", "," );
+			vRem = vRem.replace( '.', ',' );
 
-			$( "#valRem" ).html( vRem );
-			$( "#donationValue" ).html( dColl );
+			$( '#valRem' ).html( vRem );
+			$( '#donationValue' ).html( dColl );
 		},
-		complete: function() {
+		complete: function () {
 			$( 'div#daysLeft' ).show();
 		}
 	} );
