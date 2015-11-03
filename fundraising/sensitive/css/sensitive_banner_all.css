@@ -325,6 +325,16 @@ button#WMDE_BannerFullForm-finish.waiting, button#WMDE_BannerFullForm-finish-sep
     float: left;
 }
 
+#WMDE_BannerFullForm-dataprotection li {
+    font-weight: normal;
+    list-style-type: inherit;
+    margin: 10px 0;
+}
+
+#WMDE_BannerFullForm-dataprotection-link {
+    margin: 0;
+}
+
 .banner-lightbox-funds {
     width: 650px;
 }

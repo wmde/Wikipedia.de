@@ -2,30 +2,34 @@
     display: none;
 }
 
-/*for mobile page*/
-#WMDE_Banner div {
-    box-sizing: content-box;
+#WMDE_Banner {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size:13px;
+    text-align: left;
+    background: transparent;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
 }
 
-#WMDE_Banner td {
-    vertical-align: top;
+#WMDE_Banner input, select, button{
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 13px;
 }
 
 #WMDE_Banner input {
     background: none repeat scroll 0 0 white;
     border: 1px solid #a9a9a9;
     border-radius: 4px;
-    font-size: 13px;
     padding: 0 2px;
 }
 
 #WMDE_Banner input[type=radio] {
     padding: 0;
     border: none;
-}
-
-#WMDE_Banner button {
-    font-size: 14px;
 }
 
 #WMDE_Banner input.focused {
@@ -40,18 +44,18 @@
     background-color: #a9a9a9;
 }
 
-/*end for mobile page*/
+#WMDE_Banner div {
+    box-sizing: content-box;
+}
 
-#WMDE_Banner {
-    background: transparent;
-    display: none;
-    font-family: Arial, Helvetica, Verdana, sans-serif;
-    text-align: left;
-    left: 0;
-    position: fixed;
-    top: 0;
+#WMDE_Banner table {
+    border: none;
+    border-collapse: collapse!important;
     width: 100%;
-    z-index: 9999;
+}
+
+#WMDE_Banner td {
+    vertical-align: top;
 }
 
 #WMDE_BannerForm-wrapper {
@@ -64,16 +68,6 @@
 
 #WMDE_BannerForm {
     height: 100%;
-}
-
-#WMDE_Banner table {
-    border: none;
-    border-collapse: collapse!important;
-    width: 100%;
-}
-
-#WMDE_Banner {
-    font-size:13px
 }
 
 #WMDE_BannerForm td {
@@ -118,7 +112,6 @@
 #WMDE_BannerForm-payment button {
     cursor: pointer;
     display: inline-block;
-    font-size: 13px !important;
     font-weight: bold;
     width: 110px;
     border: 3px double #ddd;
@@ -181,13 +174,10 @@
 }
 
 #WMDE_Banner-legal {
-    font-family: Arial, Helvetica, Verdana, sans-serif;
     position: relative;
     margin: 0;
     padding: 10px 40px 10px 40px;
-    font-size: 13px;
     line-height: 16px;
-    font-weight: normal;
     z-index: -10;
     background: #CEDFF1;
     top: -100px;
@@ -222,7 +212,6 @@
 
 #WMDE_Banner_info {
     margin: 0 10px 2px 35px;
-    font-size: 13px;
     line-height: 16px;
     position: relative;
     border-top: 1px solid #988A00;
