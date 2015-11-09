@@ -1,0 +1,51 @@
+/* --- Sticky bit --- */
+
+#WMDE_Banner-nag {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ffcc00;
+    padding: 6px;
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#WMDE_Banner-nag-content {
+    padding-right: 32px;
+}
+
+#WMDE_Banner-nag-link {
+    vertical-align: middle;
+}
+#WMDE_Banner-nag-link:hover {
+    text-decoration: underline;
+}
+
+#WMDE_Banner-nag-donate {
+    margin-left: 10px;
+}
+
+#WMDE_Banner-nag-close {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    background: url(//upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png) no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    opacity: 0.8;
+    margin: 8px 12px;
+}
+body.rtl #WMDE_Banner-nag-close {
+    left: 8px;
+    right: auto;
+}
+
+#WMDE_Banner-nag-close:hover {
+    opacity: 1;
+}

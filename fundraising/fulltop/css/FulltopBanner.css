@@ -1,0 +1,442 @@
+#centralNotice.collapsed #WMDE_Banner {
+    display: none;
+}
+
+/* For IE9 */
+@media screen {
+    #centralNotice {
+        display: block !important;
+    }
+}
+
+/* Hide when editing */
+.action-edit #centralNotice,
+.ve-activated #centralNotice {
+    display: none !important;
+}
+
+/* Clearfix */
+
+#WMDE_Banner .cf:before,
+#WMDE_Banner .cf:after {
+    content: "";
+    display: table;
+}
+
+#WMDE_Banner .cf:after { clear: both; }
+
+/* Border-Box */
+
+#WMDE_Banner *,
+#WMDE_Banner *:before,
+#WMDE_Banner *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Transitions */
+
+#WMDE_Banner-form label,
+#WMDE_Banner-form button,
+#WMDE_Banner-form #amount_custom {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition:    all .3s ease-in-out;
+    -o-transition:      all .3s ease-in-out;
+    -ms-transition:     all .3s ease-in-out;
+    transition:         all .3s ease-in-out;
+}
+
+/* --- Main banner wrapper --- */
+
+#WMDE_Banner-wrapper {
+    text-align: left;
+    background: transparent;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+/* --- Window Styles --- */
+
+#WMDE_Banner-window {
+    margin: 0 auto;
+    background: #fff;
+    width: 100%;
+    position: relative;
+    font: 1em/1.2 "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Nimbus Sans L", "Arial", "Liberation Sans", sans-serif;
+    color: #000;
+}
+
+#WMDE_Banner-close-button {
+    background: url('//upload.wikimedia.org/wikipedia/donate/c/cf/Close-trilogy.png') no-repeat center center;
+    width: 20px;
+    height: 21px;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    opacity: .5;
+    text-indent: -99999px;
+    z-index: 999;
+}
+body.rtl #WMDE_Banner-close-button {
+    left: 8px;
+    right: auto;
+}
+
+#WMDE_Banner-close-button:hover { opacity: 1; }
+
+#WMDE_Banner-table {
+    display: table;
+}
+
+/* -------- Message ------- */
+
+#WMDE_Banner-message {
+    display: table-cell;
+    width: 60%;
+    vertical-align: top;
+    padding: 1.5em 2em;
+    font-weight: bold;
+    color: #000;
+}
+
+@media (min-width : 960px) {
+    #WMDE_Banner-message { width: 75%; }
+}
+
+/* -- Font Size / Line Height -- */
+@media (min-width : 960px)  { #WMDE_Banner-message { font-size: 1.2em; } }
+@media (min-width : 1000px) { #WMDE_Banner-message { font-size: 1.25em; } }
+
+#WMDE_Banner-message p { line-height: 1.2; }
+
+@media (min-width : 1000px) { #WMDE_Banner-message p { line-height: 1.25; } }
+@media (min-width : 1200px) { #WMDE_Banner-message p { line-height: 1.35; } }
+@media (min-width : 1300px) { #WMDE_Banner-message p { line-height: 1.45; } }
+
+/* -- Paragraph Spacing -- */
+#WMDE_Banner-message p { margin-bottom: .5em; }
+#WMDE_Banner-message p:last-child { margin-bottom: 0; }
+
+/* -- Highlight -- */
+#WMDE_Banner-message .btext-highlight {
+    background-color: #faff00;
+    padding: 1px 5px;
+}
+
+/* -------------- Form -------------- */
+
+#WMDE_Banner-form {
+    display: table-cell;
+    background: #d8d7d7;
+    width: 40%;
+    vertical-align: top;
+    height: 100%;
+    padding: 1.1em 1.8em;
+    position: relative;
+}
+
+@media (min-width : 960px) { #WMDE_Banner-form { width: 25%; } }
+
+#WMDE_Banner-form:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: " ";
+    margin: 0;
+    border: 10px solid transparent;
+    border-left-color: white;
+    pointer-events: none;
+}
+
+body.rtl #WMDE_Banner-form:before {
+    left: auto;
+    right: 0;
+    border-left-color: transparent;
+    border-right-color: white;
+}
+
+#WMDE_Banner-form h2 {
+    font-size: 1.1em;
+    border-bottom: 0;
+    text-align: center;
+}
+
+#WMDE_Banner-form fieldset {
+    width: 100%;
+    border: 0;
+    margin: 0 auto;
+    padding: 0 0 1em 0;
+}
+
+#WMDE_Banner-frequency ul,
+#WMDE_Banner-amounts ul,
+#WMDE_Banner-payment ul {
+    width: 100%;
+    height: 100%;
+    display: table;
+    margin: 0 0 .3em;
+    padding: 0;
+    list-style: none;
+}
+
+#WMDE_Banner-form legend {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 0.3em 0;
+    text-align: center;
+    font-size: .9em;
+    color: rgba(0,0,0,0.42);
+}
+
+/* --- Common Button Styles --- */
+
+.WMDE_Banner-btn {
+    display: block;
+    padding: 1em .1em;
+    background-color: #e8e8e8;
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.18), inset 0px 0px 16px 6px #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.WMDE_Banner-btn:hover {
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,.5), inset 0 14px 16px rgba(255,255,255,.75), inset 0 0 7px #fff;
+    color: #367fb4;
+}
+
+.WMDE_Banner-btn.checked {
+    background: #9f9f9f !important;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.18), inset 2px 2px 2px 0px rgba(0,0,0,0.11);
+    color: #fff;
+}
+
+.WMDE_Banner-btn:active {
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* --- Frequency Buttons --- */
+
+#WMDE_Banner-frequency li {
+    display: table-cell;
+    width: 50%;
+    padding: 0 2% 0 0;
+    vertical-align: top;
+}
+body.rtl #WMDE_Banner-frequency li { padding: 0 0 0 2%; }
+
+#WMDE_Banner-frequency label {
+    width: 100%;
+    display: block;
+    font-size: .9em;
+}
+
+@media (min-width : 1100px) { #WMDE_Banner-frequency label { font-size: .95em; } }
+@media (min-width : 1200px) { #WMDE_Banner-frequency label { font-size: 1em; } }
+
+#WMDE_Banner-frequency input[type="radio"] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* --- Amount Buttons --- */
+
+#WMDE_Banner-amounts legend {
+    display: block;
+
+}
+
+#WMDE_Banner-amounts li {
+    display: table-cell;
+    width: 25%;
+    height: 100%;
+    clear: none;
+    padding: 0 2% 0 0;
+    vertical-align: top;
+}
+body.rtl #WMDE_Banner-amounts li {
+    padding: 0 0 0 2%;
+}
+
+/* Chrome specific - need to be floated for height 100% to work */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #WMDE_Banner-amounts li { float: left; }
+    body.rtl #WMDE_Banner-amounts li { float: right; }
+}
+
+#WMDE_Banner-amounts li input[type="radio"] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+#WMDE_Banner-amounts label {
+    font-size: .9em;
+    height: 100%;
+    text-transform: none;
+}
+
+@media (min-width : 800px)  { #WMDE_Banner-amounts .predefined_amount { font-size: 1em; } }
+@media (min-width : 1100px) { #WMDE_Banner-amounts .predefined_amount { font-size: 1.1em; } }
+
+/* --- Other Amount --- */
+
+#amount_custom .WMDE_Banner-btn {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    padding: 0.2em 0 0.4em 0;
+}
+
+#amount_custom label {
+    display: block;
+    height: auto;
+    margin-bottom: 0.2em;
+    font-size: .7em;
+    line-height: 1;
+    cursor: pointer;
+}
+
+#amount_custom input {
+    width: 80%;
+    background: #a4a4a4;
+    border: 0;
+    color: #fff;
+    font-size: .9em;
+    padding: .3em;
+    -moz-border-radius:    .3em;
+    -webkit-border-radius: .3em;
+    border-radius:         .3em;
+    direction: ltr;
+    text-align: center;
+}
+
+#amount_custom .checked input {
+    background: #fff;
+    color: #163348;
+}
+
+#amount-other-input {
+    margin-top: .6em;
+}
+
+/* --- Payment method Buttons --- */
+
+#WMDE_Banner-payment ul li {
+    display: table-cell;
+    padding: 0 2% 0 0;
+    vertical-align: top;
+    width: 50%;
+}
+body.rtl #WMDE_Banner-payment ul li {
+    padding: 0 0 0 2%;
+}
+
+#WMDE_Banner-payment .WMDE_Banner-btn {
+    min-height: 4em;
+}
+
+#WMDE_Banner-window button {
+    width: 100%;
+    height: 100%;
+    font-size: .9em;
+    float: none;
+    font-family: inherit;
+}
+
+@media (min-width : 1100px) { #WMDE_Banner-window button { font-size: .95em; } }
+@media (min-width : 1200px) { #WMDE_Banner-window button { font-size: 1em; } }
+
+/* info footer */
+
+#WMDE_Banner-footer {
+    poisition: absolute;
+    left: 0;
+    top: 0;
+    font-size: .8em;
+    line-height: 1;
+    background: #d8d7d7;
+    padding: 1em;
+}
+
+@media (min-width : 1200px) { #WMDE_Banner-footer { font-size: 1em; } }
+
+#WMDE_Banner-info {
+    display: inline-block;
+}
+
+#WMDE_Banner-info span {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+#WMDE_Banner-info span.binfo-ucase {
+    text-transform: uppercase;
+}
+
+#WMDE_Banner-info span.binfo-bold {
+    font-weight: bold;
+}
+
+#WMDE_Banner-infoicon {
+    margin-bottom: 1px;
+    margin-right: 10px;
+}
+
+/* shared with DesktopBanner.css */
+
+#WMDE_Banner .interval-hidden {
+    display: none;
+}
+
+/* progress bar customization */
+
+#donationMeterWrapper, #donationMeterWrapper div {
+    box-sizing: content-box;
+}
+
+#donationMeterWrapper {
+    max-width: inherit;
+    margin: 0;
+}
+
+#donationRemaining {
+    font: inherit;
+}
+
+#donationMeterWrapper { margin-top: 2em; }
+
+@media (min-width : 960px)  {
+    #donationMeter { height: 32px; border-width: 4px; }
+    #donationFill { height: 32px; top: 4px; left: 4px; }
+    #donationMeterTip {
+        background: url( '//upload.wikimedia.org/wikipedia/commons/2/20/Pmeter-tip.png' ) no-repeat center center;
+        width: 14px;
+        height: 32px;
+    }
+    #donationRemaining {
+        top: 8px;
+    }
+}

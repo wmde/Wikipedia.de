@@ -1,0 +1,75 @@
+#donationMeterWrapper {
+    position: relative;
+    margin: 0 10px 4px 35px;
+    max-width: 1200px;
+}
+
+#donationMeter {
+    margin: 0 auto;
+    height: 20px;
+    background: #FF6C00;
+    border: 2px solid #FF6C00;
+    border-radius: 8px;
+}
+
+#donationFill {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 90px;
+    height: 20px;
+    background: #FFFFFF;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#pbarTip {
+    position: absolute;
+    right: 0;
+    height: 20px;
+}
+
+#pbarTip img {
+    vertical-align: baseline;
+}
+
+#donationText {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-align: right;
+    /*margin: 8px -16px;*/
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #B2B2B2;
+    overflow: hidden;
+}
+
+#donationRemaining {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    display: none;
+}
+
+#daysLeft {
+    display: none;
+    font-size: 14px;
+    color: #FF6C00;
+    font-weight: bold;
+    line-height: 20px;
+    position: absolute;
+    left: 5px;
+}
+
+#donationMeterTip {
+    position: absolute;
+    right: 0;
+    background: url( '//upload.wikimedia.org/wikipedia/commons/8/89/Pbar-tip-small.png' ) no-repeat center center;
+    width: 8px;
+    height: 20px;
+}
