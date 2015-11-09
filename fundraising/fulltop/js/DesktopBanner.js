@@ -314,7 +314,7 @@ function animateProgressBar() {
 
 function replaceWikiVars( text ) {
     var re = /\{\{\{([^\}]+)\}\}\}/,
-        wikiVarMatch; = re.exec( text ),
+        wikiVarMatch;
     while ( ( wikiVarMatch = re.exec( text ) ) !== null ) {
         if ( GlobalBannerSettings[ wikiVarMatch[ 1 ] ] ) {
             text = text.replace( wikiVarMatch[0], GlobalBannerSettings[ wikiVarMatch[ 1 ] ] );
