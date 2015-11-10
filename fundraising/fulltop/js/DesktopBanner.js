@@ -3,7 +3,8 @@
 /* globals mw, alert */
 // TODO put replaceWikiVars and its calls to common-banner.js and remove this file
 var finalDateTime = new Date( 2016, 0, 1, 5, 0, 0 ),
-	goalSum = 8700000;
+	goalSum = 8700000,
+    cookieName = GlobalBannerSettings.cookieName || 'centralnotice_banner_impression_count';
 
 $( function () {
 	$( '#WMDE_Banner-close' ).click( function () {
@@ -138,8 +139,8 @@ function floorF( num ) {
 }
 
 function increaseImpCount() {
-	var impCount = parseInt( $.cookie( 'centralnotice_banner_impression_count' ), 10 ) || 0;
-	$.cookie( 'centralnotice_banner_impression_count', impCount + 1, { expires: 7, path: '/' } );
+	var impCount = parseInt( $.cookie( cookieName ), 10 ) || 0;
+	$.cookie( cookieName, impCount + 1, { expires: 7, path: '/' } );
 	return impCount + 1;
 }
 
@@ -147,14 +148,14 @@ function increaseBannerImpCount( bannerId ) {
 	var impCount = 0,
 		impCountCookie, bannerImpCount;
 
-	if ( $.cookie( 'centralnotice_single_banner_impression_count' ) ) {
-		impCountCookie = $.cookie( 'centralnotice_single_banner_impression_count' );
+	if ( $.cookie( cookieName ) ) {
+		impCountCookie = $.cookie( cookieName );
 		bannerImpCount = impCountCookie.split( '|' );
 		if ( bannerImpCount[ 0 ] === bannerId ) {
 			impCount = parseInt( bannerImpCount[ 1 ], 10 );
 		}
 	}
-	$.cookie( 'centralnotice_single_banner_impression_count', bannerId + '|' + ( impCount + 1 ), {
+	$.cookie( cookieName, bannerId + '|' + ( impCount + 1 ), {
 		expires: 7,
 		path: '/'
 	} );
