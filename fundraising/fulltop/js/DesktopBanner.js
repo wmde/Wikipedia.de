@@ -308,19 +308,19 @@ function animateProgressBar() {
 			$( '#donationValue' ).html( dColl );
 		},
 		complete: function () {
-                        $( '#donationRemaining' ).show();
+			$( '#donationRemaining' ).show();
 			$( 'div#daysLeft' ).show();
 		}
 	} );
 }
 
 function replaceWikiVars( text ) {
-    var re = /\{\{\{([^\}]+)\}\}\}/,
-        wikiVarMatch;
-    while ( ( wikiVarMatch = re.exec( text ) ) !== null ) {
-        if ( GlobalBannerSettings[ wikiVarMatch[ 1 ] ] ) {
-            text = text.replace( wikiVarMatch[0], GlobalBannerSettings[ wikiVarMatch[ 1 ] ] );
-        }
-    }
-    return text;
+	var re = /\{\{\{([^\}]+)\}\}\}/,
+		wikiVarMatch;
+	while ( ( wikiVarMatch = re.exec( text ) ) !== null ) {
+		if ( GlobalBannerSettings[ wikiVarMatch[ 1 ] ] ) {
+			text = text.replace( wikiVarMatch[0], GlobalBannerSettings[ wikiVarMatch[ 1 ] ] );
+		}
+	}
+	return text;
 }
