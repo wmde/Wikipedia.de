@@ -10,7 +10,9 @@ $( function () {
 		if ( Math.random() < 0.01 ) {
 			$( '#WMDE_Banner-close-ct' ).attr( 'src', replaceWikiVars( 'https://spenden.wikimedia.de/piwik/piwik.php?idsite=1&url=https://spenden.wikimedia.de/banner-closed/{{{BannerName}}}&rec=1' ) );
 		}
-		mw.centralNotice.hideBanner();
+		if ( mw && mw.centralNotice ) {
+			mw.centralNotice.hideBanner();
+		}
 		removeBannerSpace();
 		return false;
 	} );
@@ -81,7 +83,7 @@ function getApprDonatorsRaw( rand ) {
 }
 
 function getApprDonationsFor( secsPast, rand ) {
-	var apprDontionsMinute = parseFloat( '{{{appr-donations-per-minute}}}' ),
+	var apprDontionsMinute = parseFloat( replaceWikiVars( '{{{appr-donations-per-minute}}}' ) ),
 		randFactor = 0;
 
 	if ( rand === true ) {
@@ -279,7 +281,7 @@ function animateProgressBar() {
 	$( '#daysLeft' ).hide();
 
 	barWidth = $( '#donationMeter' ).width();
-	dTarget = parseInt( '8300000', 10 );
+	dTarget = parseInt( '8700000', 10 );
 	dCollected = getApprDonationsRaw();
 	dRemaining = dTarget - dCollected;
 
