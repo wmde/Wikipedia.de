@@ -1,0 +1,22 @@
+#WMDE_Banner * {
+    font-size: 16px;
+}
+
+#WMDE_Banner-message p {
+    font-weight:bold;
+    font-size:1.0em;
+    margin:0;
+}
+
+#WMDE_Banner-message span,
+#WMDE_Banner-message i {
+    font-size:inherit;
+}
+
+
+#WMDE_Banner h2 {
+    font-weight:normal;
+    margin:0;
+    padding: .5em 0 0.7em 0;
+}
+
