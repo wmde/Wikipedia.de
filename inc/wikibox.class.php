@@ -10,25 +10,7 @@ class WikiBox extends WikiRip {
 	}
 
 	function pick_page( $listPage, $purge = false, $testPage = false ) {
-		$list = $this->rip_page( $listPage, 'raw', $purge );
-		if ( !$list && !$testPage ) {
-			return false;
-		}
-
-		$list = preg_replace( '@<!--.*?-->@s', '', $list );
-		if ( !preg_match_all( '/^\*+.*\[\[(.+?)( *\|.*?)?\]\]/m', $list, $mm, PREG_SET_ORDER ) ) {
-			$mm = array();
-		}
-		if ( !$mm && !$testPage) {
-			return false;
-		}
-
-		$list = array();
-
-		foreach ( $mm as $m ) {
-			$list[] = WikiRip::normalizeTitle( $m[1] );
-		}
-
+		$list = $this->fetchList( $listPage, $purge, $testPage );
 		if ( $testPage ) {
 			$page = WikiRip::normalizeTitle( "Web:{$testPage}" );
 			$this->cache_duration = 0; //disable cache for testing
@@ -55,4 +37,27 @@ class WikiBox extends WikiRip {
 
 		return $html;
 	}
+
+	private function fetchList( $listPage, $purge = false, $testPage = false ) {
+		$list = $this->rip_page( $listPage, 'raw', $purge );
+		if ( !$list && !$testPage ) {
+			return false;
+		}
+
+		$list = preg_replace( '@<!--.*?-->@s', '', $list );
+		$items = array();
+		preg_match_all( '/^\*+.*\[\[(.+?)( *\|.*?)?\]\]/m', $list, $items, PREG_SET_ORDER );
+		if ( !$items && !$testPage ) {
+			return false;
+		}
+
+		$list = array();
+
+		foreach ( $items as $item ) {
+			$list[] = WikiRip::normalizeTitle( $item[1] );
+		}
+
+		return $list;
+	}
+
 }
