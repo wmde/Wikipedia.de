@@ -1,10 +1,11 @@
 /*jshint latedef: nofunc */
 /*jshint unused: false */
 /* globals mw, alert */
-// TODO put replaceWikiVars and its calls to common-banner.js and remove this file
+// TODO compare to common-banner.js and use that on wpde
 var finalDateTime = new Date( 2016, 0, 1, 5, 0, 0 ),
-	goalSum = 8700000,
-    cookieName = GlobalBannerSettings.cookieName || 'centralnotice_banner_impression_count';
+	goalSum = 8600000,
+	allBannersCookie = GlobalBannerSettings.allBannersCookie || 'centralnotice_banner_impression_count',
+	singleBannerCookie = GlobalBannerSettings.singleBannerCookie || 'centralnotice_single_banner_impression_count';;
 
 $( function () {
 	$( '#WMDE_Banner-close' ).click( function () {
@@ -148,14 +149,14 @@ function increaseBannerImpCount( bannerId ) {
 	var impCount = 0,
 		impCountCookie, bannerImpCount;
 
-	if ( $.cookie( cookieName ) ) {
-		impCountCookie = $.cookie( cookieName );
+	if ( $.cookie( singleBannerCookie ) ) {
+		impCountCookie = $.cookie( singleBannerCookie );
 		bannerImpCount = impCountCookie.split( '|' );
 		if ( bannerImpCount[ 0 ] === bannerId ) {
 			impCount = parseInt( bannerImpCount[ 1 ], 10 );
 		}
 	}
-	$.cookie( cookieName, bannerId + '|' + ( impCount + 1 ), {
+	$.cookie( singleBannerCookie, bannerId + '|' + ( impCount + 1 ), {
 		expires: 7,
 		path: '/'
 	} );
