@@ -39,14 +39,13 @@ NOW
 				->with( 'Web:Banner', 'raw' )
 				->willReturn( $listContent );
 
-		$wikibox->expects( $this->at( 1 ) )
-				->method( 'rip_page' )
-				->with( $expectedPageTitle, 'render' );
+		if ( $expectedPageTitle ) {
+			$wikibox->expects( $this->at( 1 ) )
+					->method( 'rip_page' )
+					->with( $expectedPageTitle, 'render' );
+		}
 
-		$wikibox->expects( $this->exactly( 2 ) )
-				->method( 'rip_page' );
-
-		$wikibox->pick_page( 'Web:Banner', true, false );
+		$wikibox->pick_page( 'Web:Banner' );
 	}
 
 	public function testWhenPassingTestPageTitleNotInListAndMarkedAsTest_pickPageReturnsPageContent() {
@@ -75,14 +74,76 @@ NOW
 
 		$test = $wikibox->pick_page( 'Web:Banner', true, 'Banner/Some_banner' );
 		$this->assertEquals(
-			'<i class="error">inactive feature page not marked with "wikibox-test": Web:Banner/Some_banner</i>',
-			$test
+				'<i class="error">inactive feature page not marked with "wikibox-test": Web:Banner/Some_banner</i>',
+				$test
 		);
 	}
 
-	private function createNewWikiBox() {
+	public function templateListProvider() {
+		return array(
+				array(
+						'* {{BannerDefinition|title=Some_banner|campaign=unittest|secondaryTitle=Some_other_banner|maxImp=5|maxOverallImp=10}}',
+						'Some_banner',
+						0,
+						0
+				),
+				array(
+						'* {{BannerDefinition|title=Some_banner|campaign=unittest|secondaryTitle=Some_other_banner|maxImp=5|maxOverallImp=10}}',
+						'Some_other_banner',
+						'unittest|7',
+						7
+				),
+				array(
+						'* {{BannerDefinition|title=Some_banner|campaign=unittest|secondaryTitle=Some_other_banner|maxImp=5|maxOverallImp=10}}',
+						false,
+						'unittest|12',
+						12
+				)
+		);
+	}
+
+	/** @dataProvider templateListProvider */
+	public function testWhenPassingTemplate_pickPageReturnsPageBasedOnParameters(
+			$listContent, $expectedPageTitle, $impCount, $overallImpCount
+	) {
+		$cookieJar = $this->getMockBuilder( '\WMDE\wpde\CookieJar' )
+				->disableOriginalConstructor()
+				->setMethods( array( 'getCookie' ) )
+				->getMock();
+
+		$map = array(
+				array( 'impCount', $impCount ),
+				array( 'overallImpCount', $overallImpCount )
+		);
+
+		$cookieJar->expects( $this->any() )
+				->method( 'getCookie' )
+				->will( $this->returnValueMap( $map ) );
+
+		$wikibox = $this->createNewWikiBox( $cookieJar );
+
+		$wikibox->expects( $this->at( 0 ) )
+				->method( 'rip_page' )
+				->with( 'Web:Banner', 'raw' )
+				->willReturn( $listContent );
+
+		if ( $expectedPageTitle ) {
+			$wikibox->expects( $this->at( 1 ) )
+					->method( 'rip_page' )
+					->with( $expectedPageTitle, 'render' );
+		}
+
+		$wikibox->pick_page( 'Web:Banner' );
+	}
+
+	private function createNewWikiBox( $cookieJar = null ) {
+		if ( !$cookieJar ) {
+			$cookieJar = $this->getMockBuilder( '\WMDE\wpde\CookieJar' )
+					->setMethods( array( 'getCookie', 'setCookie' ) )
+					->getMock();
+		}
 		return $this->getMockBuilder( 'WikiBox' )
-				->setConstructorArgs( array( 'test.url' ) )
+				->setConstructorArgs( array( 'test.url', null, null, $cookieJar ) )
 				->setMethods( array( 'rip_page' ) )
 				->getMock();
 	}

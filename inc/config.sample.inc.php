@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../src/CookieJar.php';
+
+use WMDE\wpde\CookieJar;
+
 $cliMode = false;
 $devMode = false;
 $myDomain = null;
@@ -165,14 +169,20 @@ if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
 		$wbPageCacheList = new FreshCacheList( "$wbCacheDir/{$wbCachePrefix}page-cache.list" );
 		$wbImageCacheList = new FreshCacheList( "$wbImageCacheDir/{$wbCachePrefix}image-cache.list" );
 
-      $featurebox = new WikiBox( $wbWikiUrl, $wbRipCache );
+	$cookieJarParams = array(
+			'expire' => time() + 604800, /* 1 week */
+			#'secure' => false,
+			#'domain' => 'www.wikipedia.de',
+			'path' => '/wpde'
+	);
+      $featurebox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams );
       $featurebox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
       $featurebox->purge = $purge;
       $featurebox->cache_duration = $wbCacheDuration;
       $featurebox->page_cache_list = $wbPageCacheList;
       $featurebox->image_cache_list = $wbImageCacheList;
 
-      $bannerbox = new WikiBox( $wbWikiUrl, $wbRipCache );
+      $bannerbox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
       $bannerbox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
       $bannerbox->purge = $purge;
       $bannerbox->cache_duration = $wbCacheDuration;
