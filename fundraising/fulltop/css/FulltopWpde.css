@@ -13,10 +13,12 @@
     font-size:inherit;
 }
 
-
 #WMDE_Banner h2 {
     font-weight:normal;
     margin:0;
     padding: .5em 0 0.7em 0;
 }
 
+#donationRemaining {
+    top: 11px;
+}
