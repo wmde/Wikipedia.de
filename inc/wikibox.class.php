@@ -158,6 +158,7 @@ class WikiBox extends WikiRip {
 				return $values[1];
 			}
 		}
+		return 0;
 	}
 
 }
