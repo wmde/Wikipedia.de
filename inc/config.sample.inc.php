@@ -175,7 +175,7 @@ if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
 			#'domain' => 'www.wikipedia.de',
 			'path' => '/wpde'
 	);
-      $featurebox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams );
+      $featurebox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
       $featurebox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
       $featurebox->purge = $purge;
       $featurebox->cache_duration = $wbCacheDuration;
