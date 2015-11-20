@@ -136,6 +136,33 @@ NOW
 		$wikibox->pick_page( 'Web:Banner' );
 	}
 
+	public function testWhenCloseCookieIsSet_pickPageReturnsFalse() {
+		$cookieJar = $this->getMockBuilder( '\WMDE\wpde\CookieJar' )
+				->disableOriginalConstructor()
+				->setMethods( array( 'getCookie' ) )
+				->getMock();
+
+		$map = array(
+				array( 'impCount', 0 ),
+				array( 'overallImpCount', 0 ),
+				array( 'unittest_hide_cookie', 1 )
+		);
+
+		$cookieJar->expects( $this->any() )
+				->method( 'getCookie' )
+				->will( $this->returnValueMap( $map ) );
+
+		$wikibox = $this->createNewWikiBox( $cookieJar );
+		$wikibox->bannerWasClosedCookieName = 'unittest_hide_cookie';
+
+		$wikibox->expects( $this->once() )
+				->method( 'rip_page' )
+				->with( 'Web:Banner', 'raw' )
+				->willReturn( '* {{BannerDefinition|title=Some_banner|campaign=unittest}}' );
+
+		$this->assertFalse( $wikibox->pick_page( 'Web:Banner' ) );
+	}
+
 	private function createNewWikiBox( $cookieJar = null ) {
 		if ( !$cookieJar ) {
 			$cookieJar = $this->getMockBuilder( '\WMDE\wpde\CookieJar' )

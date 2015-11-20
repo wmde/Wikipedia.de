@@ -45,11 +45,11 @@ $blockedSearches = array();
 
 if ( empty($myDomain) ) {
 	if ( !empty($_SERVER['HTTP_HOST'] ) ) {
-        	$myDomain = $_SERVER['HTTP_HOST'];
+			$myDomain = $_SERVER['HTTP_HOST'];
 	} else if ( !empty($_SERVER['SERVER_NAME']) ) {
-        	$myDomain = $_SERVER['SERVER_NAME'];
+			$myDomain = $_SERVER['SERVER_NAME'];
 	} else {
-        	$myDomain = false;
+			$myDomain = false;
 	}
 }
 
@@ -68,12 +68,12 @@ if ( $cliMode && !empty( $argv[1] ) && $argv[1] == 'debug' ) {
 }
 
 if ( $devMode ) {
-        error_reporting( E_ALL );
-        ini_set( "display_errors", 1 );
+		error_reporting( E_ALL );
+		ini_set( "display_errors", 1 );
 }
 
 if ( $devMode && $cliMode ) { // dev mode, use local resources
-        if ( !function_exists('debug') ) {
+		if ( !function_exists('debug') ) {
 			function debug($location, $msg = "", $var = "nothing9874325") {
 				$s = "";
 				
@@ -85,7 +85,7 @@ if ( $devMode && $cliMode ) { // dev mode, use local resources
 			}
 		}
 
-        if ( !function_exists('backtrace') ) {
+		if ( !function_exists('backtrace') ) {
 			function backtrace($label) {
 				debug_print_backtrace();
 			}
@@ -110,14 +110,14 @@ if ( $devMode ) { // dev mode, use local resources
 		
 		$firephp->registerExceptionHandler(false);
 		
-        if ( !function_exists('debug') ) {
+		if ( !function_exists('debug') ) {
 			function debug($location, $name = "", $var = "") {
 				global $firephp; 
 				$firephp->log($var, $location . ': ' . $name);
 			}
 		}
 
-        if ( !function_exists('backtrace') ) {
+		if ( !function_exists('backtrace') ) {
 			function backtrace($label) {
 				global $firephp; 
 				$firephp->trace($label);
@@ -141,33 +141,34 @@ $wbRipCache = null;
 $wbImageCache = null;
 $wbPageCacheList = null;
 $wbImageCacheList = null;
+$wbBannerWasClosedCookie = "centralnotice_wmde15_hide_cookie";
 
 if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
 	debug(__FILE__, "setting up wiki boxes", $wbWikiUrl);
 
-      require_once("wikibox.class.php");
-      
-	  if ( $wbInternalCacheMode ) {
-		  $buff = new LocalCache($wbCachePrefix, $wbInternalCacheMode);
-		  $wbRipCache = new BufferedFileCache($buff, $wbCacheDir, $wbCachePrefix);      
-		  $wbRipCache->buffer_expiry = $wbCacheBufferDuration;
-	  } else if ( $wbMemcachedServer ) {
-		  $buff = new MemcachedCache($wbMemcachedServer, $wbCachePrefix);
-		  $wbRipCache = new BufferedFileCache($buff, $wbCacheDir, $wbCachePrefix);      
-		  $wbRipCache->buffer_expiry = $wbCacheBufferDuration;
-	  } else {
-		  $wbRipCache = new FileCache($wbCacheDir, $wbCachePrefix);      
-	  }
+	require_once("wikibox.class.php");
 
-	  if ( $wbImageCacheDir ) {
-		  $wbImageCache = new FileCache($wbImageCacheDir, $wbCachePrefix);
-		  $wbImageCache->serialize = false; // raw data, not serialized
-		  $wbImageCache->suffix = ""; // keep extension
-		  $wbImageCache->fmode = 0644; //make cached files readable
-	  }
+	if ( $wbInternalCacheMode ) {
+		$buff = new LocalCache($wbCachePrefix, $wbInternalCacheMode);
+		$wbRipCache = new BufferedFileCache($buff, $wbCacheDir, $wbCachePrefix);
+		$wbRipCache->buffer_expiry = $wbCacheBufferDuration;
+	} else if ( $wbMemcachedServer ) {
+		$buff = new MemcachedCache($wbMemcachedServer, $wbCachePrefix);
+		$wbRipCache = new BufferedFileCache($buff, $wbCacheDir, $wbCachePrefix);
+		$wbRipCache->buffer_expiry = $wbCacheBufferDuration;
+	} else {
+		$wbRipCache = new FileCache($wbCacheDir, $wbCachePrefix);
+	}
 
-		$wbPageCacheList = new FreshCacheList( "$wbCacheDir/{$wbCachePrefix}page-cache.list" );
-		$wbImageCacheList = new FreshCacheList( "$wbImageCacheDir/{$wbCachePrefix}image-cache.list" );
+	if ( $wbImageCacheDir ) {
+		$wbImageCache = new FileCache($wbImageCacheDir, $wbCachePrefix);
+		$wbImageCache->serialize = false; // raw data, not serialized
+		$wbImageCache->suffix = ""; // keep extension
+		$wbImageCache->fmode = 0644; //make cached files readable
+	}
+
+	$wbPageCacheList = new FreshCacheList( "$wbCacheDir/{$wbCachePrefix}page-cache.list" );
+	$wbImageCacheList = new FreshCacheList( "$wbImageCacheDir/{$wbCachePrefix}image-cache.list" );
 
 	$cookieJarParams = array(
 			'expire' => time() + 604800, /* 1 week */
@@ -175,19 +176,21 @@ if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
 			#'domain' => 'www.wikipedia.de',
 			'path' => '/wpde'
 	);
-      $featurebox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
-      $featurebox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
-      $featurebox->purge = $purge;
-      $featurebox->cache_duration = $wbCacheDuration;
-      $featurebox->page_cache_list = $wbPageCacheList;
-      $featurebox->image_cache_list = $wbImageCacheList;
+	$featurebox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
+	$featurebox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
+	$featurebox->purge = $purge;
+	$featurebox->cache_duration = $wbCacheDuration;
+	$featurebox->page_cache_list = $wbPageCacheList;
+	$featurebox->image_cache_list = $wbImageCacheList;
+	$featurebox->bannerWasClosedCookieName = $wbBannerWasClosedCookie;
 
-      $bannerbox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
-      $bannerbox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
-      $bannerbox->purge = $purge;
-      $bannerbox->cache_duration = $wbCacheDuration;
-      $bannerbox->page_cache_list = $wbPageCacheList;
-      $bannerbox->image_cache_list = $wbImageCacheList;
+	$bannerbox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
+	$bannerbox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
+	$bannerbox->purge = $purge;
+	$bannerbox->cache_duration = $wbCacheDuration;
+	$bannerbox->page_cache_list = $wbPageCacheList;
+	$bannerbox->image_cache_list = $wbImageCacheList;
+	$bannerbox->bannerWasClosedCookieName = $wbBannerWasClosedCookie;
 }
 
 $featuretest = @$_GET['featuretest'];
