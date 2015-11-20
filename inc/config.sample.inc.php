@@ -141,6 +141,7 @@ $wbRipCache = null;
 $wbImageCache = null;
 $wbPageCacheList = null;
 $wbImageCacheList = null;
+$wbBannerWasClosedCookie = "centralnotice_wmde15_hide_cookie";
 
 if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
 	debug(__FILE__, "setting up wiki boxes", $wbWikiUrl);
@@ -181,6 +182,7 @@ if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
       $featurebox->cache_duration = $wbCacheDuration;
       $featurebox->page_cache_list = $wbPageCacheList;
       $featurebox->image_cache_list = $wbImageCacheList;
+	  $featurebox->bannerWasClosedCookieName = $wbBannerWasClosedCookie;
 
       $bannerbox = new WikiBox( $wbWikiUrl, $wbRipCache, null, new CookieJar( $cookieJarParams ) );
       $bannerbox->setImageCache($wbImageCache, $wbImageCachePath, $wbImageCacheExceptions);
@@ -188,6 +190,7 @@ if ( defined('SETUP_WIKI_BOXES') && isset($wbWikiUrl) ) {
       $bannerbox->cache_duration = $wbCacheDuration;
       $bannerbox->page_cache_list = $wbPageCacheList;
       $bannerbox->image_cache_list = $wbImageCacheList;
+	  $bannerbox->bannerWasClosedCookieName = $wbBannerWasClosedCookie;
 }
 
 $featuretest = @$_GET['featuretest'];

@@ -7,6 +7,7 @@ class WikiBox extends WikiRip {
 
 	private $bannerParameters;
 	private $cookieJar;
+	public $bannerWasClosedCookieName = 'hide_banner';
 
 	function __construct( $url, $cache = null, $cachedir = null, CookieJar $cookieJar = null ) {
 		$this->cookieJar = $cookieJar;
@@ -103,6 +104,10 @@ class WikiBox extends WikiRip {
 
 	private function getPageTitleByParams( $params ) {
 		if ( !array_key_exists( 'title', $params ) ) {
+			return false;
+		}
+
+		if ( $this->cookieJar->getCookie( $this->bannerWasClosedCookieName ) ) {
 			return false;
 		}
 
