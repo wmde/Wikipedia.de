@@ -70,6 +70,13 @@ h3 {
 	padding:1em;
 }
 
+#propertiesLink {
+    padding: .5em 1em;
+    width:8em;
+    text-align:right;
+    vertical-align: top;
+}
+
 #main {
 	clear:both;
 	padding-top:2em;
