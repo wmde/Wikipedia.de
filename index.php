@@ -109,7 +109,15 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 		<a onclick="triggerPiwikTrack(this, 'wikimedia.de');" href="http://www.wikimedia.de">Wikimedia Deutschland e.V.</a>
 		&nbsp;&ndash;&nbsp; <a href="./imprint" onclick="triggerPiwikTrack(this, 'impressum');">Impressum&nbsp;und&nbsp;Datenschutz</a>
 	</p>
-	<?php $donors = trim( getLatestDonorsString(3) ); ?>
+	<?php
+		// Deactivate donor names during the fundraising campaign
+		if( fundraisingCampaignIsActive() ) {
+			$donors = false;
+		}
+		else {
+			$donors = trim( getLatestDonorsString(3) );
+		}
+	?>
 	<?php  if ( $donors ) { ?>
 	<p>Wir danken <a onclick="triggerPiwikTrack(this, 'donation-list');" href="https://spenden.wikimedia.de/spenden/list.php">unseren neusten Spendern</a>: <strong> <?= $donors ?></strong></p>
 	<?php } ?>

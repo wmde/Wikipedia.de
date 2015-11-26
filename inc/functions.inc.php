@@ -58,6 +58,21 @@ function getLatestDonorsString($max=3) {
 	return htmlspecialchars(join(", ",$donors));
 }
 
+/**
+ *  Return if a fundraising campaign is active.
+ *
+ *  At the moment, this is entirely date-based:
+ *  Fundraising season in Germany is in November and December and the 1st week of January
+ *
+ * @return boolean
+ */
+function fundraisingCampaignIsActive() {
+	$now = new DateTime();
+	$month = $now->format( 'n' );
+	$day = $now->format( 'j' );
+	return $month == 11 || $month == 12 || ( $month == 1 && $day < 7 );
+}
+
 function getLatestDonors($max=3, $purge = false) {
 	global $wbRipCache, $wbCacheDuration;
 	
