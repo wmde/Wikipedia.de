@@ -22,54 +22,6 @@ function chooseLang($availableLangs) {
 	return array_shift($langs);
 }
 
-function fetchLatestDonorsString($max=3, $cacheKey = null) {
-	global $wbPageCacheList, $wbRipCache;
-	
-	$url = "https://spenden.wikimedia.de/spenden/latest.php?n=$max"; //TODO: config
-	
-	debug(__FUNCTION__, "fetching donors", $url);
-	$content = file_get_contents($url); 
-	debug(__FUNCTION__, "got donors", $content);
-	
-	if ( $cacheKey && $wbPageCacheList && $wbRipCache 
-		&& method_exists( $wbRipCache, 'get_cache_file' ) ) {
-			
-		$f = $wbRipCache->get_cache_file( $cacheKey );
-		$wbPageCacheList->add( array('donors', $max, $url) );
-	}
-	
-	return $content;
-}
-
-function getLatestDonorsString($max=3) {
-	$donor_list = getLatestDonors($max);
-	if ( !$donor_list ) return false;
-
-	$donors = preg_split('/(\r\n|\r|\n)+/', $donor_list);
-
-	//$donors = array_rand ( $donors, $max );
-	//shuffle ($donors);
-	$donors = array_slice ($donors, 0, $max);
-	foreach($donors AS $key=>$val) {
-		list($val) = explode("(",$val);
-		list($val) = explode(",",$val);
-		$donors[$key] = trim($val);
-	}
-	return htmlspecialchars(join(", ",$donors));
-}
-
-function getLatestDonors($max=3, $purge = false) {
-	global $wbRipCache, $wbCacheDuration;
-	
-	if ( !empty( $GLOBALS['purge'] ) ) $purge = true;
-
-	$key = 'LatestDonorsString' . $max;
-	$cmd = array('fetchLatestDonorsString', array($max, $key));
-    $content = $wbRipCache->aquire($key, $cmd, $wbCacheDuration , $purge);
-    
-    return $content;
-}
-
 function banner($banners, $id, $text = NULL) {
 	if ( !$banners ) return;
 	?>
@@ -91,7 +43,7 @@ function banner($banners, $id, $text = NULL) {
 			}
 		?>
 		<br style="clear:right"/>
-	</div> 
+	</div>
 	<?php
 }
 
