@@ -26,15 +26,3 @@ if (!empty($bannerbox)) {
 	$bannerbox->tracing = 'cli';
 	$bannerbox->refetch_pages(); //re-fetching of images is implicit!
 }
-
-if (!empty($wbRipCache) && !empty($wbPageCacheList)) {
-	$items = $wbPageCacheList->items();
-	
-	foreach ( $items as $item ) {
-		if ( $item[0] == 'donors' ) {
-			$max = (int)$item[1];
-			
-			getLatestDonors($max, $purge);
-		} 
-	}
-}

@@ -43,7 +43,7 @@ function banner($banners, $id, $text = NULL) {
 			}
 		?>
 		<br style="clear:right"/>
-	</div> 
+	</div>
 	<?php
 }
 
