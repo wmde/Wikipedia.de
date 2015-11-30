@@ -49,7 +49,7 @@ else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!"
   <tr>
   <td style="text-align:left; padding:.5em 1em; vertical-align:top;">Die Hauptseite der deutschsprachigen Wikipedia finden Sie unter <a href="https://de.wikipedia.org">https://de.wikipedia.org</a>.</td>
 
-  <td style="padding:.5em 1em; width:8em; text-align:right; vertical-align:top;">
+  <td id="propertiesLink">
     <a href="properties">Einstellungen</a>
   </td>
 
