@@ -145,5 +145,15 @@ echo '<a href="https://wikipedia.org">mehr</a>';
     </script><noscript><p><img src="<?php echo $piwikConf["url"]; ?>piwik.php?idsite=<?php echo $piwikConf["siteId"]; ?>" style="border:0" alt="" /></p></noscript>
 <?php } ?>
 <!-- End Piwik Tracking Code -->
+
+<!-- temporary tracking of page views with donation tracker -->
+<img src="" id="piwik-tracking" />
+<script type="text/javascript">
+if ( Math.random() > 0.01 ) {
+	var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=",
+		trackUrl = "https://spenden.wikimedia.de/wpde-page-imp";
+	$('#piwik-tracking').attr( 'src', pwkUrl + encodeURIComponent( trackUrl ) );
+}
+</script>
 </body>
 </html>
