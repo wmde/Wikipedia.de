@@ -32,13 +32,6 @@ $wbCacheBufferDuration = 20; // check files every 20 seconds
 $wbFeatureListPage = ""; # list of features to be displayed
 $wbBannerListPage = ""; # list of banners to be displayed
 
-$piwikConf = array(
-	"active" => false,
-	"url" => "", # URI of piwik installation
-	"secureUrl" => "", # secure URI of piwik installation
-	"siteId" => "", # site ID as defined in piwik
-);
-
 # block page titles and/or search terms
 $blockedPages = array();
 $blockedSearches = array();
