@@ -10,3 +10,9 @@ remote MediaWiki installation.
 
 Copy ```inc/config.sample.inc.php``` to ```inc/config.inc.php```. See 
 inline comments for configuration options.
+
+Run
+
+    docker-compose up
+    
+You can reach the local version of this project at [http://localhost:8085/](http://localhost:8085/)
