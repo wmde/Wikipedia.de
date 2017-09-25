@@ -31,6 +31,13 @@ $onKeyUp = "triggerSuggestLater('$lang');"
 	<link rel="apple-touch-icon" href="/img/wikipedia.png" />
 	<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
 	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<?php
+		if ( isset($banner) && $banner ):
+	?>
+		<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+	<?php
+		endif;
+	?>
 	<script language="JavaScript" type="text/javascript" src="suggest.js"></script>
 </head>
 
