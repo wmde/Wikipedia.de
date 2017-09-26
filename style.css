@@ -18,7 +18,7 @@ a:hover, a:active {
 	background-repeat:repeat-x;
 }
 
-p {
+#main p {
 	margin:0;
 	padding:0;
 	margin-top:1em;
@@ -26,7 +26,7 @@ p {
 	font: 9pt arial;
 }
 
-h3 {
+#main h3 {
 	margin:0;
 	padding:0;
 	margin-top:0.7em;
@@ -208,13 +208,6 @@ h3 {
 	background-color:#ffffff;
 	border:1px solid #999;
 	-moz-border-radius:8px;
-}
-
-#bannerbox {
-}
-
-#bannerbox p {
-	margin: 0;
 }
 
 #donationbox_bottom {
