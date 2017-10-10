@@ -11,7 +11,7 @@ function triggerSuggestLater( lang ) {
 
 function searchSuggest( lang ) {
 	searchLang = lang;
-	var str = encodeURIComponent( $( '#txtSearch' ).val() );
+	var str = $( '#txtSearch' ).val();
 
 	if ( str == lastSearch ) return;
 	lastSearch = str;
