@@ -23,17 +23,17 @@ class WikiBox extends WikiRip {
 		if ( $testPage ) {
 			$page = WikiRip::normalizeTitle( "Web:{$testPage}" );
 			$this->cache_duration = 0; //disable cache for testing
-			$html = $this->rip_page( $page, 'render', true );
+			$html = $this->rip_page( $page, 'raw', true );
 			if ( !$html ) {
 				$html = '<i class="error">page not found: ' . htmlspecialchars( $page ) . '</i>';
 			} else if ( !in_array( $page, $list ) && !preg_match( '/wikibox-test/i', $html ) ) {
-				$html = '<i class="error">inactive feature page not marked with "wikibox-test": ' . htmlspecialchars( $page ) . '</i>';
+				#$html = '<i class="error">inactive feature page not marked with "wikibox-test": ' . htmlspecialchars( $page ) . '</i>';
 			}
 		} else {
 			$i = mt_rand( 0, count( $list ) - 1 );
 			$page = $list[$i];
 				
-			$html = $this->rip_page( $page, 'render', $purge );
+			$html = $this->rip_page( $page, 'raw', $purge );
 			if ( !$html ) {
 				return false;
 			}
