@@ -3,6 +3,7 @@ var suggestTimeout = null;
 var delay = 500;
 var searchLang = "de";
 var lastSearch = "";
+var searchPath = 'go';
 var searchProviders = {
 	default: [
 		{
@@ -89,6 +90,20 @@ function getSearchProvidersForLanguage( language ) {
 	return activeSearchProviders;
 }
 
+function getSearchLink( query, language, provider ) {
+	var queryParams = {
+			l: language,
+			q: query
+		};
+
+	if ( typeof provider === 'string' ) {
+		queryParams.e = provider;
+		queryParams.s = 'search';
+	}
+
+	return searchPath + '?' + $.param( queryParams );
+}
+
 function handleSearchSuggest( response ) {
 	var searchString = lastSearch;
 	if( response == null ) return;
@@ -115,7 +130,7 @@ function handleSearchSuggest( response ) {
 				.addClass( 'suggest_link' )
 				.append(
 					$( '<a></a>' )
-						.attr( 'href', 'go?l=' + searchLang + '&q=' + entry[0] )
+						.attr( 'href', getSearchLink( entry[0], searchLang ) )
 						.addClass( searchString === entry[0] ? 'exact-match' : 'partial-match' )
 						.text( entry[0] )
 				)
@@ -132,7 +147,7 @@ function handleSearchSuggest( response ) {
 						.attr( 'src', provider.icon )
 						.attr( 'title', 'Suchen mit ' + provider.title ),
 					$( '<a></a>' )
-						.attr( 'href', 'go?l=' + searchLang + '&q=' + searchString + '&e=' + provider.linkId + '&s=search' )
+						.attr( 'href', getSearchLink( searchString, searchLang, provider.linkId ) )
 						.text( provider.anchor )
 				)
 		);
