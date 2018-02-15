@@ -41,6 +41,15 @@ a:hover, a:active {
 	color: #333;
 	padding: 2px 6px 2px 6px;
 }
+.suggest_link img {
+	width: 16px;
+	height: 16px;
+	border: 0 none;
+	margin-right: 0.8em;
+}
+.suggest_link a.exact-match {
+	font-weight: bold;
+}
 .suggest_link_over {
 	background-color: #d8e8ff;
 }

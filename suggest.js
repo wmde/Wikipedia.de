@@ -3,6 +3,51 @@ var suggestTimeout = null;
 var delay = 500;
 var searchLang = "de";
 var lastSearch = "";
+var searchPath = 'go';
+var searchProviders = {
+	default: [
+		{
+			title: 'Wikipedia',
+			anchor: 'auf wikipedia.org suchen',
+			linkId: 'wikipedia',
+			icon: 'favicon.ico'
+		}
+	],
+	languageExtras: {
+		de: [
+			{
+				title: 'T-Online',
+				anchor: 't-online.de',
+				linkId: 't-online',
+				icon: 'img/t-online.ico'
+			},
+			{
+				title: 'web.de',
+				anchor: 'web.de',
+				linkId: 'web.de',
+				icon: 'img/web.de.ico'
+			},
+			{
+				title: 'exalead',
+				anchor: 'exalead.de',
+				linkId: 'exalead',
+				icon: 'img/exalead.ico'
+			},
+			{
+				title: 'Wikiwix',
+				anchor: 'wikiwix.com',
+				linkId: 'wikiwix',
+				icon: 'img/wikiwix.ico'
+			},
+			{
+				title: 'EyePlorer',
+				anchor: 'eyeplorer.com',
+				linkId: 'eyeplorer',
+				icon: 'img/eyeplorer.ico'
+			}
+		]
+	}
+};
 
 function triggerSuggestLater( lang ) {
 	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
@@ -37,60 +82,76 @@ function hideSuggest() {
 	lastSearch = "";
 }
 
+function getSearchProvidersForLanguage( language ) {
+	var activeSearchProviders = searchProviders.default;
+	if ( searchProviders.languageExtras.hasOwnProperty( language ) ) {
+		activeSearchProviders = activeSearchProviders.concat( searchProviders.languageExtras[language] );
+	}
+	return activeSearchProviders;
+}
+
+function getSearchLink( query, language, provider ) {
+	var queryParams = {
+			l: language,
+			q: query
+		};
+
+	if ( typeof provider === 'string' ) {
+		queryParams.e = provider;
+		queryParams.s = 'search';
+	}
+
+	return searchPath + '?' + $.param( queryParams );
+}
+
 function handleSearchSuggest( response ) {
 	var searchString = lastSearch;
 	if( response == null ) return;
 
-	var ss = $( '#search_suggest' ).empty().show();
-	var str = response.split( "\n" );
-	ss.append( '<div class="suggest_link">Treffer f&uuml;r "' + searchString + '"</div>' );
+	var ss = $( '#search_suggest' ).empty().show(),
+		str = response.split( "\n" ),
+		searchProviders = getSearchProvidersForLanguage( searchLang )
+	;
+
+	ss.append(
+		$( '<div></div>' )
+			.addClass( 'suggest_link' )
+			.text( 'Treffer für ' + searchString )
+	);
 
 	$.each( str, function( index, row ) {
 		// skip first row, it's the search string itself
 		if( index === 0 ) return true;
 
 		var entry = row.split( "\t" );
-		var suggest = '<div class="suggest_link"><a href="go?l='+ searchLang +'&q=' + entry[0] + '">';
 
-		if ( searchString == entry[0] ) {
-			suggest += '<b>' + entry[0] + '</b>';
-		} else {
-			suggest += entry[0];
-		}
-
-		suggest += '</a> ';
-		suggest += '</div>';
-		ss.append( suggest );
+		ss.append(
+			$( '<div></div>' )
+				.addClass( 'suggest_link' )
+				.append(
+					$( '<a></a>' )
+						.attr( 'href', getSearchLink( entry[0], searchLang ) )
+						.addClass( searchString === entry[0] ? 'exact-match' : 'partial-match' )
+						.text( entry[0] )
+				)
+		);
 	} );
 	ss.append( '<hr noshade size=1 style="background-color:#ffffff;">' );
-	ss.append( '<div class="suggest_link"><img src="favicon.ico" width="16" height="16" title="Suchen mit Wikipedia" border="0" >&nbsp;&nbsp;<a href="go?l=' + searchLang + '&e=wikipedia&s=search&q=' + searchString + '">auf wikipedia.org suchen</a></div>' );
 
-	if (searchLang == "de") {
-		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
-		suggest += 'onmouseout="javascript:suggestOut(this);" ';
-		suggest += 'class="suggest_link"><img src="img/t-online.ico" width="16" height="16" title="Suchen mit T-Online" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=t-online&s=search">t-online.de</a></div>';
-		ss.append( suggest );
-
-		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
-		suggest += 'onmouseout="javascript:suggestOut(this);" ';
-		suggest += 'class="suggest_link"><img src="img/web.de.ico" width="16" height="16" title="Suchen mit web.de" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=web.de&s=search">web.de</a></div>';
-		ss.append( suggest );
-
-		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
-		suggest += 'onmouseout="javascript:suggestOut(this);" ';
-		suggest += 'class="suggest_link"><img src="img/exalead.ico" width="16" height="16" title="Suchen mit exalead" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=exalead&s=search">exalead.de</a></div>';
-		ss.append( suggest );
-
-		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
-		suggest += 'onmouseout="javascript:suggestOut(this);" ';
-		suggest += 'class="suggest_link"><img src="img/wikiwix.ico" width="16" height="16" title="Suchen mit Wikiwix" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=wikiwix&s=search">wikiwix.com</a></div>';
-		ss.append( suggest );
-
-		var suggest = '<div onmouseover="javascript:suggestOver(this);" ';
-		suggest += 'onmouseout="javascript:suggestOut(this);" ';
-		suggest += 'class="suggest_link"><img src="img/eyeplorer.ico" width="16" height="16" title="Suchen mit EyePlorer" border="0" />&nbsp;&nbsp;<a href="go?l=' + searchLang + '&q=' + searchString + '&e=eyeplorer&s=search">eyeplorer.com</a></div>';
-		ss.append( suggest );
-	}
+	$.each( searchProviders, function ( index, provider ) {
+		ss.append(
+			$( '<div></div>' )
+				.addClass( 'suggest_link' )
+				.append(
+					$( '<img>' )
+						.attr( 'src', provider.icon )
+						.attr( 'title', 'Suchen mit ' + provider.title ),
+					$( '<a></a>' )
+						.attr( 'href', getSearchLink( searchString, searchLang, provider.linkId ) )
+						.text( provider.anchor )
+				)
+		);
+	} );
 }
 
 $( document ).ready( function() {
