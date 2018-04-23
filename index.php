@@ -119,31 +119,15 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 </div> <!-- main -->
 
 </center>
-<?php if (isset($googleAnalyticsKey)) { ?>
-  <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-    try {
-    var pageTracker = _gat._getTracker(<?php echo $googleAnalyticsKey; ?>);
-    pageTracker._trackPageview();
-    } catch(err) {}
-  </script>
-<?php } ?>
-<!-- Piwik -->
-<?php if (is_array($piwikConf) && $piwikConf["active"]) { ?>
-  <script type="text/javascript">
-    var pkBaseURL = (("https:" == document.location.protocol) ? "<?php echo $piwikConf["secureUrl"]; ?>" : "<?php echo $piwikConf["url"]; ?>");
-    document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-    </script><script type="text/javascript">
-      try {
-        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", <?php echo $piwikConf["siteId"]; ?>);
-        piwikTracker.trackPageView();
-        piwikTracker.enableLinkTracking();
-      } catch( err ) {}
-    </script><noscript><p><img src="<?php echo $piwikConf["url"]; ?>piwik.php?idsite=<?php echo $piwikConf["siteId"]; ?>" style="border:0" alt="" /></p></noscript>
-<?php } ?>
-<!-- End Piwik Tracking Code -->
+
+<!-- temporary tracking of page views with donation tracker -->
+<img src="" id="piwik-tracking" />
+<script type="text/javascript">
+if ( Math.random() <= 0.01 ) {
+	var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=3&rec=1&url=",
+		trackUrl = "https://wikipedia.de/";
+	$('#piwik-tracking').attr( 'src', pwkUrl + encodeURIComponent( trackUrl ) );
+}
+</script>
 </body>
 </html>
