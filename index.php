@@ -124,8 +124,8 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 <img src="" id="piwik-tracking" />
 <script type="text/javascript">
 if ( Math.random() <= 0.01 ) {
-	var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=1&rec=1&url=",
-		trackUrl = "https://spenden.wikimedia.de/wpde-page-imp";
+	var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=3&rec=1&url=",
+		trackUrl = "https://wikipedia.de/";
 	$('#piwik-tracking').attr( 'src', pwkUrl + encodeURIComponent( trackUrl ) );
 }
 </script>
