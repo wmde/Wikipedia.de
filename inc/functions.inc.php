@@ -55,7 +55,6 @@ function error_page($message_html, $lang) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Wikipedia - die freie Enzyklop&auml;die (Portal Deutschland)</title>
 	<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
-	<script language="JavaScript" type="text/javascript" src="ajax_search.js"></script>
 </head>
 <body>
 <div id="head">

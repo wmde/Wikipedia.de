@@ -24,7 +24,7 @@ $onKeyUp = "triggerSuggestLater('$lang');"
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= $lang ?>" lang="<?= $lang ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang ?>" lang="<?php echo $lang ?>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>wikipedia.de - Wikipedia, die freie Enzyklop&auml;die</title>
@@ -75,29 +75,12 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 	</p>
 
 	<div id="mainbox">
-		<div><a href="https://<?= $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?= $lang ?>)" alt="Logo Wikipedia" /></a></div>
+		<div><a href="https://<?php echo $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?php echo $lang ?>)" alt="Logo Wikipedia" /></a></div>
 		<div id="maincontent">
-			<h3><?= myText("searchin") ?></h3>
-			<?php
-			if (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "t-online" && $lang=="de") {
-				?>
-				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="t-online" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/t-online.ico"  width="16" height="16" title="Suchen mit T-Online" /></form></div>
-				<?php
-			}elseif (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "exalead" && $lang=="de") {
-				?>
-				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="exalead" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/exalead.ico" width="16" height="16" title="Suchen mit exalead" /></form></div>
-				<?php
-			}elseif (isset($_COOKIE["engine"]) && $_COOKIE["engine"] == "web.de" && $lang=="de") {
-				?>
-				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="web.de" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /><img src="img/web.de.ico" width="16" height="16" title="Suchen mit web.de" /></form></div>
-				<?php
-			} else {
-				?>
-				<div id="form"><form id="frmSearch" action="go" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?= $lang ?>" /><input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?= myText("search") ?>" alt="Suche starten" /></form></div>
-				<?php
-			}
-			?>
+			<h3><?php echo myText("searchin") ?></h3>
+			<div id="form"><form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?php echo $lang ?>" /><input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?php echo myText("search") ?>" alt="Suche starten" /></form></div>
 			<div id="search_suggest"></div>
+			<div id="advanced_search"><a href="https://<?php echo $lang ?>.wikipedia.org/wiki/Special:Search?profile=advanced">Erweiterte Suche</a></div>
 			<p>&nbsp;</p>
 
 			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.</p>-->
