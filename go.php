@@ -2,17 +2,20 @@
 require_once("./inc/config.inc.php");
 require_once("./inc/functions.inc.php");
 
-if (!isset($_GET["q"]) || !$_GET["q"]) {
-	header("Location: http://".$myDomain);
-	die($myDomain);
-}
 if (!isset($_GET["l"]) || !$_GET["l"]) {
 	header("Location: http://".$myDomain);
 	die($myDomain);
 }
 
-$q = stripslashes($_GET["q"]);
 $l = stripslashes($_GET["l"]);
+
+if (!isset($_GET["q"]) || !$_GET["q"]) {
+	header("Location: http://$l.wikipedia.org/wiki/Special:Search?profile=advanced");
+	die($myDomain);
+}
+
+$q = stripslashes($_GET["q"]);
+
 
 if(isset($_GET["s"])) {
 	if (@preg_match($blockedSearches, $q) || @preg_match($blockedPages, $q)) {

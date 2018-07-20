@@ -2,7 +2,7 @@ body {
 	margin:0;
 	padding:0;
 	background-color:white;
-	font: 9pt arial;
+	font: 9pt 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
 }
 
 a:link, a:visited {
@@ -23,7 +23,6 @@ a:hover, a:active {
 	padding:0;
 	margin-top:1em;
 	margin-bottom:1em;
-	font: 9pt arial;
 }
 
 #main h3 {
@@ -32,14 +31,14 @@ a:hover, a:active {
 	margin-top:0.7em;
 	margin-bottom:0.7em;	
 	font-size: 10pt;
-	font-family:arial;
 	font-weight:bold;
 }
 
 .suggest_link {
 	background-color: #FFFFFF;
 	color: #333;
-	padding: 2px 6px 2px 6px;
+	padding: 5px 10px 5px 10px;
+	font-size: 13px;
 }
 .suggest_link img {
 	width: 16px;
@@ -47,11 +46,19 @@ a:hover, a:active {
 	border: 0 none;
 	margin-right: 0.8em;
 }
-.suggest_link a.exact-match {
+.suggest_link .exact-match {
 	font-weight: bold;
 }
 .suggest_link_over {
 	background-color: #d8e8ff;
+}
+.search_result {
+	width: 100%;
+	display: inline-block;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	padding: 1px 0;
 }
 #search_suggest {
 	width:23em;
@@ -242,18 +249,25 @@ form {
 	padding:0;
 }
 #txtSearch {
+	box-sizing: border-box;
 	background-color:#eee;
 	border:1px solid #ccc;
+	height: 30px;
 	width:23em;
-	padding:1px;
-}
+	padding:5px 5px 5px 10px;
 
+}
+#cmdSearch {
+	height: 30px;
+}
 #footer {
 	margin-top:5em;
 	font-size:9pt;
 	color:#333;
 }
-
+#advanced_search {
+	padding: 0.7em 0 0;
+}
 #donationfooter {
 	padding-top:2em;
 	font-size:9pt;

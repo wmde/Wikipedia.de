@@ -4,50 +4,6 @@ var delay = 500;
 var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
-var searchProviders = {
-	default: [
-		{
-			title: 'Wikipedia',
-			anchor: 'auf wikipedia.org suchen',
-			linkId: 'wikipedia',
-			icon: 'favicon.ico'
-		}
-	],
-	languageExtras: {
-		de: [
-			{
-				title: 'T-Online',
-				anchor: 't-online.de',
-				linkId: 't-online',
-				icon: 'img/t-online.ico'
-			},
-			{
-				title: 'web.de',
-				anchor: 'web.de',
-				linkId: 'web.de',
-				icon: 'img/web.de.ico'
-			},
-			{
-				title: 'exalead',
-				anchor: 'exalead.de',
-				linkId: 'exalead',
-				icon: 'img/exalead.ico'
-			},
-			{
-				title: 'Wikiwix',
-				anchor: 'wikiwix.com',
-				linkId: 'wikiwix',
-				icon: 'img/wikiwix.ico'
-			},
-			{
-				title: 'EyePlorer',
-				anchor: 'eyeplorer.com',
-				linkId: 'eyeplorer',
-				icon: 'img/eyeplorer.ico'
-			}
-		]
-	}
-};
 
 function triggerSuggestLater( lang ) {
 	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
@@ -82,14 +38,6 @@ function hideSuggest() {
 	lastSearch = "";
 }
 
-function getSearchProvidersForLanguage( language ) {
-	var activeSearchProviders = searchProviders.default;
-	if ( searchProviders.languageExtras.hasOwnProperty( language ) ) {
-		activeSearchProviders = activeSearchProviders.concat( searchProviders.languageExtras[language] );
-	}
-	return activeSearchProviders;
-}
-
 function getSearchLink( query, language, provider ) {
 	var queryParams = {
 			l: language,
@@ -108,50 +56,43 @@ function handleSearchSuggest( response ) {
 	var searchString = lastSearch;
 	if( response == null ) return;
 
-	var ss = $( '#search_suggest' ).empty().show(),
-		str = response.split( "\n" ),
-		searchProviders = getSearchProvidersForLanguage( searchLang )
-	;
+	var ss = $( '#search_suggest' ).empty().show();
+	var searchResults = response.split( "\n" );
 
-	ss.append(
-		$( '<div></div>' )
-			.addClass( 'suggest_link' )
-			.text( 'Treffer für ' + searchString )
-	);
+	// Removing first element because it's the search string itself
+	searchResults.shift();
 
-	$.each( str, function( index, row ) {
-		// skip first row, it's the search string itself
-		if( index === 0 ) return true;
+	// Removing the last element because it is always an empty string
+	searchResults.pop();
+
+	$.each( searchResults, function( index, row ) {
 
 		var entry = row.split( "\t" );
+		ss.append(
+			$( '<div></div>' )
+				.addClass( 'suggest_link' )
+				.append( $( '<a></a>' ).attr( 'href', getSearchLink( entry[0], searchLang ) )
+					.append(
+						$( '<span></span>' )
+							.addClass( searchString === entry[0] ? 'exact-match' : 'partial-match' )
+							.addClass( 'search_result' )
+							.text( entry[0] )
+					)
+				)
+		);
+	} );
 
+	if( searchResults.length === 0 ) {
 		ss.append(
 			$( '<div></div>' )
 				.addClass( 'suggest_link' )
 				.append(
-					$( '<a></a>' )
-						.attr( 'href', getSearchLink( entry[0], searchLang ) )
-						.addClass( searchString === entry[0] ? 'exact-match' : 'partial-match' )
-						.text( entry[0] )
+					$( '<span></span>' )
+						.addClass( 'search_result' )
+						.text( 'Es wurden keine Artikel gefunden.' )
 				)
 		);
-	} );
-	ss.append( '<hr noshade size=1 style="background-color:#ffffff;">' );
-
-	$.each( searchProviders, function ( index, provider ) {
-		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
-				.append(
-					$( '<img>' )
-						.attr( 'src', provider.icon )
-						.attr( 'title', 'Suchen mit ' + provider.title ),
-					$( '<a></a>' )
-						.attr( 'href', getSearchLink( searchString, searchLang, provider.linkId ) )
-						.text( provider.anchor )
-				)
-		);
-	} );
+	}
 }
 
 $( document ).ready( function() {
