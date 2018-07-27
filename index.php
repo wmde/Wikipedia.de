@@ -103,14 +103,10 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 
 </center>
 
-<!-- temporary tracking of page views with donation tracker -->
-<img src="" id="piwik-tracking" />
-<script type="text/javascript">
-if ( Math.random() <= 0.01 ) {
-	var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=3&rec=1&url=",
-		trackUrl = "https://wikipedia.de/";
-	$('#piwik-tracking').attr( 'src', pwkUrl + encodeURIComponent( trackUrl ) );
-}
-</script>
+<!-- Matomo -->
+<script async defer type="text/javascript" src="tracking.js"></script>
+<noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
+<!-- End Matomo Code -->
+
 </body>
 </html>
