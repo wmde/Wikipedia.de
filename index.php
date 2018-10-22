@@ -75,17 +75,22 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 	</p>
 
 	<div id="mainbox">
-		<div><a href="https://<?php echo $lang ?>.wikipedia.org/"><img src="img/logo.png" style="float:left;" border="0" align="left" width="100" height="100" title="Hauptseite der Wikipedia (<?php echo $lang ?>)" alt="Logo Wikipedia" /></a></div>
+		<div>
+            <a href="https://<?php echo $lang ?>.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia (<?php echo $lang ?>)" alt="Wikipedia - Die freie Enzyklopädie" height="250"/></a>
+        </div>
 		<div id="maincontent">
-			<h3><?php echo myText("searchin") ?></h3>
-			<div id="form"><form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" /><input type="hidden" name="l" value="<?php echo $lang ?>" /><input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />&nbsp; <input type="submit" id="cmdSearch" name="b" value="<?php echo myText("search") ?>" alt="Suche starten" /></form></div>
+			<div id="form">
+                <form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="<?php print htmlspecialchars($onKeyUp); ?>" autocomplete="off" />
+                    <input type="hidden" name="l" value="<?php echo $lang ?>" />
+                    <input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
+                    <button type="submit" id="cmdSearch" name="b"><span class="search-icon"></span></button>
+                </form>
+            </div>
 			<div id="search_suggest"></div>
 			<div id="advanced_search"><a href="https://<?php echo $lang ?>.wikipedia.org/wiki/Special:Search?profile=advanced">Erweiterte Suche</a></div>
-			<p>&nbsp;</p>
-
-			<!--<p>Fehlermeldungen? Verbesserungsvorschl&auml;ge?<br />Wir freuen uns auf <a href="http://meta.wikimedia.org/wiki/Wikipedia.de">R&uuml;ckmeldungen</a>.</p>-->
-		</div> <!-- maincontent -->
-	</div>  <!-- mainbox -->
+            <h3><?php echo myText("searchin") ?></h3>
+		</div>
+	</div>
 
       <?php if ( $showFeature && @$featurebox ) include("inc/featurebox.inc.php"); ?>
 
