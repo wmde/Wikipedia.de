@@ -74,7 +74,7 @@ function handleSearchSuggest( response ) {
 				.append( $( '<a></a>' ).attr( 'href', getSearchLink( entry[0], searchLang ) )
 					.append(
 						$( '<span></span>' )
-							.addClass( searchString === entry[0] ? 'exact-match' : 'partial-match' )
+							.addClass( searchString.toLowerCase() === entry[0].toLowerCase() ? 'exact-match' : 'partial-match' )
 							.addClass( 'search_result' )
 							.text( entry[0] )
 					)
