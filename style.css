@@ -13,10 +13,9 @@ a:hover, a:active {
   color: #373737;
 }
 
-#main {
-
+a {
+	text-decoration: none;
 }
-
 p {
 	margin:0;
 	padding:0;
@@ -56,14 +55,6 @@ p {
 	line-height: 25px;
 	font-size: 15px;
 	padding: 10px 20px 10px 10px;
-}
-.search_result::after {
-	content: "➔";
-	font-size: 16px;
-	font-weight: bold;
-	position: absolute;
-	right: 10px;
-	bottom: 25%;
 }
 .suggest_link_over .search_result {
 	color: #575757;
@@ -112,10 +103,6 @@ p {
     vertical-align: top;
 }
 
-#main {
-	padding-top:2em;
-}
-
 #langs {
 	margin-bottom:0.5em;
 	font-size:9pt;
@@ -134,19 +121,13 @@ p {
 }
 
 #featurebox {
-	align:center;
 	padding:0;
-	margin:2em auto 1em auto;
+	margin:6em auto 1em auto;
 }
 
 .feature-wrapper {
 	background-color:#ffffff;
-	min-width:45em;
-	align:center;
-	border:1px solid #999;
-	padding: 1.5em;
-	border-radius:8px;
-	-moz-border-radius:8px;
+	max-width:45em;
 }
 
 .feature {
@@ -269,7 +250,8 @@ form {
 	margin:0;
 	padding:0;
 }
-#txtSearch {
+input {
+	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
 	background-color: #ffffff;
 	border: 1px solid #a2a9b1;
@@ -281,18 +263,22 @@ form {
 	font-size: 16px;
 	line-height: 1.6;
 }
-#txtSearch:active, #txtSearch:focus {
+@media (max-width: 330px) {
+	input {
+		max-width: 200px;
+	}
+}
+input:active, input:focus {
 	border: 2px solid #36c;
 	border-right: none;
 }
-#cmdSearch {
+button {
 	height: 45px;
 	background-color: #36c;
 	border: none;
 	color: #fff;
 	margin: 0;
 	padding: 0;
-	z-index: 2;
 	font-size: 16px;
 	line-height: 1.6;
 	vertical-align: middle;
@@ -322,7 +308,7 @@ form {
 	background-size: 25px auto;
 	background-position: center;
 }
-#cmdSearch:hover {
+button:hover {
 	background: #447ff5;
 	border-color: #447ff5;
 }
@@ -335,11 +321,11 @@ form {
 	padding: 0.7em 0 0;
 }
 #donationfooter {
-	background-color: #ffffff;
+	background-color: #202520;
 	border-top: 1px solid #dddddd;
 	padding-top: 2em;
 	font-size: 9pt;
-	color: #000;
+	color: #ffffff;
 	clear: both;
 	position: absolute;
 	bottom: 0;
@@ -353,11 +339,12 @@ form {
 }
 
 #donationfooter a {
-	color: #000;
+	color: #fff;
 }
 .link-block ul {
-	padding: 0 100px;
-	margin: 0;
+	padding: 0;
+	margin: 0 auto;
+	width: 90%;
 	list-style: none;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -365,19 +352,17 @@ form {
 	-webkit-flex-flow: row wrap;
 	flex-wrap: wrap;
 	-ms-flex-pack: justify;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	-webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
 }
 
 .link-block li {
 	padding: 0;
-	width: 300px;
-	margin-top: 10px;
+	width: auto;
 	margin-bottom: 10px;
 	line-height: 150px;
-	color: #747474;
+	color: #fff;
 	font: 14px Arial, Helvetica, sans-serif;
 	text-align: left;
 }
@@ -386,12 +371,112 @@ form {
 	margin-top: 0;
 }
 
+.wikipedia-logo img {
+	height: 250px;
+}
+
 .wikimedia-logo {
 	height: 50px;
 }
 
-input {
-	margin:0;
-	padding:0;
+@media (max-width: 900px) {
+	.link-block ul {
+		width: 43em;
+	}
+	.link-block li {
+		width: 50%;
+	}
+}
 
+@media (max-width: 900px) and (max-height: 700px) {
+	#donationfooter {
+		position: relative;
+		margin-top: 50px;
+		margin-bottom: -15px;
+	}
+}
+
+@media (max-width: 600px) {
+	#donationfooter {
+		position: relative;
+		margin-top: 50px;
+		margin-bottom: -15px;
+	}
+	.link-block ul {
+		padding: 0;
+		margin: 0 auto;
+		width: 250px;
+	}
+	.link-block li {
+		width: 100%;
+		margin-bottom: 30px;
+	}
+	.wikipedia-logo img {
+		height: 200px;
+	}
+	#featurebox {
+		margin: 2em 1.5em 1em 1.5em;
+	}
+}
+
+@media (max-height: 600px) {
+	#donationfooter {
+		position: relative;
+		margin-top: 50px;
+	}
+}
+
+#featurebox strong {
+	display: block;
+	font-size: 14px;
+	margin: 0 0 7px 0;
+	color: #202520;
+}
+
+.call-to-action p {
+	margin-top: 0;
+	font-size: 11px;
+	color: #8e8e8e;
+}
+
+.call-to-action form {
+	display: flex;
+}
+
+.call-to-action form input {
+	flex: 1 1 auto;
+}
+
+.call-to-action label {
+	color: #202520;
+	display: block;
+	font-size: 12px;
+	margin: 0 0 2px 0;
+}
+
+.call-to-action input {
+	height: 35px;
+}
+
+.call-to-action button {
+	border-radius: 0 2px 2px 0;
+	color: #000;
+	flex: 1 0 auto;
+	width: auto;
+	padding: 0 15px;
+	font-size: 13px;
+	height: 35px;
+	background-color: #f8f9fa;
+	border: 1px solid #a2a9b1;
+}
+
+@media (max-width: 600px) {
+	.call-to-action input {
+		width: 60%;
+	}
+
+	.call-to-action button {
+		font-size: 11px;
+		padding: 0 5px;
+	}
 }

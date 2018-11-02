@@ -11,11 +11,11 @@ if (!isset($_COOKIE) || !count($_COOKIE)) {
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>wikipedia.de - Wikipedia, die freie Enzyklop&auml;die</title>
 	<link rel="apple-touch-icon" href="/img/wikipedia.png" />
 	<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
@@ -40,15 +40,15 @@ else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!"
 
 <div id="main">
 	<div id="mainbox">
-		<div>
-			<a href="https://de.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie" height="250"/></a>
+		<div class="wikipedia-logo">
+			<a href="https://de.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie"/></a>
 		</div>
 		<div id="maincontent">
 			<div id="form">
 				<form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
 					<input type="hidden" name="l" value="de" />
 					<input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
-					<button type="submit" id="cmdSearch" name="b"><span class="search-icon"></span></button>
+					<button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
 				</form>
 			</div>
 			<div id="search_suggest"></div>
@@ -59,32 +59,30 @@ else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!"
 
 	<?php if ( isset($bottomBanners) && !empty($bottomBanners) ) banner($bottomBanners, "donationbox_bottom", "Jetzt spenden!"); ?>
 
-<footer class="page-footer" id="donationfooter"><div class="footer content"><div class="link-block">
-	<div class="footer content">
-		<div class="link-block">
-			<ul>
-				<li><a href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_black.svg" alt="Wikimedia Deutschland e.V."></a></li>
-				<li>
-					<p><strong>Über Wikimedia Deutschland e. V.</strong></p>
-					<p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
-					<p><a href="https://wikimedia.de/de/satzung">Satzung, Ordnungen & Beschlüsse</a></p>
-					<p><a href="https://wikimedia-deutschland.softgarden.io/de/vacancies">Stellenangebote</a></p>
-				</li>
-				<li>
-					<p><strong>Mitwirken</strong></p>
-					<p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
-					<p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt Spenden</a></p>
-					<p><a href="https://spenden.wikimedia.de/page/Transparenz">Mittelverwendung</a></p>
-				</li>
-				<li>
-					<p><strong>Vereinskanäle</strong></p>
-					<p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
-					<p><a href="https://www.facebook.com/WMDEeV">Facebook</a></p>
-					<p><a href="https://twitter.com/wikimediade">Twitter</a></p>
-				</li>
-			</ul>
-		</div>
-	</div>
+<footer class="page-footer" id="donationfooter">
+    <div class="link-block">
+        <ul>
+            <li><a href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_white.svg" alt="Wikimedia Deutschland e.V."></a></li>
+            <li>
+                <p><strong>Über Wikimedia Deutschland e. V.</strong></p>
+                <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
+                <p><a href="https://wikimedia.de/de/satzung">Satzung, Ordnungen & Beschlüsse</a></p>
+                <p><a href="https://wikimedia-deutschland.softgarden.io/de/vacancies">Stellenangebote</a></p>
+            </li>
+            <li>
+                <p><strong>Mitwirken</strong></p>
+                <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
+                <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt Spenden</a></p>
+                <p><a href="https://spenden.wikimedia.de/page/Transparenz">Mittelverwendung</a></p>
+            </li>
+            <li>
+                <p><strong>Vereinskanäle</strong></p>
+                <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
+                <p><a href="https://www.facebook.com/WMDEeV">Facebook</a></p>
+                <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
+            </li>
+        </ul>
+    </div>
 </footer>
 
 </div> <!-- main -->
