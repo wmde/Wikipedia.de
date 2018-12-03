@@ -25,20 +25,17 @@ $onKeyUp = "triggerSuggestLater('$lang');"
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang ?>" lang="<?php echo $lang ?>">
+<div id="WMDE-Banner-Container"></div>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>wikipedia.de - Wikipedia, die freie Enzyklop&auml;die</title>
 	<link rel="apple-touch-icon" href="/img/wikipedia.png" />
 	<link rel="stylesheet" media="screen" type="text/css" href="style.css" />
-	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-	<?php
-		if ( isset($banner) && $banner ):
-	?>
-		<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
-	<?php
-		endif;
-	?>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 	<script language="JavaScript" type="text/javascript" src="suggest.js"></script>
+    <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
+    <script type="application/javascript" src="https://bruce.wikipedia.de/your-contribution-to-free-knowledge.js"></script>
 </head>
 
 <body onload="self.focus();document.getElementById('txtSearch').focus();">
