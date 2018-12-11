@@ -25,7 +25,6 @@ $onKeyUp = "triggerSuggestLater('$lang');"
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang ?>" lang="<?php echo $lang ?>">
-<div id="WMDE-Banner-Container"></div>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>wikipedia.de - Wikipedia, die freie Enzyklop&auml;die</title>
@@ -34,17 +33,11 @@ $onKeyUp = "triggerSuggestLater('$lang');"
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 	<script language="JavaScript" type="text/javascript" src="suggest.js"></script>
-    <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
-    <script type="application/javascript" src="https://bruce.wikipedia.de/your-contribution-to-free-knowledge.js"></script>
 </head>
 
 <body onload="self.focus();document.getElementById('txtSearch').focus();">
+<div id="WMDE-Banner-Container"></div>
 <center>
-
-<?php
-if ( $showBanner && @$bannerbox ) include("inc/bannerbox.inc.php");
-else if ( @$topBanners ) banner($topBanners, "donationbox_top", "Jetzt spenden!");
-?>
 
 <table id="head" border="0" cellpadding="0" cellspacing="0" style="width:100%">
   <tr>
@@ -84,10 +77,6 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 		</div> <!-- maincontent -->
 	</div>  <!-- mainbox -->
 
-      <?php if ( $showFeature && @$featurebox ) include("inc/featurebox.inc.php"); ?>
-
-    <?php if ( isset($bottomBanners) && !empty($bottomBanners) ) banner($bottomBanners, "donationbox_bottom", "Jetzt spenden!"); ?>
-
 <div id="donationfooter">
 	<p>
 		<a onclick="triggerPiwikTrack(this, 'wikimedia.de');" href="http://www.wikimedia.de">Wikimedia Deutschland e.V.</a>
@@ -109,7 +98,8 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 		$( '#piwik-tracking' ).attr( 'src', pwkUrl + encodeURIComponent( trackUrl ) );
 	}
 </script>
-
+<script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
+<script type="application/javascript" src="https://bruce.wikipedia.de/your-contribution-to-free-knowledge.js"></script>
 <!-- Matomo -->
 <script async defer type="text/javascript" src="tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
