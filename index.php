@@ -99,11 +99,19 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 	}
 </script>
 <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
-<?php if ( isset( $_GET[ "banner" ] ) && $_GET[ "banner" ] === htmlspecialchars( $_GET[ "banner" ] ) ): ?>
-    <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/<?php echo htmlspecialchars( $_GET[ "banner" ] ) ?>.js"></script>
-<?php else: ?>
-    <script type="application/javascript" src="https://bruce.wikipedia.de/your-contribution-to-free-knowledge.js"></script>
-<?php endif; ?>
+<?php
+$randomBanner = 'your-contribution-to-free-knowledge.js';
+$rawUrlBanner = filter_input( INPUT_GET, 'banner', FILTER_UNSAFE_RAW );
+$filteredUrlBanner = basename( filter_input(
+	INPUT_GET,
+	'banner',
+	FILTER_SANITIZE_SPECIAL_CHARS,
+	FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK
+) );
+$urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sprintf( 'banners/wikipedia.de-banners/%s.js', $filteredUrlBanner) : $randomBanner;
+?>
+<script type="application/javascript" src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>"></script>
+
 <!-- Matomo -->
 <script async defer type="text/javascript" src="tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
