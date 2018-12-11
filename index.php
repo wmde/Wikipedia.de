@@ -99,7 +99,11 @@ echo '<a href="https://wikipedia.org">mehr</a>';
 	}
 </script>
 <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
-<script type="application/javascript" src="https://bruce.wikipedia.de/your-contribution-to-free-knowledge.js"></script>
+<?php if ( isset( $_GET[ "banner" ] ) && $_GET[ "banner" ] === htmlspecialchars( $_GET[ "banner" ] ) ): ?>
+    <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/<?php echo htmlspecialchars( $_GET[ "banner" ] ) ?>.js"></script>
+<?php else: ?>
+    <script type="application/javascript" src="https://bruce.wikipedia.de/your-contribution-to-free-knowledge.js"></script>
+<?php endif; ?>
 <!-- Matomo -->
 <script async defer type="text/javascript" src="tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
