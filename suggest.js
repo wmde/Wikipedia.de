@@ -40,9 +40,9 @@ function hideSuggest() {
 
 function getSearchLink( query, language, provider ) {
 	var queryParams = {
-			l: language,
-			q: query
-		};
+		l: language,
+		q: query
+	};
 
 	if ( typeof provider === 'string' ) {
 		queryParams.e = provider;
