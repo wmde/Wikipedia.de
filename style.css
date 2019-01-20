@@ -109,8 +109,10 @@ p {
 }
 
 #mainbox {
+	margin: 0 auto;
+	text-align: center;
 	width:45em;
-	padding:1.5em;
+	padding: 4em 1.5em 1.5em 1.5em;
 }
 
 @media (max-width: 600px) {
@@ -257,11 +259,13 @@ input {
 	border: 1px solid #a2a9b1;
 	border-right: none;
 	height: 45px;
-	-webkit-appearance: textfield;
 	width: 100%;
 	padding: 8px 8px 8px 8px;
 	font-size: 16px;
 	line-height: 1.6;
+	-webkit-appearance: textfield;
+	-webkit-tap-highlight-color: #36c;
+	outline: #36c;
 }
 @media (max-width: 330px) {
 	input {
@@ -331,12 +335,6 @@ button:hover {
 	bottom: 0;
 	width: 100%;
 }
-@media (max-width: 600px) {
-	#donationfooter {
-		position: relative;
-		margin-top: 50px;
-	}
-}
 
 #donationfooter a {
 	color: #fff;
@@ -397,11 +395,6 @@ button:hover {
 }
 
 @media (max-width: 600px) {
-	#donationfooter {
-		position: relative;
-		margin-top: 50px;
-		margin-bottom: -15px;
-	}
 	.link-block ul {
 		padding: 0;
 		margin: 0 auto;
@@ -417,9 +410,30 @@ button:hover {
 	#featurebox {
 		margin: 2em 1.5em 1em 1.5em;
 	}
+	#mainbox {
+		padding: 1em 1.5em 1.5em 1.5em;
+	}
 }
 
-@media (max-height: 600px) {
+
+/* iPad landscape selector to ensure input field is always on screen */
+@media (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+	.wikipedia-logo img {
+		height: 200px;
+	}
+	#mainbox {
+		padding: 0 1.5em 1.5em 1.5em;
+	}
+	#maincontent {
+		margin: 10px 0 0 0;
+	}
+}
+
+/* Make sure footer never hides search bar for low device heights */
+@media (max-height: 600px),
+(max-height: 950px) and (max-width: 600px) {
 	#donationfooter {
 		position: relative;
 		margin-top: 50px;
