@@ -26,52 +26,48 @@ if (!isset($_COOKIE) || !count($_COOKIE)) {
 
 <body onload="self.focus();document.getElementById('txtSearch').focus();">
 <div id="WMDE-Banner-Container"></div>
-<center>
-    <div id="main">
-        <div id="mainbox">
-            <div class="wikipedia-logo">
-                <a href="https://de.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie"/></a>
-            </div>
-            <div id="maincontent">
-                <div id="form">
-                    <form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
-                        <input type="hidden" name="l" value="de" />
-                        <input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
-                        <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
-                    </form>
-                </div>
-                <div id="search_suggest"></div>
-            </div>
+<div id="main">
+    <div id="mainbox">
+        <div class="wikipedia-logo">
+            <a href="https://de.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie"/></a>
         </div>
-        <footer class="page-footer" id="donationfooter">
-            <div class="link-block">
-                <ul>
-                    <li><a onclick="triggerPiwikTrack(this, 'wikimedia.de-logo');" href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_white.svg" alt="Wikimedia Deutschland e.V."></a></li>
-                    <li>
-                        <p><strong>Über Wikimedia Deutschland e. V.</strong></p>
-                        <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
-                        <p><a href="https://wikimedia.de/de/satzung">Satzung, Ordnungen & Beschlüsse</a></p>
-                        <p><a href="https://wikimedia-deutschland.softgarden.io/de/vacancies">Stellenangebote</a></p>
-                    </li>
-                    <li>
-                        <p><strong>Mitwirken</strong></p>
-                        <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
-                        <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt Spenden</a></p>
-                        <p><a href="https://spenden.wikimedia.de/use-of-funds">Mittelverwendung</a></p>
-                    </li>
-                    <li>
-                        <p><strong>Vereinskanäle</strong></p>
-                        <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
-                        <p><a href="https://www.facebook.com/WMDEeV">Facebook</a></p>
-                        <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
-                    </li>
-                </ul>
+        <div id="maincontent">
+            <div id="form">
+                <form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
+                    <input type="hidden" name="l" value="de" />
+                    <input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
+                    <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
+                </form>
             </div>
-        </footer>
-
-    </div> <!-- main -->
-
-</center>
+            <div id="search_suggest"></div>
+        </div>
+    </div>
+    <footer class="page-footer" id="donationfooter">
+        <div class="link-block">
+            <ul>
+                <li><a onclick="triggerPiwikTrack(this, 'wikimedia.de-logo');" href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_white.svg" alt="Wikimedia Deutschland e.V."></a></li>
+                <li>
+                    <p><strong>Über Wikimedia Deutschland e. V.</strong></p>
+                    <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
+                    <p><a href="https://wikimedia.de/de/satzung">Satzung, Ordnungen & Beschlüsse</a></p>
+                    <p><a href="https://wikimedia-deutschland.softgarden.io/de/vacancies">Stellenangebote</a></p>
+                </li>
+                <li>
+                    <p><strong>Mitwirken</strong></p>
+                    <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
+                    <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt Spenden</a></p>
+                    <p><a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mittelverwendung</a></p>
+                </li>
+                <li>
+                    <p><strong>Vereinskanäle</strong></p>
+                    <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
+                    <p><a href="https://www.facebook.com/WMDEeV">Facebook</a></p>
+                    <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>
 
 <!-- temporary tracking of page views with donation tracker -->
 <img src="" id="piwik-tracking"/>

@@ -109,8 +109,10 @@ p {
 }
 
 #mainbox {
+	margin: 0 auto;
+	text-align: center;
 	width:45em;
-	padding:1.5em;
+	padding: 4em 1.5em 1.5em 1.5em;
 }
 
 @media (max-width: 600px) {
@@ -257,11 +259,13 @@ input {
 	border: 1px solid #a2a9b1;
 	border-right: none;
 	height: 45px;
-	-webkit-appearance: textfield;
 	width: 100%;
 	padding: 8px 8px 8px 8px;
 	font-size: 16px;
 	line-height: 1.6;
+	-webkit-appearance: textfield;
+	-webkit-tap-highlight-color: #36c;
+	outline: #36c;
 }
 @media (max-width: 330px) {
 	input {
