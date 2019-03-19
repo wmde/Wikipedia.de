@@ -1,7 +1,11 @@
+html, body, #main {
+	min-height: 98vh;
+}
+
 body {
 	margin:0;
 	padding:0;
-	background-color:white;
+	background-color: #111;
 	font: 9pt 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
 }
 
@@ -21,6 +25,11 @@ p {
 	padding:0;
 	margin-top:1em;
 	margin-bottom:1em;
+}
+
+#main {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 #main h3 {
@@ -325,13 +334,13 @@ button:hover {
 	padding: 0.7em 0 0;
 }
 #donationfooter {
-	background-color: #202520;
-	border-top: 1px solid #dddddd;
+	border-top: 1px solid #575757;
+	background-color: #111;
 	padding-top: 2em;
 	font-size: 9pt;
 	color: #ffffff;
 	clear: both;
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	width: 100%;
 }
