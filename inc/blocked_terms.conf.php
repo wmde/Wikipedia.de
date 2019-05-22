@@ -17,10 +17,7 @@ $blockedPages = array(
 	"Loriot",
 	"Victor von Bülow",
 	"Santander Consumer Bank \(Deutschland\)",
-	"Ulrich Marseille"
-);
-
-$blockedSearches = array(
+	"Ulrich Marseille",
 	"(stella )?deetjen",
 	"helge schneider",
 	"(dirk )?bavendamm",
@@ -29,3 +26,5 @@ $blockedSearches = array(
 	"loriot?"
 );
 
+$blockedPages = str_replace( ' ', '[_ ]', $blockedPages );
+$blockedPages = '#(^'. join('$)|(^', $blockedPages) .'$)#iAu';
