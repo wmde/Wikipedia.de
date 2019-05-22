@@ -1,8 +1,29 @@
 body {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 100vh;
 	margin:0;
 	padding:0;
 	background-color:white;
-	font: 9pt 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
+	font: 14px 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
+}
+#main {
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-ms-flex: 1;
+	flex: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	min-height: 100vh;
+}
+
+#mainbox {
+	-ms-flex: 1 0 auto;
+	flex: 1 0 auto;
 }
 
 a:link, a:visited {
@@ -70,14 +91,14 @@ p {
 	border: 1px solid #a2a9b1;
 	border-top: none;
 	display: none;
-	max-width: 540px;
+	max-width: 560px;
 	box-sizing: border-box;
 	z-index: 5;
 }
 
 @media (max-width: 600px) {
 	#search_suggest {
-		width: calc(100% - 36px);
+		width: calc(100% - 42px);
 	}
 }
 
@@ -111,8 +132,8 @@ p {
 #mainbox {
 	margin: 0 auto;
 	text-align: center;
-	width:45em;
-	padding: 4em 1.5em 1.5em 1.5em;
+	width: 40em;
+	padding: 4em 1.5em 4em 1.5em;
 }
 
 @media (max-width: 600px) {
@@ -195,48 +216,6 @@ p {
 #maincontent {
 	text-align: left;
 	margin: 30px 0 0 0;
-}
-
-#donationbox {
-	margin-top:2em;
-
-	width:45em;
-	align:center;
-	padding:1.5em;
-
-
-	background-color:#ffffff;
-	border:1px solid #999;
-	-moz-border-radius:8px;
-}
-
-#donationbox_top {
-	margin:1em auto;
-
-	width:736px;
-	min-width:736px;
-	max-width:736px;
-	/* height: 90px; */
-	text-align: center;
-	align: center;
-
-	background-color:#ffffff;
-	border:1px solid #999;
-	-moz-border-radius:8px;
-}
-
-#donationbox_bottom {
-	margin-top:2em;
-	margin-bottom: 0.5em;
-
-	width:736px;
-	height: 90px;
-	text-align: center;
-
-
-	background-color:#ffffff;
-	border:1px solid #999;
-	-moz-border-radius:8px;
 }
 
 form {
@@ -324,14 +303,13 @@ button:hover {
 #advanced_search {
 	padding: 0.7em 0 0;
 }
+
 #donationfooter {
 	background-color: #202520;
 	border-top: 1px solid #dddddd;
 	padding-top: 2em;
 	font-size: 9pt;
 	color: #ffffff;
-	clear: both;
-	position: absolute;
 	bottom: 0;
 	width: 100%;
 }
@@ -386,14 +364,6 @@ button:hover {
 	}
 }
 
-@media (max-width: 900px) and (max-height: 700px) {
-	#donationfooter {
-		position: relative;
-		margin-top: 50px;
-		margin-bottom: -15px;
-	}
-}
-
 @media (max-width: 600px) {
 	.link-block ul {
 		padding: 0;
@@ -411,32 +381,7 @@ button:hover {
 		margin: 2em 1.5em 1em 1.5em;
 	}
 	#mainbox {
-		padding: 1em 1.5em 1.5em 1.5em;
-	}
-}
-
-
-/* iPad landscape selector to ensure input field is always on screen */
-@media (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape) {
-	.wikipedia-logo img {
-		height: 200px;
-	}
-	#mainbox {
-		padding: 0 1.5em 1.5em 1.5em;
-	}
-	#maincontent {
-		margin: 10px 0 0 0;
-	}
-}
-
-/* Make sure footer never hides search bar for low device heights */
-@media (max-height: 600px),
-(max-height: 950px) and (max-width: 600px) {
-	#donationfooter {
-		position: relative;
-		margin-top: 50px;
+		padding: 1em 1.5em 4em 1.5em;
 	}
 }
 
@@ -447,50 +392,17 @@ and (orientation : landscape) {
 	color: #202520;
 }
 
-.call-to-action p {
-	margin-top: 0;
-	font-size: 11px;
-	color: #8e8e8e;
-}
-
-.call-to-action form {
-	display: flex;
-}
-
-.call-to-action form input {
-	flex: 1 1 auto;
-}
-
-.call-to-action label {
-	color: #202520;
-	display: block;
-	font-size: 12px;
-	margin: 0 0 2px 0;
-}
-
-.call-to-action input {
-	height: 35px;
-}
-
-.call-to-action button {
-	border-radius: 0 2px 2px 0;
-	color: #000;
-	flex: 1 0 auto;
-	width: auto;
-	padding: 0 15px;
-	font-size: 13px;
-	height: 35px;
-	background-color: #f8f9fa;
-	border: 1px solid #a2a9b1;
-}
-
-@media (max-width: 600px) {
-	.call-to-action input {
-		width: 60%;
+/* iPad landscape selector to ensure input field is always on screen */
+@media (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+	.wikipedia-logo img {
+		height: 200px;
 	}
-
-	.call-to-action button {
-		font-size: 11px;
-		padding: 0 5px;
+	#mainbox {
+		padding: 0 1.5em 4em 1.5em;
+	}
+	#maincontent {
+		margin: 10px 0 0 0;
 	}
 }
