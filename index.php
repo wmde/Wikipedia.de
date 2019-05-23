@@ -1,16 +1,3 @@
-<?php
-define('SETUP_WIKI_BOXES', 1);
-include_once("inc/config.inc.php");
-include_once("inc/functions.inc.php");
-
-header("Content-Type: text/html; charset=UTF-8");
-
-// Cookie setzen (zum Test)
-if (!isset($_COOKIE) || !count($_COOKIE)) {
-	setcookie( "cookies" , true);
-}
-
-?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -21,7 +8,7 @@ if (!isset($_COOKIE) || !count($_COOKIE)) {
     <link rel="stylesheet" media="screen" type="text/css" href="style.css" />
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="suggest.js"></script>
+    <script type="text/javascript" src="suggest.js"></script>
 </head>
 
 <body onload="self.focus();document.getElementById('txtSearch').focus();">
@@ -41,32 +28,9 @@ if (!isset($_COOKIE) || !count($_COOKIE)) {
             </div>
             <div id="search_suggest"></div>
         </div>
+        <div id="wmde-banner-featurebox"></div>
     </div>
-    <footer class="page-footer" id="donationfooter">
-        <div class="link-block">
-            <ul>
-                <li><a onclick="triggerPiwikTrack(this, 'wikimedia.de-logo');" href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_white.svg" alt="Wikimedia Deutschland e.V."></a></li>
-                <li>
-                    <p><strong>Wikimedia Deutschland e. V.</strong></p>
-                    <p><a href="https://www.wikimedia.de/de/ueber-uns">Über uns</a></p>
-                    <p><a href="https://wikimedia-deutschland.softgarden.io/de/vacancies">Stellenangebote</a></p>
-                    <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
-                </li>
-                <li>
-                    <p><strong>Mitwirken</strong></p>
-                    <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
-                    <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt spenden</a></p>
-                    <p><a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mittelverwendung</a></p>
-                </li>
-                <li>
-                    <p><strong>Vereinskanäle</strong></p>
-                    <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
-                    <p><a href="https://www.facebook.com/WMDEeV">Facebook</a></p>
-                    <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <?php include 'footer.php'?>
 </div>
 
 <!-- temporary tracking of page views with donation tracker -->

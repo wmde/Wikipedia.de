@@ -1,10 +1,8 @@
 <?php
+/** Last remnants of super retro PHP code */
+require_once './inc/blocked_terms.conf.php';
 $max_seconds = 5;
 set_time_limit( $max_seconds + 1 );
-ini_set('user_agent', 'wikipedia.de (ajax suggest for search portal)');
-
-require_once("./inc/config.inc.php");
-require_once("./inc/json.php");
 
 function load_url($url) {
 	global $useCURL, $max_seconds;
@@ -65,19 +63,18 @@ if (isset($_GET['search']) && $_GET['search'] != '' && isset($_GET['lang'])) {
 			echo urlencode($page["title"])."\t".$_GET["lang"]."\n";
 		}
 	} else {
-		$json = new Services_JSON();
 		$input = @load_url( 'https://' . $lang . '.wikipedia.org/w/api.php?action=opensearch&search=' . $search );
 		if ($input===null) fail("api call failed");
 
-		$result = $json->decode($input);
+		$result = json_decode($input);
 		if ($result===null) fail("failed to decode results");
 
 		echo urldecode($search)."\t".$lang."\n";
 		if (is_array($result[1])) {
 			foreach($result[1] AS $id=>$title) {
-                if (@preg_match($blockedPages,$title)) {
-                                	continue;
-				}                                                                                               
+				if (preg_match($blockedPages,$title)) {
+					continue;
+				}
 				echo $title."\t".$lang."\n";
 			}
 		}
