@@ -1,3 +1,4 @@
+<?php header('HTTP/1.1 451 Unavailable For Legal Reasons'); ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
