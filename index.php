@@ -12,6 +12,7 @@
 </head>
 
 <body onload="self.focus();document.getElementById('txtSearch').focus();">
+<div id="WMDE-Banner-Container"></div>
 <div id="main">
     <div id="mainbox">
         <div class="wikipedia-logo">
@@ -27,7 +28,7 @@
             </div>
             <div id="search_suggest"></div>
         </div>
-        <div id="WMDE-Banner-Container"></div>
+        <div id="wmde-banner-featurebox"></div>
     </div>
     <?php include 'footer.php'?>
 </div>
