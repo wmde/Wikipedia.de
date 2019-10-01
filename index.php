@@ -33,8 +33,8 @@
     <?php include 'footer.php'?>
 </div>
 
-<!-- temporary tracking of page views with donation tracker -->
-<img src="" id="piwik-tracking"/>
+<!-- Tracking 1% page views with donation tracker. When you see this, ask yourself if it's still needed -->
+<img src="" style="position:absolute;bottom:0;right:0" id="piwik-tracking"/>
 <script type="text/javascript">
 	if( Math.random() <= 0.01 ) {
 		var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=3&rec=1&url=",
