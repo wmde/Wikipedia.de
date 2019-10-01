@@ -7,6 +7,10 @@ body {
 	padding:0;
 	background-color:white;
 	font: 14px 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
+	-webkit-box-orient:vertical;
+	-webkit-box-direction:normal;
+	-ms-flex-direction:column;
+	flex-direction:column;
 }
 #main {
 	-webkit-box-orient: vertical;
@@ -311,7 +315,7 @@ button:hover {
 	font-size: 9pt;
 	color: #ffffff;
 	bottom: 0;
-	width: 100vw;
+	max-width: 100vw;
 }
 
 #donationfooter a {
