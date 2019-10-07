@@ -222,7 +222,7 @@ p {
 	margin: 30px 0 0 0;
 }
 
-form {
+.search-form {
 	margin:0;
 	padding:0;
 	display: -webkit-box;
@@ -235,7 +235,7 @@ form {
 	margin:0;
 	padding:0;
 }
-input {
+.search-form input {
 	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
 	background-color: #ffffff;
@@ -251,15 +251,15 @@ input {
 	outline: #36c;
 }
 @media (max-width: 330px) {
-	input {
+	.search-form input {
 		max-width: 200px;
 	}
 }
-input:active, input:focus {
+.search-form input:active, .search-form input:focus {
 	border: 2px solid #36c;
 	border-right: none;
 }
-button {
+.button-ooui-like {
 	height: 45px;
 	background-color: #36c;
 	border: none;
@@ -285,6 +285,10 @@ button {
 	transition: background .1s ease,color .1s ease,border-color .1s ease,box-shadow .1s ease,-webkit-box-shadow .1s ease,-moz-box-shadow .1s ease;
 	width: 90px;
 }
+.button-ooui-like:hover {
+	background: #447ff5;
+	border-color: #447ff5;
+}
 .search-icon {
 	background-image: url(img/wmde_search_icon.svg);
 	background-repeat: no-repeat;
@@ -294,10 +298,6 @@ button {
 	width: 100%;
 	background-size: 25px auto;
 	background-position: center;
-}
-button:hover {
-	background: #447ff5;
-	border-color: #447ff5;
 }
 #footer {
 	margin-top:5em;
