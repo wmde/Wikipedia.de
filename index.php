@@ -20,7 +20,8 @@
         </div>
         <div id="maincontent">
             <div id="form">
-                <form id="frmSearch" action="go.php" method="get" accept-charset="UTF-8"><input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
+                <form id="frmSearch" class="search-form" action="go.php" method="get" accept-charset="UTF-8">
+                    <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
                     <input type="hidden" name="l" value="de" />
                     <input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
                     <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
