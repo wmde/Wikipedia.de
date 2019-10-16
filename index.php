@@ -34,15 +34,6 @@
     <?php include 'footer.php'?>
 </div>
 
-<!-- Tracking 1% page views with donation tracker. When you see this, ask yourself if it's still needed -->
-<img src="" style="position:absolute;bottom:0;right:0" id="piwik-tracking"/>
-<script type="text/javascript">
-	if( Math.random() <= 0.01 ) {
-		var pwkUrl = location.protocol + "//tracking.wikimedia.de/piwik.php?idsite=3&rec=1&url=",
-			trackUrl = "https://wikipedia.de/";
-		$( '#piwik-tracking' ).attr( 'src', pwkUrl + encodeURIComponent( trackUrl ) );
-	}
-</script>
 <script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
 <?php
 $randomBanner = 'your-contribution-to-free-knowledge.js';
