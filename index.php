@@ -11,7 +11,7 @@
     <script type="text/javascript" src="suggest.js"></script>
 </head>
 
-<body onload="self.focus();document.getElementById('txtSearch').focus();">
+<body>
 <div id="WMDE-Banner-Container"></div>
 <div id="main">
     <div id="mainbox">
@@ -55,12 +55,17 @@ $filteredUrlBanner = basename( filter_input(
 ) );
 $urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sprintf( 'banners/wikipedia.de-banners/%s.js', $filteredUrlBanner) : $randomBanner;
 ?>
-<script type="application/javascript" src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>"></script>
 
 <!-- Matomo -->
-<script async defer type="text/javascript" src="tracking.js"></script>
+<script type="text/javascript" src="tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 
+<script type="application/javascript" src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>"></script>
+<script>
+	if( $( '#WMDE-Banner-Container' ).is( ':empty' ) ) {
+		document.getElementById( 'txtSearch' ).focus();
+	}
+</script>
 </body>
 </html>
