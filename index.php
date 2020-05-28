@@ -56,8 +56,8 @@ $urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sp
 <script>
     var bruceScriptTag = $('#tmpBruceScriptTag');
     var bannerUrl = bruceScriptTag.data('banner-src');
-    var vWidthParam = "?vWidth=" + window.innerWidth + '"';
-    bruceScriptTag.after('<script type="application/javascript" src="' + bannerUrl + vWidthParam + '><\/script>');
+    var vWidthParam = "?vWidth=" + window.innerWidth;
+    bruceScriptTag.after('<script type="application/javascript" src="' + bannerUrl + vWidthParam + '"><\/script>');
     bruceScriptTag.remove();
 
 	if( $( '#WMDE-Banner-Container' ).is( ':empty' ) ) {
