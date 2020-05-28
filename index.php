@@ -52,8 +52,14 @@ $urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sp
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 
-<script type="application/javascript" src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>"></script>
+<script type="application/javascript" id="tmpBruceScriptTag" data-banner-src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>"></script>
 <script>
+    var bruceScriptTag = $('#tmpBruceScriptTag');
+    var bannerUrl = bruceScriptTag.data('banner-src');
+    var vWidthParam = "?vWidth=" + window.innerWidth;
+    bruceScriptTag.after('<script type="application/javascript" src="' + bannerUrl + vWidthParam + '"><\/script>');
+    bruceScriptTag.remove();
+
 	if( $( '#WMDE-Banner-Container' ).is( ':empty' ) ) {
 		document.getElementById( 'txtSearch' ).focus();
 	}
