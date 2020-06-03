@@ -8,7 +8,7 @@ const trackingData = {
 	},
 	FundraisingTracker: {
 		url: '//tracking.wikimedia.de/',
-		siteID: 3
+		siteID: 1
 	}
 };
 
