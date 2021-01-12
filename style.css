@@ -313,6 +313,7 @@ p {
 }
 
 #donationfooter {
+	position: relative;
 	background-color: #F3BF00;
 	border-top: 1px solid #F3BF00;
 	font-size: 9pt;
@@ -329,8 +330,10 @@ p {
 }
 
 .page-footer-column {
+	position: relative;
 	flex: 0 0 100%;
 	width: 100%;
+	z-index: 100;
 }
 
 @media (min-width: 1000px) {
@@ -392,48 +395,6 @@ p {
 	height: 50px;
 }
 
-.wikimedia-logo-footer-container {
-	position: relative;
-}
-
-.wikimedia-logo-footer {
-	position: absolute;
-	width: 35px;
-	height: 35px;
-	top: 50%;
-	margin-top: -18px;
-	left: -50px;
-}
-
-.anniversary {
-	display: block;
-	width: 90%;
-	margin: -55px auto 0;
-	text-align: center;
-}
-
-.anniversary-logo {
-	display: inline-block;
-	max-width: 340px;
-	margin-bottom: 10px;
-}
-
-.anniversary-cta {
-	color: #0154D5;
-	font-size: 20px;
-	font-weight: bold;
-	display: block;
-}
-
-@media (min-width: 1000px) {
-	.anniversary {
-		text-align: left;
-	}
-	.anniversary-cta {
-		padding-left: 20px;
-	}
-}
-
 @media (max-width: 900px) {
 	.link-block ul {
 		width: 43em;
@@ -482,5 +443,100 @@ and (orientation : landscape) {
 	}
 	#maincontent {
 		margin: 10px 0 0 0;
+	}
+}
+
+.wikimedia-logo-footer-container {
+	position: relative;
+}
+
+.wikimedia-logo-footer {
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	top: 50%;
+	margin-top: -20px;
+	left: -50px;
+}
+
+.anniversary {
+	display: block;
+	position: relative;
+	width: 90%;
+	margin: -31px auto 0;
+	text-align: center;
+}
+
+.anniversary-logo {
+	display: inline-block;
+	max-width: 340px;
+	margin-bottom: 10px;
+}
+
+.anniversary-cta {
+	color: #0154D5;
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+}
+
+.anniversary-cards {
+	display: flex;
+	width: 340px;
+	margin: 0 auto 20px;
+}
+
+.anniversary-card {
+	flex: 0 0 80px;
+	width: 80px;
+	height: 62px;
+	margin-right: 6.66666px;
+	background-image: url(img/Wikipedia_20_sprites.png);
+	background-size: 400%;
+}
+
+.anniversary-card.x-2 {
+	background-position-x: -80px;
+}
+
+.anniversary-card.x-3 {
+	background-position-x: -160px;
+}
+
+.anniversary-card.x-4 {
+	background-position-x: -240px;
+}
+
+.anniversary-card.y-2 {
+	background-position-y: -62px;
+}
+
+.anniversary-card.y-3 {
+	background-position-y: -124px;
+}
+
+.anniversary-card.y-4 {
+	background-position-y: -186px;
+}
+
+#confetti-container {
+	position: absolute;
+	z-index: 99;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+@media (min-width: 1000px) {
+	.anniversary {
+		text-align: left;
+	}
+	.anniversary-cta {
+		padding-left: 20px;
+	}
+	.anniversary-cards {
+		margin: 0 0 20px;
 	}
 }

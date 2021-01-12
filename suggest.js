@@ -106,5 +106,5 @@ $( document ).ready( function() {
 
 function triggerPiwikTrack( element, code ) {
 	var piwikImgUrl = 'https://tracking.wikimedia.de/piwik.php?idsite=1&url=https://www.wikipedia.de/link-clicked/' + code + '&rec=1';
-	$(element).prepend( '<img src="' + piwikImgUrl + '" width="0" height="0" border="0" />' );
+	$(element).append( '<img src="' + piwikImgUrl + '" width="0" height="0" border="0" />' );
 }
