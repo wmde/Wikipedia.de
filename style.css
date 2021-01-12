@@ -313,20 +313,43 @@ p {
 }
 
 #donationfooter {
-	background-color: #202520;
-	border-top: 1px solid #dddddd;
-	padding-top: 2em;
+	background-color: #F3BF00;
+	border-top: 1px solid #F3BF00;
 	font-size: 9pt;
-	color: #ffffff;
+	color: #000000;
 	bottom: 0;
 	max-width: 100vw;
+
+	display: flex;
+	flex-wrap: wrap;
 }
 
 #donationfooter a {
-	color: #fff;
+	color: #000000;
 }
+
+.page-footer-column {
+	flex: 0 0 100%;
+	width: 100%;
+}
+
+@media (min-width: 1000px) {
+	#donationfooter {
+		flex-wrap: nowrap;
+	}
+	.page-footer-column {
+		flex: 0 0 50%;
+		width: 50%;
+	}
+}
+
+.link-block {
+	padding-top: 3em;
+	padding-bottom: 1em;
+}
+
 .link-block ul {
-	padding: 0;
+	padding: 0 60px;
 	margin: 0 auto;
 	width: 90%;
 	list-style: none;
@@ -341,12 +364,18 @@ p {
 	-ms-flex-wrap: wrap;
 }
 
+@media (min-width: 1000px) {
+	.link-block ul {
+		padding: 0;
+	}
+}
+
 .link-block li {
 	padding: 0;
 	width: auto;
 	margin-bottom: 10px;
 	line-height: 150px;
-	color: #fff;
+	color: #000000;
 	font: 14px Arial, Helvetica, sans-serif;
 	text-align: left;
 }
@@ -363,6 +392,48 @@ p {
 	height: 50px;
 }
 
+.wikimedia-logo-footer-container {
+	position: relative;
+}
+
+.wikimedia-logo-footer {
+	position: absolute;
+	width: 35px;
+	height: 35px;
+	top: 50%;
+	margin-top: -18px;
+	left: -50px;
+}
+
+.anniversary {
+	display: block;
+	width: 90%;
+	margin: -55px auto 0;
+	text-align: center;
+}
+
+.anniversary-logo {
+	display: inline-block;
+	max-width: 340px;
+	margin-bottom: 10px;
+}
+
+.anniversary-cta {
+	color: #0154D5;
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+}
+
+@media (min-width: 1000px) {
+	.anniversary {
+		text-align: left;
+	}
+	.anniversary-cta {
+		padding-left: 20px;
+	}
+}
+
 @media (max-width: 900px) {
 	.link-block ul {
 		width: 43em;
@@ -374,7 +445,6 @@ p {
 
 @media (max-width: 600px) {
 	.link-block ul {
-		padding: 0;
 		margin: 0 auto;
 		width: 250px;
 	}
