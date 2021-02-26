@@ -3,7 +3,7 @@
 		<canvas id="confetti"></canvas>
 	</div>
 	<div class="page-footer-column">
-		<a onclick="triggerPiwikTrack(this, 'wikipedia-20-logo');" href="https://www.wikimedia.de/wikipedia20" class="anniversary">
+		<a href="https://www.wikimedia.de/wikipedia20" class="anniversary">
 
 			<div class="anniversary-cards">
 				<div class="anniversary-card x-1 y-1" data-x="x-1" data-y="y-1"></div>
@@ -21,7 +21,7 @@
 			<ul>
 				<li>
 					<p class="wikimedia-logo-footer-container">
-						<a onclick="triggerPiwikTrack(this, 'wikimedia.de-logo');" href="https://www.wikimedia.de" class="wikimedia-logo-footer">
+						<a href="https://www.wikimedia.de" class="wikimedia-logo-footer">
 							<img src="img/wmde_logo_footer.svg" alt="Wikimedia Deutschland e.V.">
 						</a>
 						<strong>Wikimedia Deutschland e. V.</strong>
