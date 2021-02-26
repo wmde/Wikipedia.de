@@ -1,7 +1,7 @@
 <footer class="page-footer" id="donationfooter">
     <div class="link-block">
         <ul>
-            <li><a onclick="triggerPiwikTrack(this, 'wikimedia.de-logo');" href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_white.svg" alt="Wikimedia Deutschland e.V."></a></li>
+            <li><a href="https://www.wikimedia.de"><img class="wikimedia-logo" src="img/wmde_logo_white.svg" alt="Wikimedia Deutschland e.V."></a></li>
             <li>
                 <p><strong>Wikimedia Deutschland e. V.</strong></p>
                 <p><a href="https://www.wikimedia.de/de/ueber-uns">Über uns</a></p>
