@@ -5,7 +5,7 @@
             <li>
                 <p><strong>Wikimedia Deutschland e. V.</strong></p>
                 <p><a href="https://www.wikimedia.de/de/ueber-uns">Über uns</a></p>
-                <p><a href="https://wikimedia-deutschland.softgarden.io/de/vacancies">Stellenangebote</a></p>
+                <p><a href="https://wikimedia-deutschland.career.softgarden.de">Stellenangebote</a></p>
                 <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
             </li>
             <li>
