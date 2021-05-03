@@ -34,7 +34,7 @@
     <?php include 'footer.php'?>
 </div>
 
-<script type="application/javascript" src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
+<script defer src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
 <?php
 $randomBanner = 'your-contribution-to-free-knowledge.js';
 $rawUrlBanner = filter_input( INPUT_GET, 'banner', FILTER_UNSAFE_RAW );
@@ -48,7 +48,7 @@ $urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sp
 ?>
 
 <!-- Matomo -->
-<script type="text/javascript" src="tracking.js"></script>
+<script defer type="text/javascript" src="tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 
@@ -57,7 +57,7 @@ $urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sp
     var bruceScriptTag = $('#tmpBruceScriptTag');
     var bannerUrl = bruceScriptTag.data('banner-src');
     var vWidthParam = "?vWidth=" + window.innerWidth;
-    bruceScriptTag.after('<script type="application/javascript" src="' + bannerUrl + vWidthParam + '"><\/script>');
+    bruceScriptTag.after('<script defer type="application/javascript" src="' + bannerUrl + vWidthParam + '"><\/script>');
     bruceScriptTag.remove();
 
 	if( $( '#WMDE-Banner-Container' ).is( ':empty' ) ) {
