@@ -41,6 +41,7 @@
 
 <script defer src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
 <?php
+// Allow specifying a specific banner (instead of a random one) by checking for the "banner" URL parameter
 $randomBanner = 'your-contribution-to-free-knowledge.js';
 $rawUrlBanner = filter_input( INPUT_GET, 'banner', FILTER_UNSAFE_RAW );
 $filteredUrlBanner = basename( filter_input(
@@ -51,14 +52,11 @@ $filteredUrlBanner = basename( filter_input(
 ) );
 $urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sprintf( 'banners/wikipedia.de-banners/%s.js', $filteredUrlBanner) : $randomBanner;
 ?>
-
-<script type="application/javascript" id="tmpBruceScriptTag" data-banner-src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>"></script>
-<script>
-    var bruceScriptTag = $('#tmpBruceScriptTag');
-    var bannerUrl = bruceScriptTag.data('banner-src');
+<script data-banner-src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>" >
+    var bannerSrcTag = $('[data-banner-src]');
+    var bannerUrl = bannerSrcTag.data('banner-src');
     var vWidthParam = "?vWidth=" + window.innerWidth;
-    bruceScriptTag.after('<script defer type="application/javascript" src="' + bannerUrl + vWidthParam + '"><\/script>');
-    bruceScriptTag.remove();
+    bannerSrcTag.after('<script defer src="' + bannerUrl + vWidthParam + '"><\/script>');
 
 	if( $( '#WMDE-Banner-Container' ).is( ':empty' ) ) {
 		document.getElementById( 'txtSearch' ).focus();
