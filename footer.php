@@ -17,7 +17,7 @@
             <li>
                 <p><strong>Vereinskanäle</strong></p>
                 <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
-                <p><a href="https://www.facebook.com/WMDEeV">Facebook</a></p>
+                <p><a href="https://www.facebook.com/WikimediaDE/">Facebook</a></p>
                 <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
             </li>
         </ul>
