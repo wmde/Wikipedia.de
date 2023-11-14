@@ -14,8 +14,6 @@ $blockedPages = array(
 	"Stella Deetjen",
 	"Dirk Bavendamm",
 	"Helge Schneider",
-	"Loriot",
-	"Victor von Bülow",
 	"Santander Consumer Bank \(Deutschland\)",
 	"Ulrich Marseille",
 	"(stella )?deetjen",
