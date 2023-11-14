@@ -20,7 +20,7 @@
         </div>
         <div id="maincontent">
             <p>
-                Es tut uns leid, aus rechtlichen Gründen ist es Wikimedia Deutschland untersagt die Suchanfrage für den von Ihnen eingegeben Suchbegriff durchzuführen.
+                Aus rechtlichen Gründen ist es Wikimedia Deutschland e. V. untersagt, die Suchanfrage für den von Ihnen eingegebenen Suchbegriff durchzuführen.
                 Bitte entschuldigen Sie die dadurch entstehenden Unannehmlichkeiten.
             </p>
             <p>
