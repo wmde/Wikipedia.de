@@ -19,6 +19,8 @@
                 <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
                 <p><a href="https://www.facebook.com/WikimediaDE/">Facebook</a></p>
                 <p><a href="https://social.wikimedia.de/@wikimediaDE">Mastodon</a></p>
+                <p><a href="https://www.instagram.com/wikimedia_de/">Instagram</a></p>
+                <p><a href="https://www.linkedin.com/company/wikimedia-deutschland-e-v-/">LinkedIn</a></p>
             </li>
         </ul>
     </div>
