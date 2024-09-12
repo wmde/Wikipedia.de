@@ -1,21 +1,21 @@
-<footer class="page-footer">
+<footer class="page-footer" title="Über Wikimedia Deutschland e. V.">
 	<div class="page-footer-columns">
 		<div class="page-footer-column bank-info">
 			<h2>Spendenkonto</h2>
 			<ul>
 				<li><label for="selection-input-iban">IBAN:</label><div class="selection-input selection-input-iban">
 						<span class="selection-input-text">DE09 3702 0500 0003 2873 00</span>
-						<input class="selection-input-field" id="selection-input-iban" readonly type="text" value="DE09370205000003287300"/>
+						<input class="selection-input-field" id="selection-input-iban" readonly type="text" value="DE09370205000003287300" aria-label="Drücken Sie Steuerungstaste-c oder Befehlstaste-c, um die IBAN zu kopieren."/>
 					</div>
 				</li>
 				<li><label for="selection-input-bic">BIC:</label><div class="selection-input selection-input-bic">
 						<span class="selection-input-text">BFSWDE33BER</span>
-						<input class="selection-input-field" id="selection-input-bic" readonly type="text" value="BFSWDE33BER"/>
+						<input class="selection-input-field" id="selection-input-bic" readonly type="text" value="BFSWDE33BER" aria-label="Drücken Sie Steuerungstaste-c oder Befehlstaste-c, um die BIC zu kopieren."/>
 					</div>
 				</li>
 				<li><label for="selection-input-name">Kontoinhaber:</label><div class="selection-input selection-input-name">
 						<span class="selection-input-text">Wikimedia e.V.</span>
-						<input class="selection-input-field" id="selection-input-name" readonly type="text" value="Wikimedia e.V."/>
+						<input class="selection-input-field" id="selection-input-name" readonly type="text" value="Wikimedia e.V." aria-label="Drücken Sie Steuerungstaste-c oder Befehlstaste-c, um den Namen des Kontoinhabers zu kopieren."/>
 					</div>
 				</li>
 			</ul>

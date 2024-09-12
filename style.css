@@ -23,11 +23,20 @@ body {
 	margin:0;
 	padding:0;
 	background-color: var( --color-white );
-	font: 14px 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
+	font: 14px sans-serif;
 	-webkit-box-orient:vertical;
 	-webkit-box-direction:normal;
 	-ms-flex-direction:column;
 	flex-direction:column;
+}
+
+.sr-only {
+	position:absolute;
+	left:-10000px;
+	top:auto;
+	width:1px;
+	height:1px;
+	overflow:hidden;
 }
 
 #main {
@@ -316,6 +325,7 @@ p {
 
 .button {
 	color: var( --color-white );
+	box-sizing: border-box;
 	display: flex;
 	width: 194px;
 	background: var( --color-primary );
@@ -324,7 +334,7 @@ p {
 	justify-content: center;
 	border-radius: 4px;
 	margin-bottom: 10px;
-	transition: background 200ms ease-in-out, color 200ms ease-in-out, borfer 200ms ease-in-out;
+	transition: background 200ms ease-in-out, color 200ms ease-in-out, border 200ms ease-in-out;
 }
 
 .button:hover,

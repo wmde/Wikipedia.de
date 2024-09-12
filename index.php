@@ -15,18 +15,19 @@
         <div class="wikipedia-logo">
             <a href="https://de.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie"/></a>
         </div>
-        <div id="maincontent">
+        <search id="maincontent" title="Wikipedia durchsuchen">
             <div id="form">
                 <form id="frmSearch" class="search-form" action="go.php" method="get" accept-charset="UTF-8">
-                    <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
+                    <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" aria-label="Wikipedia durchsuchen"/>
                     <input type="hidden" name="l" value="de" />
                     <input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
-                    <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
+                    <button type="submit" id="cmdSearch" class="button-ooui-like" name="b">
+						<span class="search-icon"></span><span class="sr-only">Suchen</span>
+					</button>
                 </form>
             </div>
             <div id="search_suggest"></div>
-        </div>
-        <div id="wmde-banner-featurebox"></div>
+        </search>
     </div>
     <?php include 'footer.php'?>
 </div>
