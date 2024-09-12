@@ -42,7 +42,7 @@
 </script>
 
 <!-- Matomo -->
-<script async defer type="text/javascript" src="tracking.js"></script>
+<script async defer type="text/javascript" src="js/tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 

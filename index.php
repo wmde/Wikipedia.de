@@ -6,9 +6,6 @@
     <title>Wikipedia, die freie Enzyklop&auml;die</title>
     <link rel="apple-touch-icon" href="/img/wikipedia.png" />
     <link rel="stylesheet" media="screen" type="text/css" href="style.css" />
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
-    <script type="text/javascript" src="suggest.js"></script>
 </head>
 
 <body>
@@ -34,8 +31,12 @@
     <?php include 'footer.php'?>
 </div>
 
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="js/suggest.js"></script>
+<script type="text/javascript" src="js/footer.js"></script>
 <!-- Matomo -->
-<script defer type="text/javascript" src="tracking.js"></script>
+<script defer type="text/javascript" src="js/tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 
