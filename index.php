@@ -6,9 +6,6 @@
     <title>Wikipedia, die freie Enzyklop&auml;die</title>
     <link rel="apple-touch-icon" href="/img/wikipedia.png" />
     <link rel="stylesheet" media="screen" type="text/css" href="style.css" />
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
-    <script type="text/javascript" src="suggest.js"></script>
 </head>
 
 <body>
@@ -18,24 +15,29 @@
         <div class="wikipedia-logo">
             <a href="https://de.wikipedia.org/"><img src="img/Wikipedia-logo-v2-de.svg" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie"/></a>
         </div>
-        <div id="maincontent">
+        <search id="maincontent" title="Wikipedia durchsuchen">
             <div id="form">
                 <form id="frmSearch" class="search-form" action="go.php" method="get" accept-charset="UTF-8">
-                    <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" />
+                    <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('de')" autocomplete="off" aria-label="Wikipedia durchsuchen"/>
                     <input type="hidden" name="l" value="de" />
                     <input type="hidden" name="e" value="wikipedia" /><input type="hidden" name="s" value="suchen" />
-                    <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
+                    <button type="submit" id="cmdSearch" class="button-ooui-like" name="b">
+						<span class="search-icon"></span><span class="sr-only">Suchen</span>
+					</button>
                 </form>
             </div>
             <div id="search_suggest"></div>
-        </div>
-        <div id="wmde-banner-featurebox"></div>
+        </search>
     </div>
     <?php include 'footer.php'?>
 </div>
 
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="js/suggest.js"></script>
+<script type="text/javascript" src="js/footer.js"></script>
 <!-- Matomo -->
-<script defer type="text/javascript" src="tracking.js"></script>
+<script defer type="text/javascript" src="js/tracking.js"></script>
 <noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 
