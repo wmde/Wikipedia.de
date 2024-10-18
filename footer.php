@@ -9,7 +9,7 @@
 					</div>
 				</li>
 				<li><label for="selection-input-bic">BIC:</label><div class="selection-input selection-input-bic">
-						<span class="selection-input-text">BFSWDE33BER</span>
+						<span class="selection-input-text">BFSWDE33XXX</span>
 						<input class="selection-input-field" id="selection-input-bic" readonly type="text" value="BFSWDE33BER" aria-label="Drücken Sie Steuerungstaste-c oder Befehlstaste-c, um die BIC zu kopieren."/>
 					</div>
 				</li>
