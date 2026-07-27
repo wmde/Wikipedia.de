@@ -5,13 +5,12 @@ $max_seconds = 5;
 set_time_limit( $max_seconds + 1 );
 
 function load_url($url) {
-	global $useCURL, $max_seconds;
-	if (!$useCURL) return file_get_contents($url);
+	global $max_seconds;
 
-	$ch = curl_init($url);
+	$ch = @curl_init($url);
 	if (!$ch) {
 		error_log("Failed to initialize curl for URL '$url' - check your PHP configuration");
-		return file_get_contents($url);
+		return null;
 	}
 
 	// wikipedia.org no longer accepts requests without user agent.
@@ -51,15 +50,12 @@ function fail($message, $code = 502) {
   die($message);
 }
 
-$useCURL = function_exists('curl_init') && !@$_GET['nocurl'];
-
 //Send some headers to keep the user's browser from caching the response.
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 header("Last-Modified: " . gmdate( "D, d M Y H:i:s" ) . "GMT" );
 header("Cache-Control: no-cache, must-revalidate" );
 header("Pragma: no-cache" );
 header("Content-Type: text/plain; charset=UTF-8");
-if ($useCURL) header("X-Using-cURL: yes" );
 
 if (isset($_GET['search']) && $_GET['search'] != '' && isset($_GET['lang'])) {
 	$search = urlencode($_GET['search']);
