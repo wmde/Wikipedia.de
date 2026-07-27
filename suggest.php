@@ -11,7 +11,9 @@ function load_url($url) {
 	$ch = curl_init($url);
 	if (!$ch) return file_get_contents($url);
 
-	curl_setopt($ch, CURLOPT_USERAGENT, ini_get('user_agent'));
+	// wikipedia.org no longer accepts requests without user agent.
+	$userAgent = ini_get('user_agent') || 'wikipedia.de Search Relay (+https://github.com/wmde/Wikipedia.de)';
+	curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
 	curl_setopt($ch, CURLOPT_TIMEOUT, $max_seconds); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_HEADER, 0);
