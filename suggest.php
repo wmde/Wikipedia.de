@@ -9,7 +9,10 @@ function load_url($url) {
 	if (!$useCURL) return file_get_contents($url);
 
 	$ch = curl_init($url);
-	if (!$ch) return file_get_contents($url);
+	if (!$ch) {
+		error_log("Failed to initialize curl for URL '$url' - check your PHP configuration");
+		return file_get_contents($url);
+	}
 
 	// wikipedia.org no longer accepts requests without user agent.
 	$userAgent = ini_get('user_agent') || 'wikipedia.de Search Relay (+https://github.com/wmde/Wikipedia.de)';
@@ -17,16 +20,29 @@ function load_url($url) {
 	curl_setopt($ch, CURLOPT_TIMEOUT, $max_seconds); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_HEADER, 0);
+	// Allow for transparent redirects
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
 
-	$text = curl_exec($ch);
+	$text = $fullResponse = curl_exec($ch);
 
-	$errno = curl_errno($ch);
-	if ($errno>0) $text = null;
+	$errno = curl_errno($ch); 
+	if ($errno>0) {
+		error_log("curl request to '$url' failed. curl_error:  $errno");
+		$text = null;
+	}
 
 	$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	if ($code!=200) $text = null;
+	if ($code!=200) {
+		error_log("curl request to '$url' failed with HTTP status $code. Response Text: $fullResponse");
+		$text = null;
+	}
 
-	@curl_close($ch);
+	if ($text !== null && trim($text) === "") {
+		error_log("curl request to '$url' got an empty response");
+		$text = null;
+	}
+
 	return $text;
 }
 
