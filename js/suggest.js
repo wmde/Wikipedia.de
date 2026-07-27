@@ -1,6 +1,6 @@
 var ajaxCallTimeout = 5000;
 var suggestTimeout = null;
-var delay = 500;
+var delay = 500; // debounce delay between keypresses
 var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
@@ -20,11 +20,15 @@ function searchSuggest( lang ) {
 	if ( str == "" ) {
 		hideSuggest();
 	} else {
-		$.ajax( 'suggest.php', {
+ 		// See https://en.wikipedia.org/w/api.php?action=help&modules=opensearch
+		$.ajax( 'https://' + lang + '.wikipedia.org/w/api.php', {
 			data: {
-				lang: searchLang,
-				search: str
+				action: 'opensearch',
+				search: str,
+				format: 'json',
+				origin: '*'
 			},
+			dataType: 'json',
 			success: function( response ) {
 				handleSearchSuggest( response )
 			},
@@ -38,57 +42,53 @@ function hideSuggest() {
 	lastSearch = "";
 }
 
-function getSearchLink( query, language, provider ) {
-	var queryParams = {
-		l: language,
-		q: query
-	};
+function filterResult(titles,urls) {
 
-	if ( typeof provider === 'string' ) {
-		queryParams.e = provider;
-		queryParams.s = 'search';
-	}
+	// TODO we need to filter the results here, waiting for WMDE legal team to suggest an acceptable filer method
 
-	return searchPath + '?' + $.param( queryParams );
+	return [titles, urls]
 }
 
+/**
+ * The response is a 4-element array
+ *  - search term
+ *  - array of titles
+ *  - array of excerpts (always empty strings)
+ *  - array of URLs
+ * All arrays have the same length.
+ *
+ * See https://en.wikipedia.org/w/api.php?action=help&modules=opensearch
+ */
 function handleSearchSuggest( response ) {
-	var searchString = lastSearch;
 	if( response == null ) return;
+	if( !Array.isArray(response) || response.length < 4) {
+		console.log("Malformed search response", response);
+		return;
+	}
+	var searchString = response[0];
+	var [titles, urls] = filterResult( response[1], response[3] );
 
 	var ss = $( '#search_suggest' ).empty().show();
-	var searchResults = response.split( "\n" );
 
-	// Removing first element because it's the search string itself
-	searchResults.shift();
+	$.each( titles, function( index, title ) {
 
-	// Removing the last element because it is always an empty string
-	searchResults.pop();
-
-	$.each( searchResults, function( index, row ) {
-
-		var entry = row.split( "\t" );
 		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
-				.append( $( '<a></a>' ).attr( 'href', getSearchLink( entry[0], searchLang ) )
+			$( '<div class="suggest_link"></div>' )
+				.append( $( '<a></a>' ).attr( 'href', urls[index] )
 					.append(
-						$( '<span></span>' )
-							.addClass( searchString.toLowerCase() === entry[0].toLowerCase() ? 'exact-match' : 'partial-match' )
-							.addClass( 'search_result' )
-							.text( entry[0] )
+						$( '<span class="search_result"></span>' )
+							.addClass( searchString.toLowerCase() === title.toLowerCase() ? 'exact-match' : 'partial-match' )
+							.text( title )
 					)
 				)
 		);
 	} );
 
-	if( searchResults.length === 0 ) {
+	if( titles.length === 0 ) {
 		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
+			$( '<div class="suggest_link"></div>' )
 				.append(
-					$( '<span></span>' )
-						.addClass( 'search_result' )
+					$( '<span class="search_result"></span>' )
 						.text( 'Es wurden keine Artikel gefunden.' )
 				)
 		);
