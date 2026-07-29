@@ -33,7 +33,6 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.min.js"></script>
 <script type="text/javascript" src="js/suggest.js"></script>
 <script type="text/javascript" src="js/footer.js"></script>
 <!-- Matomo -->
