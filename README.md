@@ -13,6 +13,6 @@ inline comments for configuration options.
 
 Run
 
-    docker-compose up
+    docker compose up
     
 You can reach the local version of this project at [http://localhost:8085/](http://localhost:8085/)
