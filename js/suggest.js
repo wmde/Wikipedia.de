@@ -42,13 +42,6 @@ function hideSuggest() {
 	lastSearch = "";
 }
 
-function filterResult(titles,urls) {
-
-	// TODO we need to filter the results here, waiting for WMDE legal team to suggest an acceptable filer method
-
-	return [titles, urls]
-}
-
 /**
  * The response is a 4-element array
  *  - search term
@@ -66,7 +59,7 @@ function handleSearchSuggest( response ) {
 		return;
 	}
 	var searchString = response[0];
-	var [titles, urls] = filterResult( response[1], response[3] );
+	var [titles, urls] = [ response[1], response[3] ];
 
 	var ss = $( '#search_suggest' ).empty().show();
 
