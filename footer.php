@@ -24,7 +24,7 @@
 
 		<div class="page-footer-column about">
 			<h2>Wikimedia Deutschland  e. V.</h2>
-			<p>Wir sind der gemeinnnützige Verein hinter der Wikipedia und unterstützen die Ehrenamtlichen, sichern und entwickeln die technische Infrastruktur und setzen uns für den freien Zugang zu Wissen ein.</p>
+			<p>Wir sind der gemeinnützige Verein hinter der Wikipedia und unterstützen die Ehrenamtlichen, sichern und entwickeln die technische Infrastruktur und setzen uns für den freien Zugang zu Wissen ein.</p>
 			<a class="button button-hollow" href="https://www.wikimedia.de/">Wikimedia kennenlernen</a>
 			<a class="privacy-link" href="https://www.wikimedia.de/datenschutz/">Datenschutz</a> | <a class="privacy-link" href="https://www.wikimedia.de/impressum/">Impressum</a>
 		</div>
