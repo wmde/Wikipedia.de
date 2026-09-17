@@ -1,6 +1,6 @@
 var ajaxCallTimeout = 5000;
 var suggestTimeout = null;
-var delay = 500; // debounce delay between keypresses
+var delay = 120; // debounce delay between keypresses
 var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
