@@ -82,7 +82,7 @@ function handleSearchSuggest( response ) {
 			$( '<div class="suggest_link"></div>' )
 				.append(
 					$( '<span class="search_result"></span>' )
-						.text( 'Es wurden keine Artikel gefunden.' )
+						.text( 'Keine Ergebnisse für "'+ searchString +'". Versuche es mit einem anderen Suchbegriff.' )
 				)
 		);
 	}
