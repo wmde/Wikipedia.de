@@ -21,7 +21,6 @@ $blockedPages = array(
 	"(dirk )?bavendamm",
 	"oll?i\\.? ?p\\.?",
 	"(oli(ver)? )?petszokat",
-	"loriot?"
 );
 
 $blockedPages = str_replace( ' ', '[_ ]', $blockedPages );
