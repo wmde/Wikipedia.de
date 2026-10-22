@@ -16,3 +16,7 @@ Run
     docker compose up
     
 You can reach the local version of this project at [http://localhost:8085/](http://localhost:8085/)
+
+## VueJs
+
+Our banners run on this so we provide it for them. The file was downloaded from the [CDN](https://vuejs.org/guide/quick-start.html#using-vue-from-cdn).
